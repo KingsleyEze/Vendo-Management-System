@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="../../static/images/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+    <title>Vendor Database Management Software:: UN System in Nigeria Home</title>
+
+    <!--css-->
+    <link href="../../static/vmsb/css/styles.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+
+    <!--javascript-->
+    <script src="../../static/vmsb/js/html5.js}"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="wrap">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="well" style="padding:10px;">
+                    <div class="sframe bld">Quick Links</div>
+                    <ul class="nav nav-list">
+                        <li class="active padh"><a href="/"><i class="fa fa-home"></i>&nbsp; Home</a></li>
+                        <li class="padh"><a href="/accounts/login"><i class="fa fa-user"></i>&nbsp; Login</a></li>
+                        <li class="padh"><a href="/register"><i class="fa fa-plus"></i>&nbsp; Sign Up</a></li>
+                        <li class="padh"><a href="#"><i class="fa fa-briefcase"></i>&nbsp; Notices</a></li>
+                        <li class="padh"><a href="#"><i class="fa fa-search"></i>&nbsp; Search Notices</a></li>
+                        <li class="padh"><a href="#"><i class="fa fa-comment"></i>&nbsp; FAQ</a></li>
+                    </ul>
+                </div>
+            </div><!--/span-->
+            <div class="span9">
+                <div class="mframe fnplus">
+                    <div class="sframe fnplus1 pbtm">Welcome to the UN System in Nigeria Vendor Database Management System.</div>
+                    <p class="lnh1">This is a system built to collect and help UN System in  Nigeria Vendors Recruitment Process. These include the enlistment of Companies, NGOs and Individuals that wish to do business with UNDP Nigeria.</p>
+                    <p class="lnh1">The information you provide will be used to create a roster of vendors.  <a href="/register" title="Click Here to Sign up" class="vtip">Signup</a> if you are a prospective vendor. </p>
+                    <p class="lnh1"><a  href="/accounts/login" class="vtip" title="Click Here to Login">Sign in</a> if you have signed up already and want to access currently available vacancy and openings. Or better still, go through our <a href="#" title="Go to FAQ" class="vtip">F.A.Q</a> Sections before heading here.</p>
+                    <div class="nosredna">&nbsp;</div>
+                </div>
+                <!--/row-->
+                <!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+
+        <hr />
+        <div class="xframe">
+            <footer>
+                <p class="text">United Nations System in Nigeria &copy; <span id="yearDate"></span></p>
+            </footer>
+        </div>
+    </div>
+
+</div>
+<!-- United Nations System in Nigeria   -->
+<script src="../../static/vmsb/js/jquery.js"></script>
+<script src="../../static/vmsb/js/vtip.js"></script>
+<script src="../../static/vmsb/js/prettify.js"></script>
+<script src="../../static/vmsb/js/bootstrap-transition.js"></script>
+<script src="../../static/vmsb/js/bootstrap-tab.js"></script>
+<script src="../../static/vmsb/js/bootstrap-button.js"></script>
+<script src="../../static/vmsb/js/application.js"></script>
+
+<script>
+    yearDate();
+
+    function yearDate() {
+        var d = new Date();
+        var n = d.getFullYear();
+        document.getElementById("yearDate").innerHTML = n;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+<head th:replace="fragments/header :: pubheader">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content=""><link th:href="@{/public/images/favicon.ico}" type="image/x-icon" rel="shortcut icon" />
+    <title>Vendor Database Management Software:: UN System in Nigeria Home</title>   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap-->
+    <link rel="stylesheet" th:href="@{/public/css/bootstrap.min.css}">
+    <!-- Google fonts - Open Sans-->
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic">
+    <!-- Stroke 7 font by Pixeden (http://www.pixeden.com/icon-fonts/stroke-7-icon-font-set)-->
+    <link rel="stylesheet" th:href="@{/public/css/pe-icon-7-stroke.css}">
+    <link rel="stylesheet" th:href="@{/public/css/helper.css}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" th:href="@{/public/css/style.default.css}" id="theme-stylesheet">
+    <!-- owl carousel-->
+    <link rel="stylesheet" th:href="@{/public/css/owl.carousel.css}">
+    <link rel="stylesheet" th:href="@{/public/css/owl.theme.css}">
+    <!-- plugins-->
+    <link rel="stylesheet" th:href="@{/public/css/simpletextrotator}">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" th:href="@{/public/css/custom.css}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" th:href="@{public/images/favicon.png}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body data-spy="scroll" data-target="#navigation" data-offset="120">
+<div id="all">
+    <!-- navbar-->
+    <header th:replace="fragments/header :: pubnav" class="header">
+        <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header"><a href="/" class="navbar-brand scroll-to">
+                    <img th:src="@{/public/img/b2.png}" width="118" height="100"alt="logo" class="hidden-xs hidden-sm"><img src="/public/img/b2.png" alt="logo" class="visible-xs visible-sm" width="118" height="100"><span class="sr-only">Go to homepage</span></a>
+                    <div class="navbar-buttons">
+                        <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+                    </div>
+                </div>
+                <div id="navigation" class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/" class="scroll-to">Home</a></li>
+                        <li><a href="#" class="scroll-to">About Us </a></li>
+
+                        <li><a href="#" class="scroll-to">FAQs</a></li>
+                        <li><a href="#" class="scroll-to">Contact</a></li>
+                    </ul><a href="/accounts/login"  class="btn navbar-btn btn-ghost">Login</a>
+                    <a href="/register"  class="btn navbar-btn btn-ghost">Signup </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- *** SIGNUP MODAL END ***-->
+    <section id="intro" class="text-intro no-padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>United Nations System in <span class="rotate">Nigeria</span> </h1>
+                    <h3 class="weight-300">Vendor Database Management System</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p><span th:text="${#numbers.formatDecimal(vendorsNum, 0, 'DEFAULT', 0, 'DEFAULT') }"></span> Vendors have already enlisted on <a href="#">VDMS</a><br /> Enlist  as a Consultant, Supplier or NGO.</p>
+                    <form class="form-inline margin-top sign-up-form">
+                        <input id="email_intro" type="text" placeholder="Search Notices" class="form-control">
+                        <input id="submit_intro" type="submit" value="Search" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="col-md-12 col-lg-8 col-lg-offset-2">
+                    <p class="margin-bottom--zero"><img alt="" th:src="@{/public/img/features3-1.png}" class="img-responsive"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--   *** CUSTOMERS ***-->
+    <section id="customers" class="section background-gray-lightest padding--small">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-md-2 col-xs-6">
+                    <div class="customer"><img th:src="@{/public/img/customers/logo-1.png}" title="UNDP" data-placement="bottom" data-toggle="tooltip" alt="" class="img-responsive"></div>
+                </div>
+                <div class="col-sm-4 col-md-2 col-xs-6">
+                    <div class="customer"><img th:src="@{/public/img/customers/unicef.png}" title="UNICEF" data-placement="bottom" data-toggle="tooltip" alt="" class="img-responsive"></div>
+                </div>
+                <div class="col-sm-4 col-md-2 col-xs-6">
+                    <div class="customer"><img th:src="@{/public/img/customers/unfpa.png}" title="UNFPA" data-placement="bottom" data-toggle="tooltip" alt="" class="img-responsive"></div>
+                </div>
+                <div class="col-sm-4 col-md-2 col-xs-6">
+                    <div class="customer"><img th:src="@{/public/img/customers/unwomen.png}" title="UNWOMEN" data-placement="bottom" data-toggle="tooltip" alt="" class="img-responsive"></div>
+                </div>
+                <div class="col-sm-4 col-md-2 col-xs-6">
+                    <div class="customer"><img th:src="@{/public/img/customers/unido.png}" title="UNIDO" data-placement="bottom" data-toggle="tooltip" alt="" class="img-responsive"></div>
+                </div>
+               <!-- <div class="col-sm-4 col-md-2 col-xs-6">
+                    <div class="customer"><img th:src="@{/public/img/customers/logo-6.png}" title="UNEP" data-placement="bottom" data-toggle="tooltip" alt="" class="img-responsive"></div>
+                </div>
+            </div>-->
+        </div>
+    </section>
+    <!--   *** CUSTOMERS END ***-->
+    <!--   *** FEATURES ***-->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="row text-center-mobile">
+                <div class="col-md-6">
+                    <div class="icon"><i class="pe-7s-diamond"></i></div>
+                    <h2>UN System in Nigeria VDMS</h2>
+                    <p>This is a system built to collect and help UN System in Nigeria Vendors Recruitment Process. These include the enlistment of Companies, NGOs and Individuals that wish to do business with <strongs style="font-weight: bold;">UNSiN Agencies</strongs> <br/>The information you provide will be used to create a roster of vendors. Signup if you are a prospective vendor. Sign in if you have signed up already and want to access currently available vacancy and openings. Or better still, go through our F.A.Q Sections before heading here.  </p>
+                </div>
+                <div class="col-md-6">
+                    <p><img alt="" src="/public/img/features1-1.png" class="img-responsive"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section background-gray-lightest">
+        <div class="container">
+            <div class="row text-center-mobile">
+                <div class="col-md-6">
+                    <p><img alt="" src="/public/img/features2-1.png" class="img-responsive"></p>
+                </div>
+                <div class="col-md-6">
+                    <div class="icon brand-terciary"><i class="pe-7s-rocket"></i></div>
+                    <h2> Criteria for vendor enlistment</h2>
+                    <p>
+
+                        1.       Registration with CAC  <br/>
+                        2.       Confirmation of  corporate bank account details<br/>
+                        3.       Registered office i.e contact address<br/>
+                        4.       At least one year Experience in field of business<br/>
+                        5.       CAC Form C07 </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section no-padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8 col-lg-offset-2 text-center">
+                    <div class="icon brand-secondary"><i class="pe-7s-graph1"></i></div>
+                    <h2>Join our system and help us build a better world when you apply your skills.</h2>
+                    <p>Our mission is to eliminate poverty by using technology to educate people in poverty.
+                        When you volunteer online you can help eliminate poverty and benefit yourself by:
+                        Volunteering online establishes strong relationships.
+                        Volunteering online is good for your career.
+                        Volunteering online gives you a sense of purpose.</p>
+                    <p class="margin-bottom--zero"><img alt="" src="/public/img/poundingyam.jpg" class="img-responsive"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--   *** FEATURES END ***  -->
+    <!--   *** TEXT ***-->
+   <!-- <section id="text" class="text-page section-inverse background-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center">Text page</h2>
+                    <p class="lead text-center">Age lived smile six defer bed their few. Had admitting concluded too behaviour him she.</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>Able an hope of body. Any nay shyness article matters own removal nothing his forming. Gay own additions education satisfied the perpetual. If he cause manor happy. Without farther she exposed saw man led. Along on happy could cease green oh. </p>
+                            <p>Betrayed cheerful declared end and. Questions we additions is extremely incommode. Next half add call them eat face. Age lived smile six defer bed their few. Had admitting concluded too behaviour him she. Of death to or to being other. </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Effects present letters inquiry no an removed or friends. Desire behind latter me though in. Supposing shameless am he engrossed up additions. My possible peculiar together to. Desire so better am cannot he up before points. Remember mistaken opinions it pleasure of debating. Court front maids forty if aware their at. Chicken use are pressed removed. </p>
+                            <p>Saw yet kindness too replying whatever marianne. Old sentiments resolution admiration unaffected its mrs literature. Behaviour new set existence dashwoods. It satisfied to mr commanded consisted disposing engrossed. Tall snug do of till on easy. Form not calm new fail. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+    <footer class="footer">
+        <div class="footer__copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <p th:inline="text">United Nations System in Nigeria &copy; [[${#dates.year(#dates.createNow())}]]
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div th:replace="fragments/footer :: public-footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<form role="form" method="post" class="form-pad col-md-4"
+      data-ng-submit="updateTopic(topicData.currTopic)">
+
+    <h2> Update Topic </h2>
+
+    <fieldset class="form-group">
+        <label>Topic Name</label> <input type="text" class="form-control"
+                                         required="required" data-ng-model="topicData.currTopic.name" /> <span
+                                         data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>Topic Code</label> <input type="text" class="form-control"
+                                           data-ng-model="topicData.currTopic.code" /> <span
+                                         data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>Section</label> <select  data-ng-model="topicData.currTopic.section.id"  ng-options="section.id as section.name for section in topicData.currTopic.sections" >        </select>   <span
+            data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>

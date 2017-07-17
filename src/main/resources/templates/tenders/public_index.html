@@ -1,0 +1,383 @@
+<html>
+<head th:replace="fragments/header :: pubheader">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vendor Dtatabase Management System</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Google fonts - Open Sans-->
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic">
+    <!-- Stroke 7 font by Pixeden (http://www.pixeden.com/icon-fonts/stroke-7-icon-font-set)-->
+    <link rel="stylesheet" href="css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="css/helper.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+    <!-- plugins-->
+    <link rel="stylesheet" href="css/simpletextrotator">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/public/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+
+
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<style>
+    #map {
+        height: 300px;
+        width: 100%;
+    }
+    /*    --------------------------------------------------
+:: General
+-------------------------------------------------- */
+    /*    --------------------------------------------------
+      :: General
+      -------------------------------------------------- */
+    body {
+        font-family: 'Open Sans', sans-serif;
+        color: #353535;
+    }
+    .content h1 {
+        text-align: center;
+    }
+    .content .content-footer p {
+        color: #6d6d6d;
+        font-size: 12px;
+        text-align: center;
+    }
+    .content .content-footer p a {
+        color: inherit;
+        font-weight: bold;
+    }
+
+    /*  --------------------------------------------------
+      :: Table Filter
+      -------------------------------------------------- */
+    .panel {
+        border: 1px solid #ddd;
+        background-color: #fcfcfc;
+    }
+    .panel .btn-group {
+        margin: 15px 0 30px;
+    }
+    .panel .btn-group .btn {
+        transition: background-color .3s ease;
+    }
+    .table-filter {
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+    }
+    .table-filter tbody tr:hover {
+        cursor: pointer;
+        background-color: #eee;
+    }
+    .table-filter tbody tr td {
+        padding: 10px;
+        vertical-align: middle;
+        border-top-color: #eee;
+    }
+    .table-filter tbody tr.selected td {
+        background-color: #eee;
+    }
+    .table-filter tr td:first-child {
+        width: 38px;
+    }
+    .table-filter tr td:nth-child(2) {
+        width: 35px;
+    }
+    .ckbox {
+        position: relative;
+    }
+    .ckbox input[type="checkbox"] {
+        opacity: 0;
+    }
+    .ckbox label {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .ckbox label:before {
+        content: '';
+        top: 1px;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        display: block;
+        position: absolute;
+        border-radius: 2px;
+        border: 1px solid #bbb;
+        background-color: #fff;
+    }
+    .ckbox input[type="checkbox"]:checked + label:before {
+        border-color: #2BBCDE;
+        background-color: #2BBCDE;
+    }
+    .ckbox input[type="checkbox"]:checked + label:after {
+        top: 3px;
+        left: 3.5px;
+        content: '\e013';
+        color: #fff;
+        font-size: 11px;
+        font-family: 'Glyphicons Halflings';
+        position: absolute;
+    }
+    .table-filter .star {
+        color: #ccc;
+        text-align: center;
+        display: block;
+    }
+    .table-filter .star.star-checked {
+        color: #F0AD4E;
+    }
+    .table-filter .star:hover {
+        color: #ccc;
+    }
+    .table-filter .star.star-checked:hover {
+        color: #F0AD4E;
+    }
+    .table-filter .media-photo {
+        width: 35px;
+    }
+    .table-filter .media-body {
+        display: block;
+        /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+    }
+    .table-filter .media-meta {
+        font-size: 11px;
+        color: #999;
+    }
+    .table-filter .media .title {
+        color: #2BBCDE;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: normal;
+        margin: 0;
+    }
+    .table-filter .media .title span {
+        font-size: .8em;
+        margin-right: 20px;
+    }
+    .table-filter .media .title span.pagado {
+        color: #5cb85c;
+    }
+    .table-filter .media .title span.pendiente {
+        color: #f0ad4e;
+    }
+    .table-filter .media .title span.cancelado {
+        color: #d9534f;
+    }
+    .table-filter .media .summary {
+        font-size: 14px;
+    }
+
+    tr
+    {
+        font-size: 14px;
+
+    }
+
+    .media > a >img
+    {
+        width: 50px;
+        height: auto;
+    }
+
+    .media-body > h4
+    {
+        font-size: 14px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .pagination {
+        display: inline-block;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ff0000;
+        margin: 0 4px;
+    }
+
+    .pagination a.active {
+        background-color: #0061B2;
+        color: white;
+        border: 1px solid #0061B2;
+    }
+
+    .pagination a:hover:not(.active) {background-color: #ff0000;
+    }
+</style>
+<body data-spy="scroll" data-target="#navigation" data-offset="120">
+<div id="all">
+    <!-- navbar-->
+    <header class="header"> <header th:replace="fragments/header :: pubnav" class="header">
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header"><a href="#all" class="navbar-brand scroll-to"><img src="img/b2.png" width="118" height="100"alt="logo" class="hidden-xs hidden-sm"><img src="img/b2.png" alt="logo" class="visible-xs visible-sm" width="118" height="100"><span class="sr-only">Go to homepage</span></a>
+                    <div class="navbar-buttons">
+                        <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+                    </div>
+                </div>
+                <div id="navigation" class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-to">Home</a></li>
+                        <li><a href="about.html" class="scroll-to">About Us </a></li>
+                        <li><a href="#" class="scroll-to">Our Product</a></li>
+                        <li><a href="faq.html" class="scroll-to">FAQs</a></li>
+                        <li><a href="contact.html" class="scroll-to">Contact</a></li>
+                        <li><a href="contact.html" class="scroll-to">Notices</a></li>
+
+                    </ul><a href="#" data-toggle="modal" data-target="#get-started" class="btn navbar-btn btn-ghost">Login</a>
+                    <a href="#" data-toggle="modal" data-target="#get-started" class="btn navbar-btn btn-ghost">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+
+            <section class="content">
+                <h1>Open Notices </h1>
+                <hr>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-filter" data-target="all">All Notices</button>
+                                    <button type="button" class="btn btn-success btn-filter un-color-primary" style="background-color: #5B92E5;" data-target="consultant">Consultant</button>
+                                    <button type="button" class="btn btn-warning btn-filter un-color-primary-dark" data-target="supplier">Suppliers</button>
+                                    <button type="button" class="btn  btn-filter un-color-primary-darkest text-white" data-target="ngo">NGOs</button>
+
+
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table class="table">
+                                    <tbody>
+                                    <tr th:each="n,iter : ${notices}" th:attr="data-status=${n.roles.size() == 1}? ${n.getRoleNames()[0].toLowerCase()}: 'vendors'">
+
+                                        <td>
+                                            <div class="ckbox">
+                                                <input type="checkbox" th:id="${'checkbox' + (iter.index + 1) }">
+                                                <label th:for="${'checkbox' + (iter.index + 1)}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <a href="#" class="pull-left">
+
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="title" th:text="${n.position}">
+                                                        Lorem Impsum
+
+                                                    </h4>
+                                                    <span class="pull-right"><a th:href="@{'/notices/' + ${n.uuid}}" class="btn btn-danger ">View Notice</a></span>
+                                                    <p class="summary" th:text="${n.details}">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+            <div class="center">
+                <div class="pagination">
+
+                    <a th:href="@{ ${pager.unpagedUrl} + '?page=0'  }" >First</a>
+
+                    <a th:if="${pager.hasPrev() }" th:href="@{ ${#strings.contains(pager.unpagedUrl, '?')} ? ${pager.unpagedUrl} + '&amp;page=' + ${pager.page -1} : ${pager.unpagedUrl} + '?page=' + ${pager.page -1}  }" >Prev</a>
+                    <a  th:each="page : ${pager.list}" th:href="@{ ${#strings.contains(pager.unpagedUrl, '?')} ?  ${pager.unpagedUrl} + '&amp;page=' + ${page} : ${pager.unpagedUrl} + '?page=' + ${page}  }"  th:text="${page}"></a>
+                    <a th:if="${#lists.size(pager.list) lt pager.totalPages}">...</a>
+                    <a th:if="${pager.hasNext()}" th:href="@{ ${#strings.contains( pager.unpagedUrl, '?')} ? ${pager.unpagedUrl} + '&amp;page=' + ${pager.page +1} : ${pager.unpagedUrl} + '?page=' + ${pager.page +1}  }" >Next</a>
+                    <a th:href="@{ ${pager.unpagedUrl} + '?page=' + ${pager.totalPages - 1}  }" >Last</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end of code -->
+
+
+        <footer class="footer">
+            <div class="footer__copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <p th:inline="text">United Nations System in Nigeria &copy; [[${#dates.year(#dates.createNow())}]]
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+<div th:replace="fragments/footer :: public-footer"></div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.star').on('click', function () {
+            $(this).toggleClass('star-checked');
+        });
+
+        $('.ckbox label').on('click', function () {
+            $(this).parents('tr').toggleClass('selected');
+        });
+
+        $('.btn-filter').on('click', function () {
+            var $target = $(this).data('target');
+            if ($target != 'all') {
+                $('.table tr').css('display', 'none');
+                $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+            } else {
+                $('.table tr').css('display', 'none').fadeIn('slow');
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

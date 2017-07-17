@@ -1,0 +1,45 @@
+{
+  "name": "vdmsng",
+  "version": "1.0.0",
+  "description": "Vendor Database MAangement System for United Nations System in Nigeria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "VDMS",
+    "Le",
+    "Proghrammeen",
+    "Solutiions"
+  ],
+  "author": "Le Proghrammeen Solutions Ltd",
+  "license": "ISC",
+  "devDependencies": {
+    "autobind-decorator": "^1.3.4",
+    "axios": "^0.16.0",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "lodash-webpack-plugin": "^0.11.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-mixin": "^3.0.5",
+    "react-timeago": "^3.2.0",
+    "reflux": "^6.4.1",
+    "uglify-js": "^2.8.21",
+    "validate": "^3.0.1",
+    "webpack": "^1.13.1",
+    "webpack-bundle-tracker": "0.0.93",
+
+    "whatwg-fetch": "^2.0.3"
+  }
+}

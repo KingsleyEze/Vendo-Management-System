@@ -1,0 +1,48 @@
+
+
+
+<div class="leftpanel" th:fragment="leftpanel-admin">
+    <div class="media profile-left">
+        <div class="media-body" sec:authorize="isAuthenticated()">
+            <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+            <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+
+
+        </div>
+    </div><!-- media -->
+
+    <h5 class="leftpanel-title">Supplier Navigation</h5>
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+        <li><a href="#">
+            <span class="pull-right badge" th:text="${thematicSize != null} ? ${thematicSize.vpa.size()} : 0 ">5</span>
+            <i class="fa fa-envelope-o"></i>
+            <span>Thematic Area</span></a></li>
+        <li class="parent"><a href=""><i class="fa fa-suitcase"></i> <span>Vendor Form</span><div id="step1"> </div></a>
+            <ul class="children">
+
+                <li><a href="/suppliers/step-one"> Supplier Registration Form</a></li>
+
+
+            </ul>
+        </li>
+        <li class="p"><a href="/notices/public"><i class="fa fa-info"></i> <span>Notices</span><div id="step2"> </div></a>
+        </li>
+        <li><a href="/tenders/me"><i class="fa fa-cubes"></i> <span>Tenders</span><div id="step3"> </div></a></li>
+
+
+
+
+
+        <li class="parent"><a href=""><i class="fa fa-bars"></i> <span>Report </span><div id="step4"> </div></a>
+            <ul class="children">
+                <li><a href="#">Supplier Profile</a></li>
+
+            </ul>
+        </li>
+
+    </ul>
+
+</div>
+<!-- leftpanel -->

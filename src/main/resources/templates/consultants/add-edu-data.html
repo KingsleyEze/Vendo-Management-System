@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+    var vendors = [[${vendors}]];
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+<section>
+    <div class="mainwrapper">
+        <div th:replace="fragments/consultant-leftpanel :: leftpanel-admin">
+        <div class="media profile-left">
+
+                <div class="media-body" sec:authorize="isAuthenticated()">
+                    <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+
+
+                    <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+                </div>
+            </div><!-- media -->
+
+            <h5 class="leftpanel-title">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+
+
+
+
+            </ul>
+
+        </div><!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Consultant Signup</li>
+                        </ul>
+                        <h4>   Add Educational data</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+                <div class="row">
+
+                    <div class="progress progress-striped active">
+                        <div style="width: 60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-primary">
+                            <span class="sr-only">60% Completed (success)</span>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">Add Educational Data</h4>
+                            <p>Please select your vendor type appropriately  </p>
+                        </div><!-- panel-heading -->
+
+                        <form th:action="@{/consultants/addEduData}" method="POST" th:object="${eduData}" class="" >
+                            <div class="panel-body" >
+
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered collapsibleTable" id="institutionAttendedTable">
+
+                                        <tr  ><th >Select Institutions Attended</th><th></th></tr>
+                                        <tr id="inst_attended">
+                                            <td> <!--<button type="button" id="addLanguageSkill" class="btn btn-sm btn-primary">Add New Institution</button>--><br />Institution 1</td>
+                                            <td>
+
+                                                <input type="hidden" th:field="*{institutionsAttended[0].id}" />
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Type</label>
+                                                    <select required='required'  th:field="*{institutionsAttended[0].institutionType}" id="inst_type" class="form-control">
+                                                        <option value="">--Select Institution Type--</option>
+                                                        <option th:each="instType : ${institutionTypes}" th:value="${instType}"  th:text="${instType}" ></option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Name: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[0].name}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Place</label>
+                                                    <input type="text" th:field="*{institutionsAttended[0].place}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label class=" ">Country Located: </label>
+                                                    <select  data-placeholder="Choose One "  th:field="*{institutionsAttended[0].country}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                                        <option value=""></option>
+                                                        <option th:each="c: ${countries}" th:value="${c}" th:text="${c}"></option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div th:if="${!#lists.isEmpty(eduData.institutionsAttended) and #lists.size(eduData.institutionsAttended) > 0}">
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">Start Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text" name="institutionsAttended[0].startDate" th:value="${#strings.isEmpty(eduData.institutionsAttended[0].startDate) ? '' : #dates.format(eduData.institutionsAttended[0].startDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">End Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  name="institutionsAttended[0].endDate" th:value="${#strings.isEmpty(eduData.institutionsAttended[0].endDate) ? '' : #dates.format(eduData.institutionsAttended[0].endDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <div th:if="${#lists.isEmpty(eduData.institutionsAttended) or #lists.size(eduData.institutionsAttended) < 0}">
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text" th:field="*{institutionsAttended[0].startDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">End Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text"  th:field="*{institutionsAttended[0].endDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group col-sm-6">
+                                                <label>Certificate Obtained: </label>
+                                                <input type="text" th:field="*{institutionsAttended[0].certificateObtained}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Grade Obtained: </label>
+                                                <input type="text" th:field="*{institutionsAttended[0].grade}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Course of Study: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[0].courseOfStudy}" class="form-control" /><br />
+                                                </div>
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                        <tr id="inst_attended">
+                                            <td> Institution 2 (Optional)</td>
+                                            <td>
+                                                <input type="hidden" th:field="*{institutionsAttended[1].id}" />
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Type</label>
+                                                    <select required='required'  th:field="*{institutionsAttended[1].institutionType}" id="inst_type" class="form-control">
+                                                        <option value="">--Select Institution Type--</option>
+                                                        <option th:each="instType : ${institutionTypes}" th:value="${instType}"  th:text="${instType}" ></option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Name: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[1].name}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Place</label>
+                                                    <input type="text" th:field="*{institutionsAttended[1].place}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label class=" ">Country Located: </label>
+                                                    <select  data-placeholder="Choose One "  th:field="*{institutionsAttended[1].country}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                                        <option value=""></option>
+                                                        <option th:each="c: ${countries}" th:value="${c}" th:text="${c}"></option>
+                                                    </select>
+                                                </div>
+
+                                                <div th:if="${!#lists.isEmpty(eduData.institutionsAttended) and #lists.size(eduData.institutionsAttended) > 1}">
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text" name="institutionsAttended[1].startDate" th:value="${#strings.isEmpty(eduData.institutionsAttended[1].startDate) ? '' :#dates.format(eduData.institutionsAttended[1].startDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">End Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text"  name="institutionsAttended[1].endDate" th:value="${#strings.isEmpty(eduData.institutionsAttended[1].endDate) ? '' : #dates.format(eduData.institutionsAttended[1].endDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker4">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div th:if="${#lists.isEmpty(eduData.institutionsAttended) or #lists.size(eduData.institutionsAttended) < 1}">
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">Start Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{institutionsAttended[1].startDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">End Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{institutionsAttended[1].endDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                    </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Certificate Obtained: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[1].certificateObtained}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Grade Obtained: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[1].grade}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Course of Study: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[1].courseOfStudy}" class="form-control" /><br />
+                                                </div>
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                        <tr id="inst_attended">
+                                            <td> Institution 2 (Optional)</td>
+                                            <td>
+
+                                                <input type="hidden" th:field="*{institutionsAttended[2].id}" />
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Type</label>
+                                                    <select required='required'  th:field="*{institutionsAttended[2].institutionType}" id="inst_type" class="form-control">
+                                                        <option value="">--Select Institution Type--</option>
+                                                        <option th:each="instType : ${institutionTypes}" th:value="${instType}"  th:text="${instType}" ></option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Name: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[2].name}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Institution Place</label>
+                                                    <input type="text" th:field="*{institutionsAttended[2].place}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label class=" ">Country Located: </label>
+                                                    <select  data-placeholder="Choose One "  th:field="*{institutionsAttended[2].country}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                                        <option value=""></option>
+                                                        <option th:each="c: ${countries}" th:value="${c}" th:text="${c}"></option>
+                                                    </select>
+                                                </div>
+
+                                                <div th:if="${!#lists.isEmpty(eduData.institutionsAttended) and #lists.size(eduData.institutionsAttended) > 2}">
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text" name="institutionsAttended[2].startDate" th:value="${#strings.isEmpty(eduData.institutionsAttended[2].startDate) ? '' :#dates.format(eduData.institutionsAttended[2].startDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker5">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">End Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text"  name="institutionsAttended[2].endDate" th:value="${#strings.isEmpty(eduData.institutionsAttended[2].endDate) ? '' :#dates.format(eduData.institutionsAttended[2].endDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker6">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div th:if="${#lists.isEmpty(eduData.institutionsAttended) or #lists.size(eduData.institutionsAttended) < 2}">
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">Start Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{institutionsAttended[2].startDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">End Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{institutionsAttended[2].endDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                    </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>Certificate Obtained: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[2].certificateObtained}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Grade Obtained: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[2].grade}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Course of Study: </label>
+                                                    <input type="text" th:field="*{institutionsAttended[2].courseOfStudy}" class="form-control" /><br />
+                                                </div>
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                                <div class="form-group col-sm-12" >
+                                    <label class=" ">professional Activities And Societies</label>
+                                    <div class="">
+                                        <input th:field="*{professionalActivitiesAndSocieties}" id="profActNSoc" class="form-control tags"  value="Sample" />
+                                    </div>
+                                </div><!-- form-group -->
+
+                                <div class="form-group col-sm-12" >
+                                    <label class=" ">professional Publications</label>
+                                    <div class="">
+                                        <input th:field="*{professionalPublications}" id="profPubs" class="form-control tags"  value="Sample" />
+                                    </div>
+                                </div><!-- form-group -->
+
+
+                                <input type="hidden" name="consultantId" th:value="${consultant.id}" />
+
+                                <input type="hidden" th:field="*{id}" />
+
+
+                            </div><!-- panel-body -->
+
+                            <div class="panel-footer">
+                                <input class="btn btn-primary mr5" type="submit" value="Submit" />
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <script>
+                        jQuery('body').on('click', '.removeLanguage', function() {
+
+                            var answer = confirm("Are you sure you want to Language Skill node?");
+                            if(answer === true){
+                                var removeControl = jQuery(this).attr("data-remove");
+                                jQuery(removeControl).remove();
+                            }
+
+                        });
+                    </script>
+
+
+
+
+                </div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+
+    jQuery(document).ready(function(jQuery) {
+        jQuery('#addLanguageSkill').click(function () {
+            var answers = "";
+
+
+            answers += "<option value=''>--Select Answer--</option>";
+            answers += "<option value='true'>YES</option>";
+            answers += "<option value='false'>NO</option>";
+
+
+
+            var languageIndex = jQuery('table#languageSkillsTable tr').length - 1;
+            var text = "";
+            text += "<tr id='language" + languageIndex + "'><td> <label>Language " + (languageIndex + 1) + "</label> </td>";
+            //Enter new State Field
+                text += "<td>";
+                    text+= "<input type='text' name='languageSkills[" + languageIndex + "].language' class='form-control' /><br />";
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='false' /></label> Read Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='false' /></label> Write Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='false' /></label> Speak Fluently?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='true' /></label>" +
+                            "<label>NO <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='false' /></label> Understand Easily?";
+
+                    text += "<button type='button' class='btn btn-sm btn-danger removeLanguage pull-right' data-remove='#language" + languageIndex + "' >Remove Doc</button>";
+                text += "</td>";
+            text += "</tr>";
+
+            jQuery('#languageSkillsTable').append(text);
+
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/pubheader :: header">
+</head>
+<body class="signin">
+
+<section>
+
+    <div class="panel panel-signin">
+        <div class="panel-body">
+
+            <div class="alert alert-danger" th:if="${param.error}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+                <p th:utext="${error}"> <a href="#">Contact Support!</a>
+                </p>
+            </div>
+            <div class="logo text-center">
+                <a th:href="@{/}">
+                    <img th:src="@{/images/vdmslogo.png}" style="width:120px; height: 65px;" alt="VDMS  Logo"/></a>
+            </div>
+            <br/>
+            <h4 class="text-center mb5">Already a Vendor?</h4>
+            <p class="text-center">Sign in to your account</p>
+
+            <div class="mb30"></div>
+
+            <form th:action="@{/accounts/login}" method="post">
+                <div class="input-group mb15">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" name="username" placeholder="Email"/>
+                </div><!-- input-group -->
+                <div class="input-group mb15">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password" name="password" class="form-control" placeholder="Password"/>
+                </div><!-- input-group -->
+
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <div class="ckbox ckbox-primary mt10">
+                            <input type="checkbox" id="rememberMe" name="remember-me" value="1"/>
+                            <label for="rememberMe">Remember Me</label>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success">Sign In <i class="fa fa-angle-right ml5"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="clearfix">
+                    <div class="pull-left">
+
+
+                        <a th:href="@{/accounts/forgotpassword}" class="">Forgot your Password? <i
+                                class="fa fa-angle-right ml5"></i></a>
+                    </div>
+                </div>
+            </form>
+
+        </div><!-- panel-body -->
+        <div class="panel-footer">
+            <a th:href="@{/register}" class="btn btn-primary btn-block">Not yet a Vendor? Signup As Vendor Now</a>
+        </div><!-- panel-footer -->
+    </div><!-- panel -->
+
+</section>
+
+
+</body>
+<script>
+
+
+</script>
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+
+
+<script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/js/select2.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/modernizr.min.js}"></script>
+<script th:src="@{/js/pace.min.js}"></script>
+<script th:src="@{/js/retina.min.js}"></script>
+<script th:src="@{/js/jquery.cookies.js}"></script>
+
+</html>

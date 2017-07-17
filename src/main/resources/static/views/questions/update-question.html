@@ -1,0 +1,12 @@
+<form role="form" method="post"
+      data-ng-submit="updateQuestion(questionData.currQuestion)">
+
+    <fieldset class="form-group">
+        <label>Question Name</label> <input type="text" class="form-control"
+                                         required="required" data-ng-model="questionData.currQuestion.name" /> <span
+                                         data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+    
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>

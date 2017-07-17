@@ -1,0 +1,31 @@
+<form role="form" method="post" class="form-pad col-md-4" data-ng-submit="addSubject(subject)">
+
+	<fieldset class="form-group">
+		<label>Subject Name</label> <input type="text" class="form-control"
+			required="required" data-ng-model="subject.name" /> <span
+			data-ng-show="errorName">{{errorName}}</span>
+        </fieldset>
+
+	<input type="submit" value="Submit" class="btn btn-success" />
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="subject in subjects">
+        <tr>
+            <td><a href="" 
+                   data-ng-click="findSubjectById(subject.id)">{{subject.name}}</a></td>
+            <td><a href=""
+                    data-ng-click="updateSubjectClicked(subject)" class="btn btn-success">Update</a></td>
+            <td><a href=""
+                    data-ng-click="deleteSubject(subject.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+    
+</table>

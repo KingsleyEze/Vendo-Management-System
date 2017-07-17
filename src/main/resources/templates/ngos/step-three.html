@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header"></header>
+
+<section>
+    <div class="mainwrapper">
+        <!--<div th:replace="fragments/ngo-leftpanel :: leftpanel-admin"></div>-->
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a href=""> Ngo </a></li>
+                            <li>Add</li>
+                        </ul>
+                        <h5><strong>Step 3: TECHNICAL CAPABILITY AND INFORMATION ON GOODS/SERVICES OFFERED</strong></h5>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <h5 class="lg-title"></h5>
+                        <p class="mb20"></p>
+
+                        <!-- PROGRESS WIZARD -->
+                        <form action="/ngos/step-three" method="post" id="progressWizard" class="panel-wizard"
+                              th:object="${ngoTechnicalDto}" enctype="multipart/form-data">
+
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <input type="hidden" name="ngoCompanyArray"
+                                   class="form-control" th:field="*{ngoCompanyArray}"/>
+                            <input type="hidden" name="ngoGoodArray"
+                                   class="form-control" th:field="*{ngoGoodArray}"/>
+
+                            <ul class="nav nav-justified nav-wizard">
+                                <li><a href="/ngos/step-one"><strong>Step 1:</strong>COMPANY</a></li>
+                                <li><a href="/ngos/step-two"><strong>Step 2:</strong>FINANCIAL</a></li>
+                                <li><a href="/ngos/step-three"><strong>Step 3:</strong>TECHNICAL</a></li>
+                                <li><a href="/ngos/step-four"><strong>Step 4:</strong>EXPERIENCE</a></li>
+                                <li><a href="/ngos/step-five"><strong>Step 5:</strong>OTHER</a></li>
+                            </ul>
+
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"
+                                     aria-valuemin="25" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="tab-pane" id="tab1-2">
+
+                                    <br class="clearfix"/>
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>IF, AVAILABLE, PLEASE PROVIDE A COPY OF YOUR LATEST QUALITY
+                                                        ASSURANCE CERTIFICATION (e.g. ISO 9000 or equivalent).:</label>
+                                                    <input type="file" name="ngoDocument"
+                                                           class="form-control" th:field="*{ngoDocument}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+
+                                            <div class="col-sm-12">
+
+                                                <div class="form-group">
+                                                    <label>
+                                                        INTERNATIONAL OFFICES/REPRESENTATION:
+                                                        (Countries where the Company has local offices/representation)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="company" id="company"
+                                                           placeholder="Enter Company Name"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="country" id="country"
+                                                           placeholder="Enter Country"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <br class="clearfix"/>
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <button id="addCompanyButton"
+                                                            class="btn btn-sm btn-success pull-right"
+                                                            type="button">Add Company
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Table-->
+                                            <br class="clearfix"/>
+                                            <div class="col-md-12">
+
+                                                <table class="table" id="companyTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Company</th>
+                                                        <th>Country</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="companyTableBody">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--||Form Group -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>LIST BELOW UP TO 15 OF YOUR CORE GOODS/SERVICES OFFERED WITH
+                                                        THEIR RESPECTIVE UNCCS CODES. A UNCCS THESAURUS CATALOGUE IS
+                                                        AVAILABLE FROM THE UNCSD SECRETARIAT:</label>
+
+                                                    <form id="ngoServiceForm">
+                                                        <br class="clearfix"/>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" name="code" id="code"
+                                                                       class="form-control"
+                                                                       placeholder="Enter UNCC Code"/>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="text" name="quality"
+                                                                       id="quality" class="form-control"
+                                                                       placeholder="Enter National/International Quality Standard"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <br class="clearfix"/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                            <textarea name="description" id="description"
+                                                                      class="form-control"
+                                                                      placeholder="Enter UNCCS Description"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <br class="clearfix"/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <button id="addServiceButton"
+                                                                        class="btn btn-sm btn-success pull-right"
+                                                                        type="button">Add Service
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <br class="clearfix"/>
+
+                                                    </form>
+
+                                                    <table class="table" id="serviceTable">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>UNCCS Code</th>
+                                                            <th>UNCCS Description</th>
+                                                            <th>National/International Quality Standard to which item
+                                                                conforms
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="serviceTableBody">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- form-group -->
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+
+                                                    <button type="submit" class="btn btn-primary pull-right">Next
+                                                    </button>
+                                                </div>
+                                            </div><!-- form-group -->
+                                        </div>
+                                    </div><!-- // -->
+
+
+                                </div><!-- tab-pane -->
+
+                            </div><!-- tab-content -->
+
+
+                        </form><!-- panel-wizard -->
+
+                    </div><!-- col-md-6 -->
+
+                </div><!-- row -->
+
+            </div><!-- contentpanel -->
+        </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function () {
+
+
+        (function () {
+
+            var goodsInput = $('#ngoGoodArray').val(); var companyInput = $('#ngoCompanyArray').val();
+            var goodsArray = goodsInput !== "" ? JSON.parse(goodsInput) : [];
+            var companyArray = companyInput !== "" ? JSON.parse(companyInput) : [];
+
+            populateServiceTable(goodsArray);
+            populateCompanyTable(companyArray);
+
+            // --------------- Table Builders
+            function populateServiceTable(collection) {
+
+                var html = '';
+                for (var i = 0; i < collection.length; i++)
+                    html += '<tr><td>' + collection[i].code + '</td>'
+                        + '<td>' + collection[i].description + '</td>'
+                        + '<td>' + collection[i].quality + '</td></tr>';
+
+                $('#serviceTable tr').first().after(html);
+            }
+
+            function populateCompanyTable(collection){
+                var html = '';
+                for (var i = 0; i < collection.length; i++)
+                    html += '<tr><td>' + collection[i].company + '</td>'
+                        + '<td>' + collection[i].country + '</td></tr>';
+
+                $('#companyTable tr').first().after(html);
+            }
+        })();
+
+        var companyCollection = [];
+        var serviceCollection = [];
+
+        //------>> MISC. <<------
+
+        //# Factories
+        var createServiceFactory = function (code, quality, description) {
+
+            return {
+                code: code,
+                quality: quality,
+                description: description
+            };
+        };
+        var createCompanyFactory = function (company, country) {
+
+            return {
+                company: company,
+                country: country
+            };
+        };
+
+
+        //# Event Listeners
+        jQuery('#addServiceButton').click(function () {
+
+            var code = jQuery('#code').val();
+            var quality = jQuery('#quality').val();
+            var description = jQuery('#description').val();
+
+            var serviceObject = createServiceFactory(code, quality, description);
+
+            serviceCollection.push(serviceObject);
+
+            buildServiceTable(serviceCollection);
+            buildNgoGoodArrayInput(serviceCollection);
+            resetAddServiceForm();
+        });
+
+
+        jQuery('#addCompanyButton').click(function () {
+
+
+            console.log('inertia');
+
+            var company = jQuery('#company').val();
+            var country = jQuery('#country').val();
+
+            var companyObject = createCompanyFactory(company, country);
+
+            companyCollection.push(companyObject);
+
+            buildCompanyTable(companyCollection);
+            buildNgoCompanyArrayInput(companyCollection);
+
+            resetAddCompanyForm();
+        });
+
+        //# Table build
+        var buildServiceTable = function (collection) {
+
+            var html = '';
+            for (var i = 0; i < collection.length; i++)
+                html += '<tr><td>' + collection[i].code + '</td>'
+                    + '<td>' + collection[i].description + '</td>'
+                    + '<td>' + collection[i].quality + '</td></tr>';
+
+            $('#serviceTable tr').first().after(html);
+        };
+
+        var buildCompanyTable = function (collection) {
+
+
+            var html = '';
+            for (var i = 0; i < collection.length; i++)
+                html += '<tr><td>' + collection[i].company + '</td>'
+                    + '<td>' + collection[i].country + '</td></tr>';
+
+            $('#companyTable tr').first().after(html);
+        };
+
+        var buildNgoCompanyArrayInput = function (collection) {
+
+            var ngoCompanyArray = JSON.stringify(collection);
+
+            $('#ngoCompanyArray').val(ngoCompanyArray);
+        };
+
+        var buildNgoGoodArrayInput = function (collection) {
+            var ngoGoodArray = JSON.stringify(collection);
+
+            $('#ngoGoodArray').val(ngoGoodArray);
+        };
+
+
+        //Reset
+        var resetAddServiceForm = function () {
+            jQuery('#code ,#quality, #description').val('');
+        };
+
+
+        var resetAddCompanyForm = function () {
+            jQuery('#company ,#country').val('');
+        };
+
+        //------>> END <<------
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function (event) {
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function () {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {"data": "name"},
+                {"data": "position"},
+                {"data": "office"},
+                {"data": "salary"}
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // Progress Wizard
+        jQuery('#progressWizard').bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                tab.prevAll().addClass('done');
+                tab.nextAll().removeClass('done');
+                tab.removeClass('done');
+
+                var $total = navigation.find('li').length;
+                var $current = index + 3;
+
+                if ($current >= $total) {
+                    $('#progressWizard').find('.wizard .next').addClass('hide');
+                    $('#progressWizard').find('.wizard .finish').removeClass('hide');
+                } else {
+                    $('#progressWizard').find('.wizard .next').removeClass('hide');
+                    $('#progressWizard').find('.wizard .finish').addClass('hide');
+                }
+
+                var $percent = ($current / $total) * 100;
+                $('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">' +
+            '<tr>' +
+            '<td>Full name:</td>' +
+            '<td>' + d.name + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extension number:</td>' +
+            '<td>' + d.extn + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extra info:</td>' +
+            '<td>And any further details here (images etc)...</td>' +
+            '</tr>' +
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

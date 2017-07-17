@@ -1,0 +1,15 @@
+Activate Account from Email
+Forgot Password
+Reset Password for Login users
+Select Vendor, VPA and Specialization
+Vendor dashboards
+Vendor Forms
+- Consultant Forms
+- Supplier Forms
+- NGO Forms
+Security: RBAC
+User Form
+- Create User
+- Assign User Category
+- Reset User Password
+- Check User Activities

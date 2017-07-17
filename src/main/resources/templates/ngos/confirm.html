@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header"></header>
+
+<section>
+    <div class="mainwrapper">
+        <!--<div th:replace="fragments/ngo-leftpanel :: leftpanel-admin"></div>-->
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a href=""> Ngo </a></li>
+                            <li>Add</li>
+                        </ul>
+                        <h5><strong>CONFIRM</strong></h5>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+                <div class="row">
+                    <div class="col-md-10">
+
+                        <!--- PROFILE --->
+
+                        <br class="clearfix"/>
+
+
+                        <!--||Form Group -->
+                        <form th:object="${profileDto}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>NAME OF COMPANY/INSTITUTION</strong>:</label>
+                                            <span th:text="*{companyDto.company}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label><strong>STREET ADDRESS</strong>:</label>
+                                            <span th:text="*{companyDto.street}"></span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label><strong>POSTAL CODE</strong>:</label>
+                                            <span th:text="*{companyDto.postalCode}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label><strong>CITY</strong>:</label>
+                                            <span th:text="*{companyDto.city}"></span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label><strong>COUNTRY</strong>:</label>
+                                            <span th:text="*{companyDto.country}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label><strong>P.O. BOX and MAILING ADDRESS</strong>:</label>
+                                            <span th:text="*{companyDto.postalAddress}"></span>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label><strong>TELEPHONE NO</strong>:</label>
+                                            <span th:text="*{companyDto.telephoneNumber}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>E-MAIL ADDRESS</strong>:</label>
+                                            <span th:text="*{companyDto.emailAddress}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label><strong>FAX NO</strong>:</label>
+                                            <span th:text="*{companyDto.faxNumber}"></span>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label><strong>INTERNET ADDRESS</strong>:</label>
+                                            <span th:text="*{companyDto.internetAddress}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>CONTACT NAME AND TITLE</strong>:</label>
+                                            <span th:text="*{companyDto.contactNameAndTitle}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>PARENT COMPANY (Full legal name)</strong>:</label>
+                                            <span th:text="*{companyDto.parentCompany}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>
+                                                <strong>SUBSIDIARIES, ASSOCIATES AND/OR OVERSEAS REPRESENTATIVE(S)
+                                                    (Attach list, if necessary)</strong>:</label>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>NATURE OF BUSINESS</strong>:</label>
+                                            <span th:text="*{companyDto.natureOfBusiness}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>TYPE OF BUSINESS</strong>:</label>
+                                            <span th:text="*{companyDto.typeOfBusiness}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label><strong>YEAR ESTABLISHED</strong>:</label>
+                                            <span th:text="*{companyDto.yearEstablished}"></span>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label><strong>NUMBER OF FULL-TIME EMPLOYEES</strong>:</label>
+                                            <span th:text="*{companyDto.numberOfFullTimeEmployee}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>LICENCE NUMBER/STATE WHERE REGISTERED</strong>:
+                                                <span th:text="*{companyDto.licenceNumberOrStateRegistered}"></span>
+                                            </label>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>VAT NUMBER/TAX IDENTIFICATION</strong>:</label>
+                                            <span th:text="*{companyDto.vatNumberTaxIdentification}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>TECHNICAL DOCUMENTS ARE AVAILABLE IN</strong>:</label>
+                                            <span th:text="*{companyDto.documentLanguage}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label><strong>WORKING LANGUAGES</strong>:</label>
+                                            <span th:text="*{companyDto.workingLanguage}"></span>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                </div>
+                            </div><!-- // -->
+
+                            <br class="clearfix"/>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>ANNUAL VALUE OF TOTAL INCOME FOR THE LAST 3 YEARS:</label>
+                                            <ul>
+                                                <li>Year One: <span th:text="*{financialDto.totalIncomeYearOne}"/></li>
+                                                <li>Year Two: <span th:text="*{financialDto.totalIncomeYearTwo}"/></li>
+                                                <li>Year Three: <span th:text="*{financialDto.totalIncomeYearThree}"/>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>ANNUAL VALUE OF EXPORT SALES FOR THE LAST 3 YEARS:</label>
+                                            <ul>
+                                                <li>Year One: <span th:text="*{financialDto.exportSalesYearOne}"/></li>
+                                                <li>Year Two: <span th:text="*{financialDto.exportSalesYearTwo}"/></li>
+                                                <li>Year Three: <span th:text="*{financialDto.exportSalesYearThree}"/>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>BANK NAME:</label>
+                                            <span th:text="*{financialDto.bankName}"/>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>ADDRESS:</label>
+                                            <span th:text="*{financialDto.bankAddress}"/>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>SWIFT/BIC ADDRESS:</label>
+                                            <span th:text="*{financialDto.swiftOrBicAddress}"/>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>BANK ACCOUNT NUMBER:</label>
+                                            <span th:text="*{financialDto.bankAccountNumber}"/>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>ACCOUNT NAME:</label>
+                                            <span th:text="*{financialDto.bankAccountName}"/>
+                                        </div><!-- form-group -->
+
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <label>AUDITED FINANCIAL REPORT:</label>
+
+                                            </div>
+                                        </div><!-- form-group -->
+
+
+                                    </div>
+                                </div>
+                            </div><!-- // -->
+
+                            <br class="clearfix"/>
+
+                            <div class="row">
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <label>IF, AVAILABLE, PLEASE PROVIDE A COPY OF YOUR LATEST QUALITY
+                                                    ASSURANCE CERTIFICATION (e.g. ISO 9000 or equivalent).:</label>
+                                            </div>
+                                        </div><!-- form-group -->
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-8">
+
+                                        <div class="col-sm-12">
+
+                                            <div class="form-group">
+                                                <label>
+                                                    INTERNATIONAL OFFICES/REPRESENTATION:
+                                                    (Countries where the Company has local offices/representation)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <br class="clearfix"/>
+
+                                        <!-- Table-->
+                                        <br class="clearfix"/>
+                                        <div class="col-md-12">
+
+                                            <table class="table" id="companyTable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Company</th>
+                                                    <th>Country</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="companyTableBody">
+                                                    <tr th:each="office : *{technicalDto.ngoOffices}">
+                                                        <td th:text="${office.company}"></td>
+                                                        <td th:text="${office.country}"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--||Form Group -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <label>LIST BELOW UP TO 15 OF YOUR CORE GOODS/SERVICES OFFERED WITH
+                                                    THEIR RESPECTIVE UNCCS CODES. A UNCCS THESAURUS CATALOGUE IS
+                                                    AVAILABLE FROM THE UNCSD SECRETARIAT:</label>
+
+
+                                                <table class="table" id="serviceTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>UNCCS Code</th>
+                                                        <th>UNCCS Description</th>
+                                                        <th>National/International Quality Standard to which item
+                                                            conforms
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="serviceTableBody">
+                                                    <tr th:each="good : *{technicalDto.ngoGood}">
+                                                        <td th:text="${good.code}"></td>
+                                                        <td th:text="${good.description}"></td>
+                                                        <td th:text="${good.quality}"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div><!-- form-group -->
+
+
+                                    </div>
+                                </div><!-- // -->
+                            </div>
+
+                            <br class="clearfix"/>
+
+                            <div class="row">
+
+                                    <div class="col-md-8">
+                                        <label>RECENT CONTRACTS WITH THE UNITED NATIONS and/or OTHER INTERNATIONAL AID ORGANIZATIONS</label>
+
+                                    </div>
+
+                                    <!--||Form Group -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <table class="table" id="contractTable">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Organization</th>
+                                                            <th>Value in US$</th>
+                                                            <th>Year</th>
+                                                            <th>Goods/Services Supplied</th>
+                                                            <th>Destination</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="contract : *{experienceDto.ngoContracts}">
+                                                            <td th:text="${contract.organization}"></td>
+                                                            <td th:text="${contract.value}"></td>
+                                                            <td th:text="${contract.year}"></td>
+                                                            <td th:text="${contract.goodService}"></td>
+                                                            <td th:text="${contract.destination}"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>TO WHICH COUNTRIES HAS YOUR COMPANY EXPORTED and/or MANAGED PROJECTS OVER THE LAST 3 YEARS?:</label>
+
+                                                    <table class="table" >
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Project</th>
+                                                                <th>Country</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span th:text="*{experienceDto.ngoProject1}"></span> </td>
+                                                                <td><span th:text="*{experienceDto.ngoCountry1}"></span> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span th:text="*{experienceDto.ngoProject2}"></span> </td>
+                                                                <td><span th:text="*{experienceDto.ngoCountry2}"></span> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span th:text="*{experienceDto.ngoProject3}"></span> </td>
+                                                                <td><span th:text="*{experienceDto.ngoCountry3}"></span> </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <br class="clearfix"/>
+
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label> ENVIRONMENTAL POLICY::</label>
+                                                </div>
+                                            </div><!-- form-group -->
+
+
+                                        </div>
+                                    </div><!-- // -->
+
+
+
+                            </div>
+
+                            <br class="clearfix"/>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>PLEASE LIST ANY DISPUTES YOUR COMPANY HAS BEEN INVOLVED IN
+                                                WITH THE UNITED NATIONS ORGANIZATIONS OVER THE LAST 3
+                                                YEARS:</label>
+                                            <br class="clearfix"/>
+
+                                            <p>
+                                                DISPUTE 1:
+                                                <br class="clearfix"/>
+                                                <span th:text="*{otherDto.ngoDispute1}"></span>
+                                            </p>
+                                            <p>
+                                                DISPUTE 2:
+                                                <br class="clearfix"/>
+                                                <span th:text="*{otherDto.ngoDispute2}"></span>
+                                            </p>
+                                            <p>
+                                                DISPUTE 3:
+                                                <br class="clearfix"/>
+                                                <span th:text="*{otherDto.ngoDispute3}"></span>
+                                            </p>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>
+                                                LIST ANY NATIONAL, OR INTERNATIONAL TRADE OR PROFESSIONAL
+                                                ORGANIZATIONS OF WHICH YOUR COMPANY IS A MEMBER
+                                            </label>
+                                            <div class="row">
+                                                <!-- Table-->
+                                                <br class="clearfix"/>
+                                                <div class="col-md-12">
+
+                                                    <table class="table" id="membershipTable">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Organization</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="companyTableBody">
+                                                        <tr th:each="member : *{otherDto.ngoMemberships}">
+                                                            <td th:text="${member.organisationName}"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>
+                                                CERTIFICATION:<br/>
+                                                I, <span th:text="*{otherDto.functionalTitle}"></span>  <span th:text="*{otherDto.signature}"></span> the undersigned, warrant that the information provided in
+                                                this form is correct and, in the event of changes, details will
+                                                be provided as soon as possible.
+
+                                            </label>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                </div>
+
+                            </div>
+
+                            <br class="clearfix"/>
+
+
+                        </form>
+
+
+                        <!--- PROFILE --->
+
+
+                    </div><!-- col-md-6 -->
+                </div><!-- row -->
+            </div><!-- contentpanel -->
+        </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function (event) {
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function () {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {"data": "name"},
+                {"data": "position"},
+                {"data": "office"},
+                {"data": "salary"}
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">' +
+            '<tr>' +
+            '<td>Full name:</td>' +
+            '<td>' + d.name + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extension number:</td>' +
+            '<td>' + d.extn + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extra info:</td>' +
+            '<td>And any further details here (images etc)...</td>' +
+            '</tr>' +
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

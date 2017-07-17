@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header"></header>
+
+<section>
+    <div class="mainwrapper">
+    <div th:replace="fragments/ngo-leftpanel :: leftpanel-admin"></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a href=""> Ngo </a></li>
+                            <li>Add</li>
+                        </ul>
+                        <h5><strong>Step 1: COMPANY DETAILS AND GENERAL INFORMATION</strong></h5>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <h5 class="lg-title"></h5>
+                        <p class="mb20"></p>
+
+                        <!-- PROGRESS WIZARD -->
+                        <form action="/ngos/step-one" method="post" id="progressWizard" class="panel-wizard" th:object="${ngoCompanyDto}" enctype="multipart/form-data">
+
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <ul class="nav nav-justified nav-wizard">
+                                <li><a href="/ngos/step-one"><strong>Step 1:</strong>COMPANY</a></li>
+                                <li><a href="/ngos/step-two"><strong>Step 2:</strong>FINANCIAL</a></li>
+                                <li><a href="/ngos/step-three"><strong>Step 3:</strong>TECHNICAL</a></li>
+                                <li><a href="/ngos/step-four"><strong>Step 4:</strong>EXPERIENCE</a></li>
+                                <li><a href="/ngos/step-five"><strong>Step 5:</strong>OTHER</a></li>
+                            </ul>
+
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"
+                                     aria-valuemin="25" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="tab-pane" id="tab1-2">
+
+                                    <br class="clearfix"/>
+
+
+                                    <!--||Form Group -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>NAME OF COMPANY/INSTITUTION</strong>:</label>
+                                                    <input type="text" name="company" placeholder="Enter Company Name"
+                                                           class="form-control" th:field="*{company}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label><strong>STREET ADDRESS</strong>:</label>
+                                                    <input type="text" name="street" placeholder="Street Address"
+                                                           class="form-control" th:field="*{street}"/>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label><strong>POSTAL CODE</strong>:</label>
+                                                    <input type="text" name="postalCode" placeholder="Enter Postal Code"
+                                                           class="form-control" th:field="*{postalCode}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label><strong>CITY</strong>:</label>
+                                                    <input type="text" name="city" placeholder="Enter City"
+                                                           class="form-control" th:field="*{city}"/>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label><strong>COUNTRY</strong>:</label>
+                                                    <input type="text" name="country" placeholder="Enter Country"
+                                                           class="form-control"  th:field="*{country}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label><strong>P.O. BOX and MAILING ADDRESS</strong>:</label>
+                                                    <input type="text" name="postalAddress"
+                                                           placeholder="Enter P.O. Box and Mailing Address"
+                                                           class="form-control" th:field="*{postalAddress}"/>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <label><strong>TELEPHONE NO</strong>:</label>
+                                                    <input type="text" name="telephoneNumber"
+                                                           placeholder="Enter Telephone Number" class="form-control"
+                                                           th:field="*{telephoneNumber}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>E-MAIL ADDRESS</strong>:</label>
+                                                    <input type="text" name="emailAddress"
+                                                           placeholder="Enter E-Mail Address" class="form-control"
+                                                           th:field="*{emailAddress}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label><strong>FAX NO</strong>:</label>
+                                                    <input type="text" name="faxNumber" placeholder="Enter FAX Number"
+                                                           class="form-control" th:field="*{faxNumber}"/>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <label><strong>INTERNET ADDRESS</strong>:</label>
+                                                    <input type="text" name="internetAddress"
+                                                           placeholder="Enter Internet Address" class="form-control"
+                                                           th:field="*{internetAddress}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>CONTACT NAME AND TITLE</strong>:</label>
+                                                    <input type="text" name="contactNameAndTitle" class="form-control"
+                                                           th:field="*{contactNameAndTitle}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>PARENT COMPANY (Full legal name)</strong>:</label>
+                                                    <input type="text" name="parentCompany" class="form-control"
+                                                           th:field="*{parentCompany}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                <label>
+                                                    <strong>SUBSIDIARIES, ASSOCIATES AND/OR OVERSEAS REPRESENTATIVE(S)
+                                                    (Attach list, if necessary)</strong>:</label>
+                                                    <input type="file" name="subsidiaries" class="form-control"
+                                                           th:field="*{subsidiaries}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>NATURE OF BUSINESS</strong>:</label>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{natureOfBusiness}" value="Manufacturer">Manufacturer</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{natureOfBusiness}" value="Trader">Trader</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{natureOfBusiness}" value="Authorized Agent">Authorized Agent</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{natureOfBusiness}" value="Consulting Company">Consulting Company</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{natureOfBusiness}" value="Other">Other</label>
+                                                    </div>
+                                                    <input type="text" name="natureOfBusinessOther" th:field="*{natureOfBusinessOther}"  class="form-control" placeholder="Please specify more details"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>TYPE OF BUSINESS</strong>:</label>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{typeOfBusiness}" value="Corporate/Limited">Corporate/Limited</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{typeOfBusiness}" value="Partnership">Partnership</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{typeOfBusiness}" value="Government Agency">Government Agency</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{typeOfBusiness}" value="University">University</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{typeOfBusiness}" value="Other">Other</label>
+                                                    </div>
+                                                    <input type="text"  th:field="*{typeOfBusinessOther}" class="form-control" placeholder="Please specify more details"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label><strong>YEAR ESTABLISHED</strong>:</label>
+                                                <input type="text" name="yearEstablished" class="form-control"
+                                                       th:field="*{yearEstablished}"/>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <label><strong>NUMBER OF FULL-TIME EMPLOYEES</strong>:</label>
+                                                    <input type="text" name="numberOfFullTimeEmployee" class="form-control"
+                                                           th:field="*{numberOfFullTimeEmployee}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>LICENCE NUMBER/STATE WHERE REGISTERED</strong>:
+                                                        </label>
+                                                    <input type="text" name="licenceNumberOrStateRegistered" class="form-control"
+                                                           th:field="*{licenceNumberOrStateRegistered}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>VAT NUMBER/TAX IDENTIFICATION</strong>:</label>
+                                                    <input type="text" name="vatNumberTaxIdentification" class="form-control"
+                                                           th:field="*{vatNumberTaxIdentification}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>TECHNICAL DOCUMENTS ARE AVAILABLE IN</strong>:</label>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="English">English</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="French">French</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="Spanish">Spanish</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="Russian">Russian</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="Arabic">Arabic</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="Chinese">Chinese</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{documentLanguage}" value="Other">Other</label>
+                                                    </div>
+                                                    <input type="text"  th:field="*{documentLanguageOther}" class="form-control" placeholder="Please specify more details"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label><strong>WORKING LANGUAGES</strong>:</label>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="English">English</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="French">French</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="Spanish">Spanish</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="Russian">Russian</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="Arabic">Arabic</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="Chinese">Chinese</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" th:field="*{workingLanguage}" value="Other">Other</label>
+                                                    </div>
+                                                    <input type="text"  th:field="*{workingLanguageOther}" class="form-control" placeholder="Please specify more details"/>
+                                                </div>
+                                            </div><!-- form-group -->
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+
+                                                    <button type="submit" class="btn btn-primary pull-right">Next</button>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                        </div>
+                                    </div><!-- // -->
+
+
+                                </div><!-- tab-pane -->
+
+                            </div><!-- tab-content -->
+
+
+                        </form><!-- panel-wizard -->
+
+                    </div><!-- col-md-6 -->
+
+                </div><!-- row -->
+            </div><!-- contentpanel -->
+        </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function (event) {
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function () {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {"data": "name"},
+                {"data": "position"},
+                {"data": "office"},
+                {"data": "salary"}
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // Progress Wizard
+        jQuery('#progressWizard').bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                tab.prevAll().addClass('done');
+                tab.nextAll().removeClass('done');
+                tab.removeClass('done');
+
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+
+                if ($current >= $total) {
+                    $('#progressWizard').find('.wizard .next').addClass('hide');
+                    $('#progressWizard').find('.wizard .finish').removeClass('hide');
+                } else {
+                    $('#progressWizard').find('.wizard .next').removeClass('hide');
+                    $('#progressWizard').find('.wizard .finish').addClass('hide');
+                }
+
+                var $percent = ($current / $total) * 100;
+                $('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">' +
+            '<tr>' +
+            '<td>Full name:</td>' +
+            '<td>' + d.name + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extension number:</td>' +
+            '<td>' + d.extn + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extra info:</td>' +
+            '<td>And any further details here (images etc)...</td>' +
+            '</tr>' +
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

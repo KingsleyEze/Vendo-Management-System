@@ -1,0 +1,171 @@
+<div th:fragment="footer">
+
+<script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/modernizr.min.js}"></script>
+<script th:src="@{/js/pace.min.js}"></script>
+<script th:src="@{/js/retina.min.js}"></script>
+<script th:src="@{/js/jquery.cookies.js}"></script>
+
+
+
+<script th:src="@{/js/morris.min.js}"></script>
+
+    <script th:src="@{/js/raphael-2.1.0.min.js}"></script>
+<script th:src="@{/js/bootstrap-wizard.min.js}"></script>
+    <script sec:authorize="not hasAnyAuthority({'ADMIN_ACCOUNT','STAFF','UNSTAFF'})" th:src="@{/js/bootstrap-tour.js}"></script>
+
+
+
+    <script th:src="@{/js/jquery.dataTables.min.js}" ></script>
+    <script th:src="@{/js/dataTables.bootstrap.js}"></script>
+    <script th:src="@{/js/dataTables.responsive.js}"></script>
+    <script th:src="@{/js/dropzone.min.js}"></script>
+
+
+    <script sec:authorize="hasAnyAuthority({'ADMIN_ACCOUNT','STAFF'})" th:if="${#httpServletRequest.requestURI} == '/accounts'" th:src="@{/js/dashboard.js}"></script>
+
+
+
+      <script th:src="@{/js/jquery.gritter.min.js}"></script>
+
+
+
+
+
+
+
+
+        <script th:inline="javascript">
+            var config = {};
+            /*<![CDATA[*/
+
+
+
+            var errors = [[${errors}]];
+            var success = [[${success}]];
+            var stickyNotice = [[${stickyNotice}]];
+
+
+            /*]]>*/
+
+
+        jQuery(document).ready(function () {
+
+            console.log(JSON.stringify(success));
+            console.log(JSON.stringify(errors));
+
+            console.log(JSON.stringify(stickyNotice));
+
+            if(success && Object.keys(success).length > 0 ) {
+                Object.keys(success).map(function (item) {
+
+
+                  return  jQuery.gritter.add({
+                        title: 'Success Info',
+                        text:  success[item],
+                        class_name: 'growl-success',
+                        image: '/images/screen.png',
+                        sticky: false,
+                        time: 10000
+                    });
+                });
+                }
+
+            if(errors && Object.keys(errors).length > 0 ) {
+                Object.keys(errors).map(function (item) {
+
+
+                    return  jQuery.gritter.add({
+                        title: 'Error Info',
+                        text:  errors[item],
+                        class_name: 'growl-danger',
+                        image: '/images/screen.png',
+                        sticky: false,
+                        time: 10000
+                    });
+                });
+            }
+
+
+            if(stickyNotice && Object.keys(stickyNotice).length > 0 ) {
+                Object.keys(stickyNotice).map(function (item) {
+
+
+                    return  jQuery.gritter.add({
+                        title: 'Information',
+                        position: 'top-left',
+                        text:  stickyNotice[item],
+                        class_name: 'growl-warning',
+                        image: '/images/screen.png',
+                        sticky: true,
+                        time: 10000
+                    });
+                });
+            }
+
+
+        });
+        </script>
+      <script sec:authorize="not hasAnyAuthority({'ADMIN_ACCOUNT','UNSTAFF','STAFF'})" type="text/javascript" >
+
+    // Instance the tour
+            var tour = new Tour({
+                keyboard: true,
+                storage: false,
+                steps: [
+                    {
+                        element: "#welcome",
+                        title: "Heads up!",
+                        content: " Please note that enlistment on VDMS does not mean automatic engagement with any of the UNSiN Agencies."
+                    },
+                    {
+                        element: "#step1",
+                        title: "Quick guide",
+                        content: "Click here and provide your vendor profile."
+                    }
+                    ,
+                    {
+                        element: "#step2",
+                        title: "Quick guide",
+                        content: "Click here to view open notices for bid."
+                    }
+                    ,
+                    {
+                        element: "#step3",
+                        title: "Quick guide",
+                        content: "Click here to follow up on your bids."
+                    }
+                    ,
+                    {
+                        element: "#step4",
+                        title: "Quick guide",
+                        content: "Click here to view or edit your vendor profile."
+                    }
+
+                ]});
+
+            // Initialize the tour
+            tour.init();
+
+            // Start the tour
+            tour.start(true);
+    </script>
+
+
+
+<br/><br/>
+    <!-- Hotjar Tracking Code for vdms.lepsms.com -->
+    <script type="text/javascript">
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:544617,hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+
+</div>
+

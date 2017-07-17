@@ -1,0 +1,20 @@
+<form role="form" method="post" class="form-pad col-md-4"
+      data-ng-submit="updatePublisher(publisherData.currPublisher)">
+
+    <h2> Update Publisher </h2>
+
+    <fieldset class="form-group">
+        <label>Publisher Name</label> <input type="text" class="form-control"
+                                             required="required" data-ng-model="publisherData.currPublisher.name" /> <span
+                                             data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>Exam Name</label>  <select  data-ng-model="publisherData.currPublisher.exam.id"  ng-options="exam.id as exam.name for exam in publisherData.currPublisher.exams" >        </select>  
+        <span
+            data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>

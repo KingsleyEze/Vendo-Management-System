@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="fragments/header :: header">
+</header>
+<body class="signin">
+
+<section>
+    <div class="panel panel-signin">
+        <div class="panel-body">
+
+
+            <h3><label>Feedback!!!</label></h3>
+            <hr />
+            <div class="alert alert-danger animated fadeInRight" th:if="${errors != null }">
+                <h3>Error!</h3>
+                <tr th:each="instance : ${errors}">
+                    <td th:text="${instance.key}">keyvalue</td>
+                    <td th:text="${instance.value}">value</td>
+                </tr>
+            </div>
+
+            <div class="col-md-12 feedback-success alert alert-info animated fadeInRight" th:if="${success != null }">
+                <h3>Successful!</h3>
+                <p th:text="${message}"></p>
+            </div>
+            <small th:if="${redirect}" th:text="Redirecting.."></small>
+
+        </div>
+
+
+
+    </div><!-- panel-body -->
+
+    </div><!-- panel -->
+
+</section>
+
+
+
+
+</body>
+
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/modernizr.min.js}"></script>
+<script th:src="@{/js/pace.min.js}"></script>
+<script th:src="@{/js/retina.min.js}"></script>
+<script th:src="@{/js/jquery.cookies.js}"></script>
+
+<script th:src="@{/js/custom.js}"></script>
+</html>

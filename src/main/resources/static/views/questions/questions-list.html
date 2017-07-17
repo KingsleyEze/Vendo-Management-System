@@ -1,0 +1,36 @@
+<div class="form-pad col-md-4">
+    <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."
+               required="required" ng-model="search.description" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+</div>
+
+
+<table class="table table-striped" jq-math="description">
+    <thead>
+        <tr>
+            <th>Question Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="question in filterList| start: (currentPage - 1) * pageSize | limitTo: pageSize">
+        <tr>
+            <td ><a href="" jq-math="description" ng-bind-html="question.description | trusted"
+                   data-ng-click="findQuestionById(question.id)">{{question.description}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updateQuestionClicked(question)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteQuestion(question.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+
+</table>
+
+<ul uib-pagination total-items="filterList.length" items-per-page="pageSize" ng-model="currentPage" max-size="5" class="pagination-sm"></ul>    
+
+
+
+
+

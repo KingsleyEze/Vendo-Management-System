@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+
+        <div th:replace="fragments/supplier-leftpanel :: leftpanel-admin"></div>
+
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Dashboard</li>
+                        </ul>
+                        <h4>Dashboard</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+                <div class="row row-stat">
+                    <div class="col-md-4">
+                        <div class="panel panel-success-alt noborder">
+                            <div class="panel-heading noborder">
+                                <div class="panel-btns">
+                                    <a href="" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i
+                                            class="fa fa-times"></i></a>
+                                </div><!-- panel-btns -->
+                                <div class="panel-icon"><i class="fa fa-users"></i></div>
+                                <div class="media-body">
+                                    <h5 class="md-title nomargin">  Vendor Details</h5>
+                                    <h1 class="mt5" th:text="${thematicSize != null} ? ${'#'} + ${thematicSize.id}: '-' ">81,022</h1>
+                                </div><!-- media-body -->
+                                <hr/>
+                                <div class="clearfix mt20">
+                                    <div class="pull-left">
+                                        <h5 class="md-title nomargin"> Code</h5>
+                                        <small class="nomargin" th:text="${thematicSize != null} ? ${thematicSize.uuid.toUpperCase()}: '-'">2,004</small>
+                                    </div>
+                                    <div class="pull-right">
+                                        <h5 class="md-title nomargin">Join Date</h5>
+                                        <h4 class="nomargin" th:text="${thematicSize != null} ? ${#dates.format(thematicSize.user.created_at,'dd-MMM-YYYY')}: '-'">10,103</h4>
+                                    </div>
+                                </div>
+
+                            </div><!-- panel-body -->
+                        </div><!-- panel -->
+                    </div><!-- col-md-4 -->
+
+                    <div class="col-md-4">
+                        <div class="panel panel-primary noborder">
+                            <div class="panel-heading noborder">
+                                <div class="panel-btns">
+                                    <a href="" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i
+                                            class="fa fa-times"></i></a>
+                                </div><!-- panel-btns -->
+                                <div class="panel-icon"><i class="fa fa-info"></i></div>
+                                <div class="media-body">
+                                    <h5 class="md-title nomargin">Open Notices</h5>
+                                    <h1 class="mt5" th:text="${noticeCount}">138,102</h1>
+                                </div><!-- media-body -->
+                                <hr/>
+                                <div class="clearfix mt20">
+                                    <div class="pull-left">
+                                        <h5 class="md-title nomargin"> This Month</h5>
+                                        <h4 class="nomargin" th:text="${noticeCountMonth}"> 10,009</h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <h5 class="md-title nomargin">This Year</h5>
+                                        <h4 class="nomargin" th:text="${noticeCountYear}">178,222</h4>
+                                    </div>
+                                </div>
+
+                            </div><!-- panel-body -->
+                        </div><!-- panel -->
+                    </div><!-- col-md-4 -->
+                    <div class="col-md-4">
+                        <div class="panel panel-dark noborder">
+                            <div class="panel-heading noborder">
+                                <div class="panel-btns">
+                                    <a href="" class="panel-close tooltips" data-toggle="tooltip" data-placement="left"
+                                       title="Close Panel"><i class="fa fa-times"></i></a>
+                                </div><!-- panel-btns -->
+                                <div class="panel-icon"><i class="fa fa-cubes"></i></div>
+                                <div class="media-body">
+                                    <h5 class="md-title nomargin">Vendor Tenders </h5>
+                                    <h1 class="mt5" th:text="${tenderCount}">153,900</h1>
+                                </div><!-- media-body -->
+                                <hr/>
+                                <div class="clearfix mt20">
+                                    <div class="pull-left">
+                                        <h5 class="md-title nomargin">This Month</h5>
+                                        <h4 th:text="${tenderCountMonth == null} ? 0 : ${tenderCountMonth}" class="nomargin">000</h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <h5 class="md-title nomargin">This Year</h5>
+                                        <h4 th:text="${tenderCountYear == null} ? 0 : ${tenderCountYear} " class="nomargin">982</h4>
+                                    </div>
+                                </div>
+
+                            </div><!-- panel-body -->
+                        </div><!-- panel -->
+                    </div><!-- col-md-4 -->
+                </div><!-- row -->
+
+
+
+
+
+
+                <div class="row row-dashboard">
+
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div><!-- row -->
+
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+
+
+<div th:replace="fragments/admin-footer::footer"></div>
+</body>
+</html>

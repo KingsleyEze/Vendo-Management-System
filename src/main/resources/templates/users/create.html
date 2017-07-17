@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <div
+                th:replace="fragments/admin-leftpanel :: leftpanel-admin" ></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a th:href="@{/users/}"> Users </a></li>
+                            <li th:text="${ edit == null  } ? 'Add': 'Edit' ">Add</li>
+                        </ul>
+                        <h4>Create/ Edit User</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-10">
+
+                        <!-- registration form -->
+
+
+                    <div th:if="${errors != null }">
+                        <tr th:each="instance : ${errors}">
+                            <td th:text="${instance.key}">keyvalue</td>
+                            <td th:text="${instance.value}">value</td>
+                        </tr>
+
+                    </div>
+
+                    <div ><!--class="col-md-10"-->
+                        <form class="form-horizontal"
+                              th:action="${ edit == null  } ? @{/users/create} : @{/users/edit} "
+                              method="POST">
+
+
+
+                            <div th:if="${#authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN_ACCOUNT')}" 
+                                 class="form-group">
+                                <div class="mb30"></div>
+
+
+
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="othernames" class="col-md-3">Firstname:</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" id="othernames" th:value="${user.firstname}" name="firstname" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastname" class="col-md-3">Lastname:</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" id="lastname" th:value="${user.lastname}" name="lastname" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                  <label for="roles" class="col-md-3">Category:</label>
+                                <div class="col-md-5">
+                                <select    id="roles" style="width: 340px;" data-placeholder="Choose roles..." title="Select Roles" class="width300  select2-offscreen mselect" data-placeholder="Choose One or More Category"  multiple="multiple"   name="roles"
+                                        tabindex="-1">
+
+                                    <option th:each="role: ${roles}" th:selected="${user.roles == null } ? false : ${#sets.contains(user.roles, role)}"  th:value="${role.id}" th:text="${role.name}"></option>
+                                </select><br /><br />
+
+
+</div>
+
+
+
+                            </div>
+                            <div class="form-group">
+                                <label for="gender" class="col-md-3">Gender:</label>
+                                <div class="col-md-5">
+                                    <select class="width300  select2-offscreen mselect"  style="width: 340px;"  id="gender" th:value="${user.gender}" name="gender">
+                                        <option th:selected="${user.gender == 'female'}" value="female">Female</option>
+                                        <option th:selected="${user.gender == 'male'}" value="male">Male</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-md-3">Email Address:</label>
+                                <div class="col-md-5">
+                                    <input type="email" class="form-control" id="email" th:value="${user.email}" name="email" />
+                                </div>
+                            </div>
+
+
+
+          <div th:if="${#authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN_ACCOUNT')}"
+                                 class="form-group">
+                                <label for="username" class="col-md-3">Username:</label>
+                                <div class="col-md-5">
+                                    <input th:if="${ edit == null  } ? '' :  disabled" type="text" class="form-control" id="username" th:value="${user.username}"  name="username" />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" th:if="${edit == null and #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN_ACCOUNT')} " >
+                                <label for="password" class="col-md-3">Password:</label>
+                                <div class="col-md-5">
+                                    <input type="password" class="form-control" id="password" th:value="${user.password}" name="password" />
+                                </div>
+                            </div>
+
+                            <input type="hidden" th:if="${ edit != null  }" name="id" th:value="${user.id}" />
+
+                            <input type="text" th:if="${ edit == null  }" name="uuid" th:value="${user.uuid}" />
+
+                            <div class="panel-footer">
+                                        <button class="btn btn-primary mr5">Create</button>
+
+                                    </div><!-- panel-footer -->
+
+
+                        </form>
+                    </div>
+                    <!-- end regitration form -->
+
+                </div>
+
+            </div>
+
+            </div></div>
+        </div><!-- end of row content -->
+
+
+        <!--</div>--><!-- end of container fluid -->
+
+
+
+
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function(){
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function(event){
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function() {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "name" },
+                { "data": "position" },
+                { "data": "office" },
+                { "data": "salary" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format (d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">'+
+            '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.name+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.extn+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

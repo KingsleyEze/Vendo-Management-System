@@ -1,0 +1,289 @@
+<div class="container-fluid">  
+
+    <form role="form" method="post" class="form-horizontal" enctype="multipart/form-data" >
+
+        <h2>Question</h2>
+
+        <div class="row">
+
+            <div class="col-sm-3">
+
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Question Type </label>
+                    <select  data-ng-model="question.type" class="form-control">
+                        <option value="">--- Select question type ---</option>
+                        <option  value="SCQ">Single Choice</option>
+                        <option  value="MCQ">Multi Choice</option>
+                        <option  value="NCQ">No Choice</option>
+                    </select>
+                </fieldset>
+
+            </div>
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Question Mode </label>
+                    <select  data-ng-model="question.mode" class="form-control">
+                        <option value="">--- Select question mode ---</option> 
+                        <option  value="Rehearsal">Rehearsal</option>
+                        <option  value="Study">Study Mode</option>
+                        <option  value="All">All Mode</option>
+                    </select>    
+                </fieldset>
+            </div>
+
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="Subject" > Subject: </label>
+                    <select data-ng-model="question.subject.id" ng-options="subject.id as subject.name for subject in subjects" ng-change="getSubjectSections()" id="subjects"  class="form-control">
+                        <option value="">-- Choose Subject --</option>
+                    </select>
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Section: </label>
+                    <select name="repeatSelect" id="section" data-ng-model="question.section.id" class="form-control" required
+                            ng-options="section.id as section.name for section in sections" ng-change="getSectionTopics()" >
+                        <option value="">--- Choose Section ---</option>
+
+                    </select>
+                </fieldset>
+            </div>
+
+            <div class="col-sm-3">
+
+                <fieldset class="form-group">
+                    <label for="topic"> Topic Name </label>
+                    <select id="topic" ng-options="topic.id as topic.name for topic in topics"data-ng-model="question.topic.id" class="form-control" ng-change="getTopicSkills()">
+                        <option value="">--- Choose topic ---</option>
+
+                    </select>    
+                </fieldset>
+
+            </div>
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="skill"> Skill: </label>
+                    <select  id="skill" data-ng-model="question.skill.id" class="form-control">
+                        <option value="">--- Select Skill ---</option> 
+                        <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.name}}</option>
+                    </select>    
+                </fieldset>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Difficulty Level: </label>
+                    <select name="repeatSelect"  data-ng-model="question.difficulty" class="form-control" >
+                        <option  value="1">Level 1</option>
+                        <option  value="2">Level 2</option>
+                        <option  value="3">Level 3</option>
+                    </select>    
+                </fieldset>
+
+            </div>
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Publisher: </label>
+                    <select name="repeatSelect"  data-ng-model="question.publisher.id" class="form-control">
+                        <option value="">--- Select publisher ---</option> 
+                        <option ng-repeat="publisher in publishers" value="{{publisher.id}}">{{publisher.name}}</option>
+                    </select>    
+                </fieldset>
+            </div>
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label>Publishing Date</label>
+                    <input type="text" class="form-control" placeholder="yyyy-mm-dd"
+                           required="required" data-ng-model="question.publishing_date" /> <span
+                           data-ng-show="errorName">{{errorName}}</span>
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <fieldset class="form-group">
+                    <label>Question Description</label> 
+                    <trix-editor ng-model-options="{updateOn: 'blur'}" spellcheck="false" class="trix-content" ng-model="question.description" angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);" trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);" trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);" trix-attachment-add="trixAttachmentAdd(e, editor);" trix-attachment-remove="trixAttachmentRemove(e, editor);" placeholder="Write something..">
+                    </trix-editor>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Paid: </label>
+                    <select name="repeatSelect"  data-ng-model="question.paid" class="form-control">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>    
+                </fieldset>
+            </div>
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Anchor Question: </label>
+                    <select name="repeatSelect" id="repeatSelect" data-ng-model="question.anchored" class="form-control">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>    
+                </fieldset>
+            </div>
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect"> Paper Type </label>
+                    <select name="repeatSelect" id="repeatSelect" data-ng-model="question.paperType" class="form-control">
+                        <option value="true">Type 1</option>
+                        <option value="false">Type 2</option>
+                        <option value="false">NA</option>
+                    </select>    
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect">  Question Image: </label>
+
+                    <input  type="file" class="button" ngf-select ng-model="question.image" name="question.image" ngf-pattern="'image/*'"
+                            ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="100"
+                             />
+                </fieldset>
+            </div>
+
+
+
+
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect">  Feedback Video Url: </label>
+
+                    <input  type="url" class="button"  ng-model="question.feedbackVideoUrl" name="question.feedbackVideoUrl"
+                    />
+                </fieldset>
+            </div>
+
+
+
+
+            <div class="col-sm-3">
+                <fieldset class="form-group">
+                    <label for="repeatSelect">  Feedback Video Name: </label>
+
+                    <input  type="text" class="button"  ng-model="question.feedbackVideoName" name="question.feedbackVideoName"
+                    />
+                </fieldset>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <h2>Answers</h2>
+
+            <fieldset data-ng-repeat="qa in questionAnswer track by $index">
+                <hr/>
+                <label for="qa.option"> {{qa.option}}</label>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="image"> Image</label><br/>
+                        <input  type="file" class="button" ngf-select ng-model="question.questionAnswer[$index].image" name="question.questionAnswer[$index].image" ngf-pattern="'image/*'"
+                                ngf-accept="'image/*'" ngf-max-size="10MB"
+                                 />
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="qa.point">Point </label> 
+                        <input  style="height:10px; clear:right;" type="text"  data-ng-model="question.questionAnswer[$index].point" value="0"  data-ng-value="0" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="qa.correct">Correct Ans
+                            <input type="checkbox" data-ng-model="question.questionAnswer[$index].correct" style="margin:0 !important; clear:both;" />
+                        </label>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="qa.description"> Description</label> <br/>
+
+                        <trix-editor ng-model-options="{updateOn: 'blur'}" spellcheck="false" id="description_$index" class="trix-content" ng-model="question.questionAnswer[$index].description" angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);" trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);" trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);" trix-attachment-add="trixAttachmentAdd(e, editor);" trix-attachment-remove="trixAttachmentRemove(e, editor);" placeholder="Write something..">
+
+                        </trix-editor>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <div class="col-sm-3">
+
+            </div>
+
+            <div class="col-sm-3">
+                <input type="submit" value="Create Question" data-ng-click="addQuestion(question)"  class="btn btn-success" />
+            </div>
+
+            <div class="col-sm-3">
+
+            </div>
+        </div>
+
+
+
+    </form>
+
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Question Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="question in questions">
+        <tr>
+            <td ><a href="" jq-math="description" ng-bind-html="question.description | trusted"
+                    data-ng-click="findQuestionById(question.id)">{{question.description}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updateQuestionClicked(question)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteQuestion(question.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+

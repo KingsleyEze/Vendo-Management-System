@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <head>
+        <title>Studylabs</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+        <script type="text/javascript" th:src="@{/js/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/angular-resource.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/angular-route.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/app.js}"></script>
+        <!-- Load controllers -->
+        <script type="text/javascript" th:src="@{/js/controllers/subjectController.js}"></script>
+        <!-- Load services -->
+        <script type="text/javascript" th:src="@{/js/services/subjectService.js}"></script>
+
+        <script type="text/javascript" th:src="@{/js/controllers/sectionController.js}"></script>
+        <!-- Load services -->
+        <script type="text/javascript" th:src="@{/js/services/sectionService.js}"></script>
+    </head>
+    <body data-ng-app="studylabsApp">
+        <header>
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-md-2">
+
+                        <a href="#"><img th:src="@{/images/studylablogo.png}" class="logo" /> </a> <!-- end of logo -->
+
+                    </div><!-- end of col-md-2 -->
+
+                </div>
+
+            </div><!-- end of container fluid -->
+
+        </header><!-- end of row with header -->
+
+
+       
+
+
+
+    </body>
+</html>

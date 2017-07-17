@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header"></header>
+
+<section>
+    <div class="mainwrapper">
+        <div th:replace="fragments/supplier-leftpanel :: leftpanel-admin"></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a href=""> Supplier </a></li>
+                            <li>Add</li>
+                        </ul>
+                        <h5><strong>Step 5: OTHER</strong></h5>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <h5 class="lg-title"></h5>
+                        <p class="mb20"></p>
+
+                        <!-- PROGRESS WIZARD -->
+                        <form action="/suppliers/step-five" method="post" id="progressWizard" class="panel-wizard"
+                              th:object="${supplierOtherDto}" enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="hidden" th:field="*{supplierMembershipArray}"/>
+                            <ul class="nav nav-justified nav-wizard">
+                                <li><a href="/suppliers/step-one"><strong>Step 1:</strong>COMPANY</a></li>
+                                <li><a href="/suppliers/step-two"><strong>Step 2:</strong>FINANCIAL</a></li>
+                                <li><a href="/suppliers/step-three"><strong>Step 3:</strong>TECHNICAL</a></li>
+                                <li><a href="/suppliers/step-four"><strong>Step 4:</strong>EXPERIENCE</a></li>
+                                <li><a href="/suppliers/step-five"><strong>Step 5:</strong>OTHER</a></li>
+                            </ul>
+
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"
+                                     aria-valuemin="25" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="tab-pane" id="tab1-2">
+
+                                    <br class="clearfix"/>
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>PLEASE LIST ANY DISPUTES YOUR COMPANY HAS BEEN INVOLVED IN
+                                                        WITH THE UNITED NATIONS ORGANIZATIONS OVER THE LAST 3
+                                                        YEARS:</label>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" th:field="*{supplierDispute1}" placeholder="Enter Dispute 1"
+                                                           class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" th:field="*{supplierDispute2}" placeholder="Enter Dispute 2"
+                                                           class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" th:field="*{supplierDispute3}" placeholder="Enter Dispute 3"
+                                                           class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>
+                                                        LIST ANY NATIONAL, OR INTERNATIONAL TRADE OR PROFESSIONAL
+                                                        ORGANIZATIONS OF WHICH YOUR COMPANY IS A MEMBER
+                                                    </label>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <input type="text" name="membership" id="membership"
+                                                                   placeholder="Enter Organization Name"
+                                                                   class="form-control"/>
+                                                        <br class="clearfix"/>
+                                                            <div class="form-group">
+                                                                <button id="addMembershipButton"
+                                                                        class="btn btn-sm btn-success pull-right"
+                                                                        type="button">Add Organization
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Table-->
+                                                        <br class="clearfix"/>
+                                                        <div class="col-md-12">
+
+                                                            <table class="table" id="membershipTable">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Organization</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody id="companyTableBody">
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>
+                                                        CERTIFICATION:<br/>
+                                                        I, the undersigned, warrant that the information provided in
+                                                        this form is correct and, in the event of changes, details will
+                                                        be provided as soon as possible:
+
+                                                    </label>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>
+                                                        Functional Title:
+                                                    </label>
+                                                    <input type="text" th:field="*{functionalTitle}" placeholder="Enter functional title"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>
+                                                        Signature (Enter Full Name):
+                                                    </label>
+                                                    <input type="text" th:field="*{signature}" placeholder="Enter Your Full Name"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+
+                                                    <button type="submit" class="btn btn-primary pull-right">Next
+                                                    </button>
+                                                </div>
+                                            </div><!-- form-group -->
+                                        </div>
+
+                                    </div>
+                                </div><!-- tab-pane -->
+
+                            </div><!-- tab-content -->
+
+
+                        </form><!-- panel-wizard -->
+
+                    </div><!-- col-md-6 -->
+
+                </div><!-- row -->
+            </div><!-- contentpanel -->
+        </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function () {
+
+        (function () {
+
+            var membershipInput = $('#supplierMembershipArray').val();
+            var membershipArray = membershipInput !== "" ? JSON.parse(membershipInput) : [];
+
+            createMembershipTable(membershipArray);
+
+            function createMembershipTable(collection) {
+
+                var html = '';
+                for (var i = 0; i < collection.length; i++)
+                    html += '<tr><td>' + collection[i].organisationName + '</td></tr>';
+
+                $('#membershipTable tr').first().after(html);
+            };
+
+        })();
+
+        var membershipCollection = [];
+
+        var createMembershipFactory = function (organisationName) {
+
+            return {
+                organisationName: organisationName
+            };
+        };
+
+
+        jQuery('#addMembershipButton').click(function () {
+
+
+            var membership = jQuery('#membership').val();
+
+            var membershipObject = createMembershipFactory(membership);
+
+            membershipCollection.push(membershipObject);
+
+            buildMembershipTable(membershipCollection);
+
+            buildSupplierMembershipArrayInput(membershipCollection);
+
+            resetAddMembershipForm();
+        });
+
+
+        var buildMembershipTable = function (collection) {
+
+            var html = '';
+            for (var i = 0; i < collection.length; i++)
+                html += '<tr><td>' + collection[i].organisationName + '</td></tr>';
+
+            $('#membershipTable tr').first().after(html);
+        };
+
+        var buildSupplierMembershipArrayInput = function (collection) {
+            var supplierMembershipArray = JSON.stringify(collection);
+
+            $('#supplierMembershipArray').val(supplierMembershipArray);
+        };
+
+
+        var resetAddMembershipForm = function () {
+            jQuery('#membership').val('');
+        };
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function (event) {
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function () {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function (oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {"data": "name"},
+                {"data": "position"},
+                {"data": "office"},
+                {"data": "salary"}
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // Progress Wizard
+        jQuery('#progressWizard').bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                tab.prevAll().addClass('done');
+                tab.nextAll().removeClass('done');
+                tab.removeClass('done');
+
+                var $total = navigation.find('li').length;
+                var $current = index + 5;
+
+                if ($current >= $total) {
+                    $('#progressWizard').find('.wizard .next').addClass('hide');
+                    $('#progressWizard').find('.wizard .finish').removeClass('hide');
+                } else {
+                    $('#progressWizard').find('.wizard .next').removeClass('hide');
+                    $('#progressWizard').find('.wizard .finish').addClass('hide');
+                }
+
+                var $percent = ($current / $total) * 100;
+                $('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">' +
+            '<tr>' +
+            '<td>Full name:</td>' +
+            '<td>' + d.name + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extension number:</td>' +
+            '<td>' + d.extn + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extra info:</td>' +
+            '<td>And any further details here (images etc)...</td>' +
+            '</tr>' +
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

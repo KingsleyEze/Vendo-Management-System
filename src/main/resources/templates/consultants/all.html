@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <div
+                th:replace="fragments/admin-leftpanel :: leftpanel-admin" ></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader"><div class="row">
+                <div class="col-md-9">
+                    <div class="media">
+                        <div class="pageicon pull-left">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <div class="media-body">
+                            <ul class="breadcrumb">
+                                <li><a th:href="@{/consultants}">List Consultants</a></li>
+                                <li><a href="">Consultant </a></li>
+                                <li>List </li>
+                            </ul>
+                            <h4>Showing Consultants</h4>
+                        </div>
+                    </div><!-- media -->
+
+                </div>
+
+                <div class="col-md-3">
+                    <!--<a th:href="@{/consultants/add}" class="btn btn-sm btn-primary btn-rounded pull-right">Add New</a>-->
+                </div>
+            </div><!-- pageheader -->
+                <div class="contentpanel">
+
+                    <div class="row">
+
+                        <form th:action="@{/consultants}" method="GET"  class="" >
+                            <div class="panel-body" >
+                                <div class="form-group col-sm-3">
+                                    <label class="label-control ">Personal Info:</label>
+                                    <div class="">
+                                        <input type="text" placeholder="First Name, Last Name e.t.c" name="personalInfo" th:value="${#httpServletRequest.getParameter('personalInfo')}" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group col-sm-6">
+                                    <label class=" ">Date of Birth:</label>
+                                    <div class="input-group">
+                                        <input id="datepicker" type="text" th:value="${#strings.isEmpty(bioData.dob) ? '' : #dates.format(bioData.dob, 'dd/MM/yyyy') }" name="dob" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+
+                                </div>-->
+
+                                <div class="form-group col-sm-3">
+                                    <label class=" ">Place of Birth:</label>
+                                    <div class="">
+                                        <input type="text" name="placeOfBirth"  th:value="${#httpServletRequest.getParameter('placeOfBirth')}" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-3">
+                                    <label class=" ">Nationality</label>
+                                    <select  data-placeholder="Choose One Nationality"  name="nationality" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                        <option value="">--Select Natioanlity--</option>
+                                        <option th:each="c: ${countries}" th:selected="${#strings.equalsIgnoreCase(c, #httpServletRequest.getParameter('nationality') )}" th:value="${c}" th:text="${c}"></option>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-3">
+                                    <label class=" ">Mother Tongue:</label>
+                                    <div class="">
+                                        <input type="text" placeholder="Mother Tongue" name="motherTongue" th:value="${#httpServletRequest.getParameter('motherTongue')}" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                            </div><!-- panel-body -->
+
+                            <div class="panel-footer">
+                                <input class="btn btn-primary mr5" type="submit" value="Search" />
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <div class="panel panel-primary-head">
+
+                        <table id="basicTable" class="table table-striped table-bordered responsive">
+                            <thead>
+                            <tr><th>Full Name</th><th>Created Date</th><th>Modified Date</th><th>Gender</th><th>Marital Status</th><th>Years of experience</th><th>Office Address</th><th>Present Address</th></tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="con : ${consultants}">
+                                <td><p><a  th:href="@{/consultants/page/} + ${con.id}"><label style="color: blue; cursor: pointer;" th:text="${con.bioData.firstName } + ' ' + ${ con.bioData.surName}"></label></a></p></td>
+                                <td><p><label th:text="${con.created_at}"></label></p></td>
+                                <td><p><label th:text="${con.updated_at}"></label></p></td>
+                                <td th:text="${con.bioData.sex}"></td>
+                                <td th:text="${con.bioData.maritalStatus}"></td>
+                                <td th:text="${con.yearsOfExperience}"></td>
+
+                                <td th:text="${con.bioData.officeAddress.addressLine}"></td>
+                                <td th:text="${con.bioData.presentAddress.addressLine}"></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div><!-- panel -->
+
+                    <br />
+
+
+
+                </div><!-- contentpanel -->
+            </div><!-- mainpanel -->
+        </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(conument).ready(function(){
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function(event){
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function() {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "name" },
+                { "data": "position" },
+                { "data": "office" },
+                { "data": "salary" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format (d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">'+
+                '<tr>'+
+                '<td>Full name:</td>'+
+                '<td>'+d.name+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extension number:</td>'+
+                '<td>'+d.extn+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extra info:</td>'+
+                '<td>And any further details here (images etc)...</td>'+
+                '</tr>'+
+                '</table>';
+    }
+</script>
+
+</body>
+</html>

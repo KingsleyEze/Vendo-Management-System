@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+    var vendors = [[${vendors}]];
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+<section>
+    <div class="mainwrapper">
+        <div th:replace="fragments/admin-leftpanel :: leftpanel-admin">
+            <div class="media profile-left">
+
+                <div class="media-body" sec:authorize="isAuthenticated()">
+                    <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+
+
+                    <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+                </div>
+            </div><!-- media -->
+
+            <h5 class="leftpanel-title">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+
+
+
+
+            </ul>
+
+        </div><!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href="/accounts"><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Consultant Evaluation</li>
+                        </ul>
+                        <h4>   IC Evaluation Form</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+
+
+
+
+                <div class="row">
+
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">Consultant Evaluation Form </h4>
+                                 </div><!-- panel-heading -->
+
+                        <form th:action="@{/evaluations/consultants/ratingForm}" method="POST" th:object="${consultant}" class="" >
+                            <div class="panel-body" >
+                                <div class="form-group col-sm-12">
+                                    <label class="label-control ">Consultant:</label>
+                                    <div class="">
+
+                                        <select  id="consultant" th:field="*{consultant}" class="select2 pselect width100p" >
+
+                                            <option value="0">--</option>
+                                            <option th:each="r:${consultants}"    th:value="${r.id}"  th:text="${r.name != null} ? ${#strings.toUpperCase(r.name)}: 'N/A'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class="label-control ">Contract:</label>
+                                    <div class="">
+
+                                        <select  id="contract"  th:field="*{contract}" class="select2 pselect width100p" >
+
+                                            <option value="0">--</option>
+                                            <option th:each="r:${contracts}" th:value="${r.id}"  th:text="${r.name != null} ? ${#strings.toUpperCase(r.name)}: 'N/A'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-12">
+                                    <label class="label-control ">Project Nubmer:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{projectNumber}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Project Title:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{projectTitle}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Station:</label>
+                                    <div class="">
+                                        <select  type="text" th:field="*{station}"  class="form-control select2-offscreen pselect" >
+<option value="0">Select Station</option>
+<option th:each="s: ${stations}" th:value="${s.id}" th:text="${s.name}"></option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Department:</label>
+                                    <div class="">
+                                        <select  type="text" th:field="*{department}"  class="form-control select2-offscreen pselect" >
+                                            <option value="0">Select Department</option>
+                                            <option th:each="s: ${departments}" th:value="${s.id}" th:text="${s.name}"></option>
+
+                                        </select>
+                                    </div></div>
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Agency:</label>
+                                    <div class="">
+
+                                        <select  type="text" th:field="*{agency}"  class="form-control select2-offscreen pselect" >
+                                            <option value="0">Select Agency</option>
+                                            <option th:each="s: ${agencies}" th:value="${s.id}" th:text="${s.acronym}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Brief Description of Tasks Completed:</label>
+                                    <div class="input-group col-md-12">
+                                        <textarea  rows="8"  th:field="*{briefDescriptionofTaskCompleted}" class="form-control col-md-12 width100p" >
+
+                                        </textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Start Date:</label>
+                                    <div class="input-group">
+                                        <input   type="text" th:value="${#strings.isEmpty(consultant.startDate) ? '' : #dates.format(consultant.startDate, 'dd/MM/yyyy') }" th:field="*{startDate}" class="form-control datepicker" placeholder="mm/dd/yyyy" id="datepicker">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">End Date:</label>
+                                    <div class="input-group">
+                                        <input id="datepicker2" type="text" th:value="${#strings.isEmpty(consultant.endDate) ? '' : #dates.format(consultant.endDate, 'dd/MM/yyyy') }" th:field="*{endDate}" class="form-control" placeholder="mm/dd/yyyy">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Country (ies) visited during assignment:</label>
+                                    <select  data-placeholder="Choose One or More Nationalities" multiple="multiple" th:field="*{countriesVisitedDuringAssignment}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                        <option value=""></option>
+                                        <option th:each="c: ${countries}" th:value="${c.key}" th:text="${c.value}"></option>
+
+                                    </select>
+                                </div>
+
+
+
+
+
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered collapsibleTable" id="addressTable">
+
+                                        <tr  ><th > SECTION II</th><th></th></tr>
+                                        <tr><th colspan="2">PLEASE RATE THE CONSULTANT/CONTRACTOR’S FOLLOWING ATTRIBUTES: (1= Excellent, 2=very good. 3=Good, 4=fair, 5=Unsatisfactory).</th></tr>
+
+                                        <tr>
+                                            <td>
+                                               1.  Technical expertise in the subject area of the assignment?
+                                            </td>
+                                            <td>
+
+                                                <select id="technicalexpertise" th:field="*{technicalExpertise}" class="select2 pselect width100p" >
+
+                                                    <option value="-1">--</option>
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                               2.  Imagination ?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{imagination}" id="imagina" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                3. Initiative?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{initiative}" id="initia" class="select2 pselect width100p" >
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                4. Interpersonal skills?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{interpersonalSkills}" id="interpersonal" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                5. Quality of the reports submitted?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{qualityofReportSubmitted}" id="quality" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                6. Timeliness of reports submitted?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{timelinessOfReportSubmitted}" id="timely" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                7. Linguistic skills?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{linguisticSkills}" id="lingui" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Language</th>
+                                                    <th>Written</th>
+                                                    <th>Spoken</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="i : ${#numbers.sequence( 0, 5, 1)}" th:id="tr__${i}__">
+                                                    <td><input th:name="languages[__${i}__].language" th:id="language__${i}__"   type="text" class="form-control"></td>
+                                                    <td>  <select  th:name="languages[__${i}__].written" th:id="written__${i}__" class="select2 pselect width100p" >
+
+
+                                                        <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                    </select></td>
+                                                    <td>   <select  th:name="[languages[__${i}__].spoken" th:id="spoken__${i}__" class="select2 pselect width100p" >
+
+
+                                                        <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                    </select>
+
+                                                    </td></tr>
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </tr></table></div>
+
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered collapsibleTable" id="addressTable">
+                                                <tr><th> SECTION III</th><th></th>
+                                        </tr>
+                                        <tr><th colspan="2">
+                                            PLEASE EXPLAIN BELOW ANY RATINGS THAT WERE ASSIGNED IN PART II. YOU MAY ALSO ADD ANY COMMENTS THAT YOU FEEL SHOULD REMAIN IN THE CONSULTANT’S FILE
+
+                                        </th></tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group col-sm-12">
+
+                                                    <div class="input-group col-md-12">
+                                        <textarea  rows="8"  th:field="*{remark}" class="form-control col-md-12 width100p" >
+
+                                        </textarea>
+                                                    </div>
+
+         </td>
+                                        </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        <div class="col-md-12 form-line"><br>
+
+                                                            <div class="col-md-9">
+                                                                Should this Consultant/Contractor remain on the roster (Check one)</div>
+                                                            <div class="col-md-3 form-inline">
+                                                                Yes&nbsp;&nbsp;&nbsp;<input type="radio"  th:field="*{keepInRoster}" th:value="true"  class="form-control" style="height: 24px;">
+                                                                No&nbsp;&nbsp;&nbsp;<input type="radio" th:field="*{keepInRoster}" th:value="false"  class="form-control" style="height: 24px;">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                     </table>
+                                </div>
+
+
+
+
+
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered collapsibleTable" id="addressTable">
+                                        <tr><th> SECTION IV</th><th></th>
+                                        </tr>
+
+
+
+                                        <tr>
+
+                                            <td>
+
+                                                <div class="col-md-12 form-line"><br>
+
+                                                    <div class="col-md-9">
+                                                        Do  you want restricted access (ACCESS WILL BE PROVIDED AT THE DISCRETION OF THE MANAGEMENT)
+                                                        FOR THE INFORMATION IN PARTS II & III (Check one)</div>
+                                                    <div class="col-md-3 form-inline">
+                                                        Yes&nbsp;&nbsp;&nbsp;<input type="radio"  th:field="*{restrictedAccess}" th:value="true" class="form-control" style="height: 24px;">
+                                                        No&nbsp;&nbsp;&nbsp;<input type="radio"  th:field="*{restrictedAccess}" th:value="false"  class="form-control" style="height: 24px;">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+
+
+
+
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    <label for="name_sign">Name of  the Evaluator </label></div>
+                                                <div class="col-md-10">
+                                                    <input type="text"  th:field="*{nameOfEvaluator}" class="form-control" id="name_sign" placeholder=" Name and Signature: ">
+                                                </div>
+                                            </div>
+
+                                            </td></tr>
+<tr>
+
+    <td>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="division">Division</label></div>
+            <div class="col-md-10">
+
+                <select  type="text" id="division" th:field="*{division}"  class="form-control select2-offscreen pselect" >
+                    <option value="0">Select Division</option>
+                    <option th:each="s: ${stations}" th:value="${s.id}" th:text="${s.name}"></option>
+
+                </select>
+            </div>
+        </div>
+    </td>
+    <tr/>
+                                        <tr>
+    <td>
+
+
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="telephone">Telephone</label></div>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="telephone" th:field="*{telephone}" placeholder=" Tel:  ">
+                </div>
+
+        </div>
+    </td>
+</tr>
+                                    </table>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div><!-- panel-body -->
+
+                            <div class="panel-footer">
+                                <input class="btn btn-primary mr5" type="submit" value="Save" />
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <script>
+                        jQuery('body').on('click', '.removeLanguage', function() {
+
+                            var answer = confirm("Are you sure you want to Language Skill node?");
+                            if(answer === true){
+                                var removeControl = jQuery(this).attr("data-remove");
+                                jQuery(removeControl).remove();
+                            }
+
+                        });
+                    </script>
+
+
+
+
+                </div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+
+    jQuery(document).ready(function(jQuery) {
+        jQuery('#addLanguageSkill').click(function () {
+            var answers = "";
+
+
+            answers += "<option value=''>--Select Answer--</option>";
+            answers += "<option value='true'>YES</option>";
+            answers += "<option value='false'>NO</option>";
+
+
+
+            var languageIndex = jQuery('table#languageSkillsTable tr').length - 1;
+            var text = "";
+            text += "<tr id='language" + languageIndex + "'><td> <label>Language " + (languageIndex + 1) + "</label> </td>";
+            //Enter new State Field
+                text += "<td>";
+                    text+= "<input type='text' name='languageSkills[" + languageIndex + "].language' class='form-control' /><br />";
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='false' /></label> Read Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='false' /></label> Write Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='false' /></label> Speak Fluently?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='true' /></label>" +
+                            "<label>NO <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='false' /></label> Understand Easily?";
+
+                    text += "<button type='button' class='btn btn-sm btn-danger removeLanguage pull-right' data-remove='#language" + languageIndex + "' >Remove Doc</button>";
+                text += "</td>";
+            text += "</tr>";
+
+            jQuery('#languageSkillsTable').append(text);
+
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

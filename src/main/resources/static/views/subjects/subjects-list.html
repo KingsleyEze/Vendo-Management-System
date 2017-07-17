@@ -1,0 +1,31 @@
+<div class="form-pad col-md-4">
+    <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."
+               required="required" ng-model="search" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+</div>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="subject in subjects| filter: search">
+        <tr>
+            <td><a href="" 
+                   data-ng-click="findSubjectById(subject.id)">{{subject.name}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updateSubjectClicked(subject)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteSubject(subject.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+
+

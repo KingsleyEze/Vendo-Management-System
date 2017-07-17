@@ -1,0 +1,75 @@
+
+<div class="row">
+    <header id="nav-header" class="clearfix">
+        <div class="col-md-5">
+            <nav class="navbar-default pull-left">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </nav>
+            <input type="text" class="hidden-sm hidden-xs" id="header-search-field" placeholder="Search for something..." ng-model="search">
+        </div>
+
+    </header>
+</div>
+
+<form role="form" method="post" class="form-horizontal" data-ng-submit="addExam(exam)">
+
+    <h4> Add Exam</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Exam Name</label> 
+            <input type="text" class="form-control" required="required" data-ng-model="exam.name" /> 
+            <span data-ng-show="errorName">{{errorName}}</span>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="submit" value="Submit" class="btn btn-success" /> 
+        </div>
+    </div>
+</form>
+
+<div id="dashboard-con">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="admin-content-con clearfix">
+
+                <header>
+                    <h4>  Exam List </h4>
+                </header>
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>Exam Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-ng-repeat="exam in exams| filter: search">
+                        <tr>
+                            <td><a href="" 
+                                   data-ng-click="findExamById(exam.id)">{{exam.name}}</a></td>
+                            <td ><a href=""
+                                    data-ng-click="updateExamClicked(exam)" class="label label-success">Update</a></td>
+                            <td ><a href=""
+                                    data-ng-click="deleteExam(exam.id)" class="label label-danger">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

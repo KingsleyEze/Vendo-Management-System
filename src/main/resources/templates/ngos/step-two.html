@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html" >
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <!--<div th:replace="fragments/ngo-leftpanel :: leftpanel-admin"></div>-->
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a href=""> Ngo </a></li>
+                            <li>Add</li>
+                        </ul>
+                        <h5><strong>Step 2: FINANCIAL INFORMATION</strong> </h5>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <h5 class="lg-title"></h5>
+                        <p class="mb20"></p>
+
+                        <!-- PROGRESS WIZARD -->
+                        <form action="/ngos/step-two" method="post" id="progressWizard" class="panel-wizard" th:object="${ngoFinancialDto}" enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <ul class="nav nav-justified nav-wizard">
+                                <li><a href="/ngos/step-one"><strong>Step 1:</strong>COMPANY</a></li>
+                                <li><a href="/ngos/step-two"><strong>Step 2:</strong>FINANCIAL</a></li>
+                                <li><a href="/ngos/step-three"><strong>Step 3:</strong>TECHNICAL</a></li>
+                                <li><a href="/ngos/step-four"><strong>Step 4:</strong>EXPERIENCE</a></li>
+                                <li><a href="/ngos/step-five"><strong>Step 5:</strong>OTHER</a></li>
+                            </ul>
+
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"
+                                     aria-valuemin="25" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="tab-pane" id="tab1-2">
+
+
+                                    <!--||Form Group -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>ANNUAL VALUE OF TOTAL INCOME FOR THE LAST 3 YEARS:</label>
+                                                    <input type="text" placeholder="Enter Annual Value of Total Income for Year One"
+                                                           th:field="*{totalIncomeYearOne}" class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" placeholder="Enter Annual Value of Total Income forYear Two"
+                                                           th:field="*{totalIncomeYearTwo}" class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" placeholder="Enter Annual Value of Total Income forYear Three"
+                                                           th:field="*{totalIncomeYearThree}" class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>ANNUAL VALUE OF EXPORT SALES FOR THE LAST 3 YEARS:</label>
+                                                    <input type="text" placeholder="Enter Annual Value of Export Sales for Year One"
+                                                           th:field="*{exportSalesYearOne}" class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" placeholder="Enter  Annual Value of Export Sales for Year Two"
+                                                           th:field="*{exportSalesYearTwo}" class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                    <input type="text" placeholder="Enter  Annual Value of Export Sales for Year Three"
+                                                           th:field="*{exportSalesYearThree}" class="form-control"/>
+                                                    <br class="clearfix"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>BANK NAME:</label>
+                                                    <input type="text" name="bankName" placeholder="Enter Bank Name"
+                                                           class="form-control" th:field="*{bankName}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>ADDRESS:</label>
+                                                    <input type="text" name="address" placeholder="Enter Company Address"
+                                                           class="form-control" th:field="*{bankAddress}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>SWIFT/BIC ADDRESS:</label>
+                                                    <input type="text" name="swiftOrBicAddress" placeholder="Enter Swift/Bic Address"
+                                                           class="form-control" th:field="*{swiftOrBicAddress}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>BANK ACCOUNT NUMBER:</label>
+                                                    <input type="text" name="bankAccountNumber" placeholder="Enter Bank Account Number"
+                                                           class="form-control" th:field="*{bankAccountNumber}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>ACCOUNT NAME:</label>
+                                                    <input type="text" name="bankAccountName" placeholder="Enter Bank Account Name"
+                                                           class="form-control" th:field="*{bankAccountName}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>PLEASE PROVIDE A COPY OF THE COMPANY'S MOST RECENT ANNUAL OR AUDITED FINANCIAL REPORT.  IF AVAILABLE, PLEASE PROVIDE CREDIT RATING BY DUN AND BRADSTREET, OR EQUIVALENT:</label>
+                                                    <input type="file"
+                                                           class="form-control" th:field="*{ngoDocument}"/>
+                                                </div>
+                                            </div><!-- form-group -->
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+
+                                                    <button type="submit" class="btn btn-primary pull-right">Next</button>
+                                                </div>
+                                            </div><!-- form-group -->
+                                        </div>
+                                    </div><!-- // -->
+
+
+                                </div><!-- tab-pane -->
+
+                            </div><!-- tab-content -->
+
+
+                        </form><!-- panel-wizard -->
+
+                    </div><!-- col-md-6 -->
+
+                </div><!-- row -->
+
+            </div><!-- contentpanel -->
+        </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function(){
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function(event){
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function() {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "name" },
+                { "data": "position" },
+                { "data": "office" },
+                { "data": "salary" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // Progress Wizard
+        jQuery('#progressWizard').bootstrapWizard({
+            onTabShow: function(tab, navigation, index) {
+                tab.prevAll().addClass('done');
+                tab.nextAll().removeClass('done');
+                tab.removeClass('done');
+
+                var $total = navigation.find('li').length;
+                var $current = index + 2;
+
+                if($current >= $total) {
+                    $('#progressWizard').find('.wizard .next').addClass('hide');
+                    $('#progressWizard').find('.wizard .finish').removeClass('hide');
+                } else {
+                    $('#progressWizard').find('.wizard .next').removeClass('hide');
+                    $('#progressWizard').find('.wizard .finish').addClass('hide');
+                }
+
+                var $percent = ($current/$total) * 100;
+                $('#progressWizard').find('.progress-bar').css('width', $percent+'%');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format (d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">'+
+            '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.name+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.extn+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Vendor Database Management System </title>
+
+    <link th:href="@{/css/style.default.css}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script th:src="@{js/html5shiv.js}"></script>
+    <script th:src="@{js/respond.min.js}"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<section>
+    <div class="notfoundpanel">
+        <h1 th:text="${status + '!'}">404!</h1>
+        <h3>Oops Something  went wrong!</h3>
+
+        <br/>
+        <code>The below technical information will guide you as to the problem encountered by the server with your last request.</code>
+<br/>
+<br/>
+<br/>
+
+
+        <p th:if="${url}">
+            <b>Page:</b> <span th:text="${url}">Page URL</span>
+        </p>
+
+        <p th:if="${timestamp}" id='created'>
+            <b> Problem Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+        </p>
+
+        <p th:if="${status}">
+            <b>Response Status:</b> <span th:text="${status}">status-code</span> <span
+                th:if="${error}" th:text="'('+${error}+')'">error ...</span>
+        </p>
+
+        <!--/* ${ex} is set by ourSimpleMappingExceptionResolver,
+               ${exception} or ${message} are set internally by Spring Boot. */-->
+        <div
+                th:if="${ex} or ${exception} or (${message} and ${message.length() != 0})">
+            <b>Cause:</b> <span th:if="${ex}" th:text="${ex}">exception ...</span>
+            <span th:if="${exception}" th:text="${exception}">exception ...</span>
+            <span th:if="${message} and ${message.length() != 0}"
+                  th:text="${message}">message ...</span>
+
+        </div>
+
+        <p
+                th:unless="${ex} or ${exception} or (${message} and ${message.length() != 0})">
+            Cause unknown (no exception details available)</p>
+
+
+        <br/><br/>
+        <br/>
+        <a th:href="@{/accounts}" class="btn btn-danger" /> Return Home </a>
+
+        <a th:href="@{/logout}" class="btn btn-danger" /> Logout </a>
+
+        <br/><br/><br/>
+
+
+
+
+    </div><!-- notfoundpanel -->
+</section>
+
+
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<script th:src="@{js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/modernizr.min.js}"></script>
+<script th:src="@{js/pace.min.js}"></script>
+<script th:src="@{js/retina.min.js}"></script>
+<script th:src="@{js/jquery.cookies.js}"></script>
+
+<script th:src="@{js/custom.js}"></script>
+
+</body>
+</html>

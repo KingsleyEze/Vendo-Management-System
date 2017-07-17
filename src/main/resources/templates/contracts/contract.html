@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <div
+                th:replace="fragments/admin-leftpanel :: leftpanel-admin" ></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="media">
+                            <div class="pageicon pull-left">
+                                <i class="fa fa-eye"></i>
+                            </div>
+                            <div class="media-body">
+                                <ul class="breadcrumb">
+                                    <li><a th:href="@{/contracts}">List Contracts</a></li>
+                                    <li><a href="">Contract Document </a></li>
+                                    <li>View</li>
+                                </ul>
+                                <h4>View Contract</h4>
+                            </div>
+                        </div><!-- media -->
+
+                        </div>
+
+                    <div class="col-md-3">
+                        <a th:href="@{/contracts/edit/} + ${contract.id}" class="btn btn-sm btn-primary btn-rounded pull-right">Edit</a><a th:href="@{/contracts/add}" class="btn btn-sm btn-primary btn-rounded pull-right">Add New</a>
+                    </div>
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Name</td><td><p th:text="${contract.name}"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td>Status</td>
+                                <td>
+
+                                    <p><label th:class="${#strings.equalsIgnoreCase(contract.status, 'COMPLETED') ? 'label label-primary' : 'label label-danger'}"  th:text="${contract.status}"></label></p><br />
+
+                                    <button  type="button" class="btn btn-white btn-sm  " data-toggle="modal"
+                                             th:attr="data-target='#changeStatusModal'+${contract.id}"     >
+                                        <i class="fa fa-pencil"></i> Change Contract Status
+                                    </button>
+
+                                    <div class="modal fade" th:id="'changeStatusModal' + ${contract.id} " tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated bounceInRight">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span
+                                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                                    </button>
+                                                    <i class="fa fa-pencil-square modal-icon"></i>
+                                                    <h4 class="modal-title">Changing Status  of <span th:text="${contract.name}"></span></h4>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="m-t" role="form" action="/contracts/changeStatus?rd=page" method="POST" th:object="${contract}">
+
+                                                        <div class="row">
+
+                                                            <table class="table table-stripped">
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label class="control-label" for="review_status">Change Status</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select name="status" id="status" class="form-control">
+                                                                            <option value="">---</option>
+                                                                            <option th:each="status: ${allStatus}" th:value="${status}" th:text="${status}" />
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                            </table>
+
+
+
+                                                            <div class="col-sm-12">
+
+                                                                <input type="hidden" name="id" th:value="${contract.id}"><br/>
+
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-primary " type="submit"><i class="fa fa-paste"></i> Review</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Details</td><td><p th:text="${contract.details}"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td>Vendor</td><td><p th:if="${contract.vendor != null}" th:text="${contract.vendor.vendorName}">Nil</p></td>
+                            </tr>
+
+                            <tr>
+                                <td>Tags</td><td> <span class="label label-info" th:each="tag: ${contract.tags}" th:text="${tag}"></span> </td>
+                            </tr>
+
+                            <tr>
+                                <td>Contract Date</td><td><p th:text="${ #strings.isEmpty(contract.contractDate) ? 'Null': #dates.format(contract.contractDate, 'EEE, MMM d, yyyy')}"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td>Created Date</td><td><p th:text="${ #strings.isEmpty(contract.created_at) ? 'Null': #dates.format(contract.created_at, 'EEE, MMM d, yyyy hh:mm')}"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td>Modified Date</td><td><p th:text="${ #strings.isEmpty(contract.updated_at) ? 'Null': #dates.format(contract.updated_at, 'EEE, MMM d, yyyy hh:mm')}"></p></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Assigned To</td><td><span class="badge" th:if="${contract.assignedTo != null}" th:text="${contract.assignedTo.username}"></span></td>
+                            </tr>
+
+                            <tr th:each="cost : ${additionalCosts}">
+                                <td>Additional Cost</td>
+                                <td>
+                                    Amount: <span class="badge" th:text="${cost.amount}" ></span><br />
+                                    Reason for cost: <span  th:text="${cost.reason}" ></span><br />
+                                    Entered By: <span th:text="${cost.createdBy.username}"></span>
+                                </td>
+                            </tr>
+
+
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div th:if="${#lists.isEmpty(documents)  }" class="alert  alert-danger ">
+
+                            <label>No document has being uploadded for this contract yet</label>
+
+                    </div>
+
+
+                        <div th:if="${!#lists.isEmpty(documents)  }" class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-btns">
+                                    <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                    <a href="" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i class="fa fa-times"></i></a>
+                                </div><!-- panel-btns -->
+
+                                Uploaded Documents for this Contract
+
+                            </div>
+                            <div class="panel-body">
+
+
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr><th>Reviewed</th><th>Created Date</th><th>Modified Date</th><th>Document Type</th><th>Doc</th></tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="doc : ${documents}">
+                                    <td>
+                                        <p><label class="label label-info" th:text="${doc.reviewed == true ? 'REVIEWED' : 'NOT YET REVIEWED'}"></label></p>
+                                        <p><label th:class="${#strings.equalsIgnoreCase(doc.reviewStatus, 'APPROVED') ? 'label label-primary' : 'label label-danger'}"  th:text="${doc.reviewStatus}"></label></p><br />
+
+                                        <button th:if="${doc.reviewed == false or #strings.equalsIgnoreCase(doc.reviewStatus, 'UNAPPROVED')}" type="button" class="btn btn-white btn-sm rvvModal " data-toggle="modal"
+                                                th:attr="data-target='#reviewModal'+${doc.id}"     >
+                                            <i class="fa fa-pencil"></i> Quick Review
+                                        </button>
+
+                                        <div class="modal fade" th:id="'reviewModal' + ${doc.id} " tabindex="-1" role="dialog"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content animated bounceInRight">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span
+                                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                                        </button>
+                                                        <i class="fa fa-pencil-square modal-icon"></i>
+                                                        <h4 class="modal-title">Reviewing <span th:text="${doc.documentType.name}"></span> document for <span th:text="${doc.contract.name}"></span></h4>
+
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="m-t" role="form" action="/contracts/documents/review?rd=page" method="POST" th:object="${doc}">
+
+                                                            <div class="row">
+
+                                                                <table class="table table-stripped">
+
+                                                                    <tr>
+                                                                        <td>
+                                                                            <label class="control-label" for="review_status">Change Status</label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <select name="reviewStatus" id="review_status" class="form-control">
+                                                                                <option value="">---</option>
+                                                                                <option th:each="status: ${reviewStatus}" th:value="${status}" th:text="${status}" />
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <label class="control-label" for="review_remarks">Remarks</label>
+                                                                        </td>
+                                                                        <td>
+                                                                        <textarea type="text" id="review_remarks" name="remarks"
+                                                                                  th:value="${doc.remarks}"
+                                                                                  placeholder="Remarks" class="form-control"></textarea>
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+
+
+
+                                                                <div class="col-sm-12">
+                                                                    <input type="hidden" name="id" th:value="${doc.id}">
+                                                                    <input type="hidden" name="contract" th:value="${doc.contract.id}"><br/>
+
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-primary " type="submit"><i class="fa fa-paste"></i> Review</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">
+                                                            Close
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><p><label th:text="${doc.created_at}"></label></p></td>
+                                    <td><p><label th:text="${doc.created_at}"></label></p></td>
+                                    <td><p><label th:text="${doc.documentType.niceName}"></label></p></td>
+                                    <th><a target="_blank" th:href="@{/documents/downloads/} + ${doc.fileName}" >View Document</a> </th>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                            </div><!-- panel-body -->
+
+                        </div><!-- panel -->
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" th:action="@{/contracts/uploads}" method="post"  enctype="multipart/form-data"  modelAttribute="uploadForm">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-btns">
+                                        <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                        <a href="" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i class="fa fa-times"></i></a>
+                                    </div><!-- panel-btns -->
+
+                                    Document Upload Form
+
+                                </div>
+                                <div class="panel-body">
+
+                                    <table class="table table-bordered collapsibleTable" id="uploadTable">
+
+                                        <tr  ><th >Upload Documents</th><th></th></tr>
+                                        <tr id="doc0">
+                                            <td> Document <button type="button" id="addDocument" class="btn btn-sm btn-primary">Add Document</button></td>
+                                            <td>
+                                                <select required='required'  name="docTypeIds[0]" id="document_type" class="docTypeField width100p select-single-hide">
+                                                    <option value="">--Select Document Type--</option>
+                                                    <option th:each="doc : ${docTypes}" th:value="${doc.id}"  th:text="${doc.niceName}" ></option>
+                                                </select>
+                                                <input type="file" name="files[0]" class="form-control" /><br />
+                                                <button type='button' class="btn btn-sm btn-danger removeDocument pull-right" data-remove="#doc0"  >Remove Doc</button>
+                                            </td>
+                                        </tr><br />
+
+                                    </table>
+
+                                    <input type="hidden" name="contractId" th:value="${contract.id}" />
+                                    <input type="submit" value="Submit" class="btn btn-large btn-primary" id="uploadDocBtn" /><p id="loading-icon"><i  class="fa fa-spinner fa-pulse fa-lg"></i>Uploading please wait..</p>
+
+
+                                    <!--<div class="form-group">
+                                        <label class="col-sm-3 control-label">Name:</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" th:field="*{name}" class="form-control" />
+                                        </div>
+                                    </div>&lt;!&ndash; form-group &ndash;&gt;
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Vendor  :</label>
+                                        <div class="col-sm-9">
+                                            <select  th:field="*{vendor}" data-placeholder="Choose One" class="width100p">
+                                                <option value="">-&#45;&#45;</option>
+                                                <option th:each="vendor: ${vendors}" th:selected="${contract.vendor == null } ? false : ${contract.vendor.id == vendor.id }"  th:value="${vendor.id}" th:text="${vendor.name}"></option>
+                                            </select>
+                                        </div>
+                                    </div>&lt;!&ndash; form-group &ndash;&gt;-->
+
+
+                                </div><!-- panel-body -->
+
+                            </div><!-- panel -->
+
+                        </form>
+
+
+                        <script>
+                            jQuery('body').on('click', '.removeDocument', function() {
+
+                                var answer = confirm("Are you sure you want to remove document node?");
+                                if(answer === true){
+                                    var removeControl = jQuery(this).attr("data-remove");
+                                    jQuery(removeControl).remove();
+                                }
+
+                            });
+                        </script>
+                    </div><!-- panel-default -->
+                </div><!-- col-md-6 -->
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+                            Add Additional Contract Cost
+
+                        </div>
+
+
+                        <form th:action="@{/contracts/addAdditionalCost}" method="POST" class="" >
+                        <div class="panel-body" >
+                            <div class="form-group col-sm-6">
+                                <label class="label-control ">Amout</label>
+                                <div class="">
+                                    <input type="text" name="amount"  class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="label-control ">Reason for cost</label>
+                                <div class="">
+                                    <textarea type="text" name="reason"  class="form-control" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="contract" th:value="${contract.id}" />
+
+                        <div class="col-sm-12">
+                            <input class="btn btn-primary mr5" type="submit" value="Submit" />
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+
+            </div><!-- row -->
+
+
+
+
+
+        </div><!-- contentpanel -->
+    </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function(){
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function(event){
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function() {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "name" },
+                { "data": "position" },
+                { "data": "office" },
+                { "data": "salary" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format (d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">'+
+                '<tr>'+
+                '<td>Full name:</td>'+
+                '<td>'+d.name+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extension number:</td>'+
+                '<td>'+d.extn+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extra info:</td>'+
+                '<td>And any further details here (images etc)...</td>'+
+                '</tr>'+
+                '</table>';
+    }
+</script>
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var docTypes = [[${docTypes}]];
+    console.log(docTypes);
+
+    /*]]>*/
+
+    jQuery(document).ready(function(jQuery) {
+
+        jQuery("#loading-icon").hide();
+
+        jQuery("#uploadDocBtn").click(function(e) {
+
+            jQuery("#loading-icon").show();
+        });
+
+
+
+
+        jQuery('#addDocument').click(function() {
+            var fileIndex = jQuery('table#uploadTable tr').length - 1;
+            var text = "";
+            text += "<tr id='doc" + fileIndex + "'><td> <label>Document</label> </td>";
+            //Enter new State Field
+            text += "<td>";
+            text += "<select required='required'  name='docTypeIds[" + fileIndex + "]' class='docTypeField width100p select-single-hide'>";
+            text += "<option value=''>--Select Document Type--</option>";
+            jQuery.each(docTypes, function(a, b) {
+                text += "<option value='" + b.id + "'>" + b.niceName + "</option>";
+            });
+            text += "</select>";
+            text += "<input type='file' name='files[" + fileIndex + "]' class='form-control' />";
+            text += "<br />";
+
+            text += "<button type='button' class='btn btn-sm btn-danger removeDocument pull-right' data-remove='#doc" + fileIndex + "' >Remove Doc</button>";
+
+            text += "</td>";
+
+            text += "</tr>";
+            console.log(text);
+            jQuery('#uploadTable').append(text);
+
+        });
+
+    });
+</script>
+
+</body>
+</html>

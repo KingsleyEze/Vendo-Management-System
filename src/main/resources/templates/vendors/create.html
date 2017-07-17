@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <div
+                th:replace="fragments/admin-leftpanel :: leftpanel-admin" ></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a th:href="@{/vendors}"> Vendors </a></li>
+                            <li th:text="${ edit == null  } ? 'Add': 'Edit' ">Add</li>
+                        </ul>
+                        <br/>
+                        <h4>Create/ Edit Vendor</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-10">
+
+                        <!-- registration form -->
+
+
+                    <div th:if="${errors != null }">
+                        <tr th:each="instance : ${errors}">
+                            <td th:text="${instance.key}">keyvalue</td>
+                            <td th:text="${instance.value}">value</td>
+                        </tr>
+
+                    </div>
+
+                    <div ><!--class="col-md-10"-->
+                        <form class="form-horizontal"  th:action="${ edit == null  } ? @{/vendors/create} : @{/vendors/edit}" method="POST" >
+
+
+
+                            <div th:if="${#authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN_ACCOUNT')}" 
+                                 class="form-group">
+                                <div class="mb30"></div>
+
+
+
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-md-3">Name:</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" id="name" th:value="${user.name}"  name="name" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="firstname" class="col-md-3">Firstname:</label>
+                                <div class="col-md-5">
+                                    <input type="text" required th:value="${user.user.firstname}" class="form-control" id="firstname" required  name="firstname" />
+
+                                    <input th:if="${ edit != null  }"  type="hidden"   th:value="${user.uuid}" class="form-control" id="uuid"   name="uuid" />
+
+                                </div>
+                            </div>
+                            <div class="mb30"></div>
+
+                            <div class="form-group">
+                                <label for="lastname" class="col-md-3">Lastname:</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control"  th:value="${user.user.lastname}" id="lastname"    name="lastname" />
+                                </div>
+                            </div>
+                            <div class="mb30"></div>
+
+                            <div class="form-group">
+                                <label for="email" class="col-md-3">Email:</label>
+                                <div class="col-md-5">
+                                    <input type="text" required th:disabled="${ edit != null  } ? 'disabled': null " class="form-control" th:value="${user.user.email}" required id="email" name="email"  />
+                                </div>
+                            </div>
+                            <div class="mb30"></div>
+
+
+                            <div class="form-group">
+                                <label for="select-vendors"   class="col-md-3">Category:</label>
+                                <div class="col-md-5">
+                                    <select th:disabled="${edit != null} ? 'disabled': ''"  style="width: 100%;" required id="select-vendors" data-placeholder="Choose One"  ref="vendorCategory"
+                                        class="w-100 select2-offscreen mselect"
+                                        title="" name="vendorCategory">
+
+                                    <option>--</option>
+                                        <option   th:each="v: ${vendors}" th:inline="text" th:value="${v.value}">[[${v.key}]]</option>
+
+
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="mb30"></div>
+
+
+
+                            <div class="mb30"></div>
+                            <div class="form-group">
+
+                            <label class="col-md-3">Vendor Programme Area</label>
+                                  <div class="col-md-5">
+
+                                <select th:disabled="${edit != null} ? 'disabled': ''"  required id="select-vpas"  style="width: 100%;"  data-placeholder="Choose One or More Programme Area" multiple="multiple" name="vpa" class="width300 select2-offscreen mselect" tabindex="-1">
+                                <option value=""></option>
+
+
+                            </select>
+                                </div>
+                            </div>
+                            <div class="mb30"></div>
+
+                            <div class="form-group">
+
+                                <label class="col-md-3">Vendor Specialization</label>
+
+                                <div class="col-md-5">
+
+                                <select th:disabled="${edit != null} ? 'disabled': ''"  id="select-vss"  required style="width: 100%;" name="vss" data-placeholder="Choose One or More Programme Area" multiple="multiple" class="width300 select2-offscreen mselect" tabindex="-1">
+                                <option value=""></option>
+
+
+
+                            </select>
+
+                            </div>
+                            </div>
+                                <div class="mb30"></div>
+
+                                <div class="form-group">
+
+                                    <label class="col-md-3">Vendor Skill(s)</label>
+
+                                    <div class="col-md-5">
+
+
+
+                                        <select  th:disabled="${edit != null} ? 'disabled': ''" th:selected="${edit != null} ? '${vendorRoles.contains}': false " id="select-skills" name="skill" style="width: 100%;" data-placeholder="Choose One or More Programme Area" multiple="multiple" class="width300 select2-offscreen mselect" tabindex="-1">
+                                            <option value=""></option>
+
+                                        </select>
+
+                                    </div></div>
+
+                                    <div class="mb30"></div>
+<br/>
+
+
+
+                            <div class="panel-footer">
+                                <button class="btn btn-primary mr5">Create/Edit</button>
+
+                            </div><!-- panel-footer -->
+
+
+
+                        </form>
+                    </div>
+                    <!-- end regitration form -->
+
+                </div>
+
+            </div>
+
+            </div></div>
+
+
+    </div><!-- end of row content -->
+
+
+        <!--</div>--><!-- end of container fluid -->
+
+
+
+
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+
+
+
+    var vendors = [[${vendors}]];
+
+
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+</body>
+</html>

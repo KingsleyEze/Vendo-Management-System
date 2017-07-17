@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+
+
+
+   var vendors = [[${vendors}]];
+
+
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+<section>
+    <div class="mainwrapper">
+        <div class="leftpanel">
+            <div class="media profile-left">
+
+                <div class="media-body" sec:authorize="isAuthenticated()">
+                     <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+
+
+                    <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+                </div>
+            </div><!-- media -->
+
+            <h5 class="leftpanel-title">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+
+
+
+
+            </ul>
+
+        </div><!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Vendor Signup</li>
+                        </ul>
+                        <h4>   Vendor Signup Step 2</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+           
+
+
+
+
+                <div class="row">
+
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">Complete the signup process</h4>
+                            <p>Please select your vendor type appropriately  </p>
+                        </div><!-- panel-heading -->
+
+                        <form th:action="@{/accounts/completeSignup}" method="POST" >
+                        <div class="panel-body" id="vendorselectapp">
+
+
+                            <h5 class="lg-title">Vendor Category </h5>
+                            <p class="mb20"> Choose any 1 of 3 Vendor Category</p>
+
+                            <div class="select2-container width300" id="s2id_select-basic">
+                                <div id="selectVendorCategory"></div>
+
+                                <select id="select-vendors" data-placeholder="Choose One" ref="vendorCategory"
+                                          class="width300  select2-offscreen mselect"
+                                        title="" name="vendorCategory">
+
+                                    <option>--</option>
+                                   <option th:each="v: ${vendors}" th:inline="text" th:value="${v.value}">[[${v.key}]]</option>
+
+                                </select>
+
+
+                            </div>
+
+
+                            <div class="mb30"></div>
+
+                            <h5 class="lg-title">Vendor Programme Area</h5>
+                            <p class="mb20">You may choose more than one programme area  </p>
+                            <div class="select2-container width300" id="s22id_select-basic">
+
+                            <div id="selectVendorProgramme"></div>
+                            <select id="select-vpas" data-placeholder="Choose One or More Programme Area" multiple="multiple" name="vpa" class="width300 select2-offscreen mselect" tabindex="-1">
+                                <option value=""></option>
+
+
+                            </select>
+                            </div>
+                            <div class="mb30"></div>
+
+                               <h5 class="lg-title">Vendor Specialization</h5>
+                            <p class="mb20">You may choose more than one specialization area  </p>
+                            <div class="select2-container width300" id="s222id_select-basic">
+                                <div id="selectVendorSpecialization"></div>
+
+                                <select id="select-vss" name="vss" data-placeholder="Choose One or More Programme Area" multiple="multiple" class="width300 select2-offscreen mselect" tabindex="-1">
+                                <option value=""></option>
+
+
+
+
+                            </select>
+                            </div>
+                            <div class="mb30"></div>
+                             <h5 class="lg-title">Vendor Skill Area</h5>
+                            <p class="mb20">You may choose more than one skill area  </p>
+                            <div class="select2-container width300" id="s2222id_select-basic">
+                                <div id="selectVendorSkill"></div>
+
+                                <select id="select-skills" name="skills" data-placeholder="Choose One or More Programme Area" multiple="multiple" class="width300 select2-offscreen mselect" tabindex="-1">
+                                <option value=""></option>
+
+                            </select></div>
+
+                            <div className="mb30"></div>
+
+                            <div class="mb30"></div>
+
+
+
+                            <div class="panel-footer">
+                                <input class="btn btn-primary mr5" type="submit" value="Complete Registration" />
+
+                            </div>
+
+
+                            <!--<p>To learn more about the United Nations System in  Nigeria Vendor types visit: <a href="#" target="_blank">http://rosters.ng.undp.org/vendors/</a></p>-->
+
+                        </div><!-- panel-body -->
+
+                        </form>
+                    </div>
+
+
+
+
+
+
+</div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+</body>
+</html>
+<script  type="text/javascript" >
+
+
+    // Instance the tour
+    var tour2 = new Tour({
+        keyboard: true,
+        storage: false,
+        steps: [
+            {
+                element: "#vendorWelcome",
+                title: "Heads up!",
+                content: " Please note that enlistment on VDMS does not mean automatic engagement with any of the UNSiN Agencies."
+            },
+            {
+                element: "#selectVendorCategory",
+                title: "Quick guide",
+                content: "Select you vendor category."
+            }
+            ,
+            {
+                element: "#selectVendorProgramme",
+                title: "Quick guide",
+                content: "Choose one or more programme area."
+            }
+            ,
+            {
+                element: "#selectVendorSpecialization",
+                title: "Quick guide",
+                content: "Choose one or more specialization area."
+            }
+            ,
+            {
+                element: "#selectVendorSkill",
+                title: "Quick guide",
+                content: "Choose one or more skill."
+            }
+
+        ]});
+
+    // Initialize the tour
+    tour2.init();
+
+    // Start the tour
+    tour2.start(true);
+
+
+</script>
+

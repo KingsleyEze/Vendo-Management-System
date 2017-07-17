@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+    var vendors = [[${vendors}]];
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+<section>
+    <div class="mainwrapper">
+        <div th:replace="fragments/admin-leftpanel :: leftpanel-admin">
+            <div class="media profile-left">
+
+                <div class="media-body" sec:authorize="isAuthenticated()">
+                    <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+
+
+                    <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+                </div>
+            </div><!-- media -->
+
+            <h5 class="leftpanel-title">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+
+
+
+
+            </ul>
+
+        </div><!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href="/accounts"><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>NGO Evaluation</li>
+                        </ul>
+                        <h4>   NGO Evaluation Form</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+
+
+
+
+                <div class="row">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">NGO Evaluation Form </h4>
+                                 </div><!-- panel-heading -->
+
+                        <form th:action="@{/evaluations/ngos/ratingForm}" method="POST" th:object="${supplier}" class="" >
+                            <div class="panel-body" >
+                                <div class="form-group col-sm-12">
+                                    <label class="label-control ">NGO:</label>
+                                    <div class="">
+
+                                        <select  id="supplier" th:field="*{supplier}" class="select2 pselect width100p" >
+
+                                            <option value="0">--</option>
+                                            <option th:each="r:${suppliers}"    th:value="${r.id}"  th:text="${r.company != null} ? ${#strings.toUpperCase(r.company)}: 'N/A'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class="label-control ">Contract:</label>
+                                    <div class="">
+
+                                        <select  id="contract"  th:field="*{contract}" class="select2 pselect width100p" >
+
+                                            <option value="0">--</option>
+                                            <option th:each="r:${contracts}" th:value="${r.id}"  th:text="${r.name != null} ? ${#strings.toUpperCase(r.name)}: 'N/A'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-12">
+                                    <label class="label-control ">Contract Number:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{contractNumber}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Organizational Unit:</label>
+                                    <div class="">
+                                        <select  type="text" th:field="*{organizationalUnit}"  class="form-control select2-offscreen pselect" >
+                                            <option value="0">Select Unit</option>
+                                            <option th:each="s: ${departments}" th:value="${s.id}" th:text="${s.name}"></option>
+
+                                        </select>
+                                    </div></div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Station:</label>
+                                    <div class="">
+                                        <select  type="text" th:field="*{station}"  class="form-control select2-offscreen pselect" >
+<option value="0">Select Station</option>
+<option th:each="s: ${stations}" th:value="${s.id}" th:text="${s.name}"></option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Agency:</label>
+                                    <div class="">
+
+                                        <select  type="text" th:field="*{agency}"  class="form-control select2-offscreen pselect" >
+                                            <option value="0">Select Agency</option>
+                                            <option th:each="s: ${agencies}" th:value="${s.id}" th:text="${s.acronym}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label class=" ">Nature of Services Provided:</label>
+                                    <div class="input-group col-md-12">
+                                        <textarea  rows="8"  th:field="*{natureOfServicesProvided}" class="form-control col-md-12 width100p" >
+
+                                        </textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Start Date:</label>
+                                    <div class="input-group">
+                                        <input   type="text" th:value="${#strings.isEmpty(supplier.startDate) ? '' : #dates.format(supplier.startDate, 'dd/MM/yyyy') }" th:field="*{startDate}" class="form-control datepicker" placeholder="mm/dd/yyyy" id="datepicker">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">End Date:</label>
+                                    <div class="input-group">
+                                        <input id="datepicker2" type="text" th:value="${#strings.isEmpty(supplier.endDate) ? '' : #dates.format(supplier.endDate, 'dd/MM/yyyy') }" th:field="*{endDate}" class="form-control" placeholder="mm/dd/yyyy">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered collapsibleTable" id="partII">
+
+                                        <tr  ><th > PART  II</th><th></th></tr>
+                                        <tr><th colspan="2">
+                                            Terms of Reference Within the framework of the terms of reference, indicate the key deliverables, including measurable outputs;
+                                            performance indicators during the review period for final evaluation of results.
+
+                                        </th></tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group col-sm-12">
+
+                                                    <div class="input-group col-md-12">
+                                        <textarea  rows="8"  th:field="*{termsOfReference}" class="form-control col-md-12 width100p" >
+
+                                        </textarea>
+                                                    </div>
+
+                                            </td>
+                                        </tr>
+
+                                    </table></div>
+
+
+
+
+
+
+
+
+
+                                        <div class="col-sm-12">
+                                    <table class="table table-bordered collapsibleTable" id="addressTable">
+
+                                        <tr  ><th > PART  IV</th><th></th></tr>
+                                        <tr><th colspan="2">
+                                            Rate the Vendor’s following attributes (to be completed by the procuring unit two months prior to contract expiration):
+
+
+                                        </th></tr>
+
+                                        <tr>
+                                            <td>
+                                                 Quality of Work
+                                            </td>
+                                            <td>
+
+                                                <select id="technicalexpertise" th:field="*{qualityOfWork}" class="select2 pselect width100p" >
+
+                                                    <option value="-1">--</option>
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                 Technical Skills ?
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{technicalSkills}" id="imagina" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                 Value for Money
+                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{valueForMoney}" id="initia" class="select2 pselect width100p" >
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+Overall Performance Rating                                            </td>
+                                            <td>
+
+                                                <select  th:field="*{overallPerformanceRating}" id="interpersonal" class="select2 pselect width100p" >
+
+
+                                                    <option th:each="r:${ratings}"    th:value="${r.rating}"  th:text="${r}"></option>
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+
+
+
+
+
+
+
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered collapsibleTable" id="addressTable">
+                                                <tr><th> SECTION V</th><th></th>
+                                        </tr>
+                                        <tr><th colspan="2">
+                                            Procuring Unit’s  Overall assessment
+                                            <br/>
+<small>Provide a brief narrative and indicate Service Evaluation discussions held with Vendor</small>
+                                        </th></tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group col-sm-12">
+
+                                                    <div class="input-group col-md-12">
+                                        <textarea  rows="8"  th:field="*{briefNarrative}" class="form-control col-md-12 width100p" >
+
+                                        </textarea>
+                                                    </div>
+
+         </td>
+                                        </tr>
+
+
+                                                     </table>
+                                </div>
+
+
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered collapsibleTable" id="addressTable">
+                                                <tr><th> SECTION VI</th><th></th>
+                                                </tr>
+                                                <tr><th colspan="2">
+                                                    Procuring Unit’s  Overall assessment
+                                                    <br/>
+                                                    <small>Provide a brief narrative and indicate Service Evaluation discussions held with Vendor</small>
+                                                </th></tr>
+
+
+                                                <tr>
+<td>
+                                                    <div class="form-group col-sm-6">
+                                                        <label class=" "> Contract extension Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input   type="text" th:value="${#strings.isEmpty(supplier.startDate) ? '' : #dates.format(supplier.startDate, 'dd/MM/yyyy') }" th:field="*{startDate}" class="form-control datepicker" placeholder="mm/dd/yyyy" id="datepicker">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group col-sm-6">
+                                                        <label class=" ">Contract extension End Date:</label>
+                                                        <div class="input-group">
+                                                            <input id="datepicker2" type="text" th:value="${#strings.isEmpty(supplier.endDate) ? '' : #dates.format(supplier.endDate, 'dd/MM/yyyy') }" th:field="*{endDate}" class="form-control" placeholder="mm/dd/yyyy">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+
+                                                    </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-group col-sm-12">
+                                                            <label class=" ">Retention of the Contractor on the database</label>
+<div class="form-inline">
+                                                                <input   type="radio" class="form-control"  th:field="*{retentionOnTheContractorsDatabase}" value="true" /> Yes
+                                                                <input   type="radio" class="form-control"  th:field="*{retentionOnTheContractorsDatabase}" value="false" /> No
+
+</div>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+
+                                                    <td>
+                                                        <div class="form-group col-sm-12">
+                                                            <label class=" ">Contract Termination Effective:</label>
+                                                            <div class="input-group">
+                                                                <input id="datepicker4" type="text" th:value="${#strings.isEmpty(supplier.contractTermination) ? '' : #dates.format(supplier.contractTermination, 'dd/MM/yyyy') }" th:field="*{contractTermination}" class="form-control" placeholder="mm/dd/yyyy">
+                                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-group col-sm-12">
+                                                            <label class=" ">Other recommendation related to assignment</label>
+                                                                 <textarea class="form-control col-md-12 width100p" th:field="*{otherRecommendationRelatedToAssignment}" rows="5"> </textarea>
+
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+
+
+
+
+
+
+
+<tr>
+    <td>
+    <div class="col-sm-12">
+        <table class="table table-bordered collapsibleTable" id="officr">
+            <tr><th> CERTIFYING OFFICER</th>
+            </tr>
+
+            </table>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="division">Name</label></div>
+            <div class="col-md-10">
+
+                <input  type="text" id="division" th:field="*{name}"  class="form-control"  />
+
+            </div>
+        </div>
+    </td>
+    <tr/>
+                                        <tr>
+    <td>
+
+
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="telephone">Title</label></div>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="telephone" th:field="*{title}" placeholder=" title:  ">
+                </div>
+
+        </div>
+    </td>
+</tr>
+                                    </table>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div><!-- panel-body -->
+
+                            <div class="panel-footer">
+                                <input class="btn btn-primary mr5" type="submit" value="Save" />
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <script>
+                        jQuery('body').on('click', '.removeLanguage', function() {
+
+                            var answer = confirm("Are you sure you want to Language Skill node?");
+                            if(answer === true){
+                                var removeControl = jQuery(this).attr("data-remove");
+                                jQuery(removeControl).remove();
+                            }
+
+                        });
+                    </script>
+
+
+
+
+                </div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+
+    jQuery(document).ready(function(jQuery) {
+        jQuery('#addLanguageSkill').click(function () {
+            var answers = "";
+
+
+            answers += "<option value=''>--Select Answer--</option>";
+            answers += "<option value='true'>YES</option>";
+            answers += "<option value='false'>NO</option>";
+
+
+
+            var languageIndex = jQuery('table#languageSkillsTable tr').length - 1;
+            var text = "";
+            text += "<tr id='language" + languageIndex + "'><td> <label>Language " + (languageIndex + 1) + "</label> </td>";
+            //Enter new State Field
+                text += "<td>";
+                    text+= "<input type='text' name='languageSkills[" + languageIndex + "].language' class='form-control' /><br />";
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='false' /></label> Read Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='false' /></label> Write Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='false' /></label> Speak Fluently?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='true' /></label>" +
+                            "<label>NO <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='false' /></label> Understand Easily?";
+
+                    text += "<button type='button' class='btn btn-sm btn-danger removeLanguage pull-right' data-remove='#language" + languageIndex + "' >Remove Doc</button>";
+                text += "</td>";
+            text += "</tr>";
+
+            jQuery('#languageSkillsTable').append(text);
+
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

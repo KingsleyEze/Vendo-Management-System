@@ -1,0 +1,32 @@
+<div class="form-pad col-md-4">
+    <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."
+               required="required" ng-model="search" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Section Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="section in sections | filter: search">
+        <tr>
+            <td><a href="" 
+                   data-ng-click="findSectiontById(section.id)">{{section.name}}</a></td>
+
+
+            <td ><a href=""
+                    data-ng-click="updateSectionClicked(section)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteSection(section.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+
+

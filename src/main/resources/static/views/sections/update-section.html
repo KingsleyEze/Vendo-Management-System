@@ -1,0 +1,29 @@
+<form role="form" method="post" class="form-pad col-md-4"
+      data-ng-submit="updateSection(sectionData.currSection)">
+
+    <h2> Update Section</h2>
+
+    <fieldset class="form-group">
+        <label>Section Name</label> <input type="text" class="form-control"
+                                           required="required" data-ng-model="sectionData.currSection.name" /> <span
+                                           data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+    <fieldset class="form-group">
+    <label>Section Code</label>
+            <input type="text" class="form-control"  data-ng-model="sectionData.currSection.code"/>
+            <span data-ng-show="errorName">{{errorName}}</span>
+      </fieldset>
+
+    <br/>
+
+
+    <fieldset class="form-group">
+        <label>Subject Name</label>  <select  data-ng-model="sectionData.currSection.subject.id"  ng-options="subject.id as subject.name for subject in sectionData.currSection.subjects" ></select>  
+        <span
+            data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>

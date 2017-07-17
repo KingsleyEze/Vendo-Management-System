@@ -1,0 +1,82 @@
+<form class="form-pad">
+    <div class="form-group">
+
+        <label for="fname">School</label>
+        <input type="text" id="fname" class="form-control">
+
+        <label for="address">Address</label><br>
+        <textarea id="address">type address here</textarea>
+        <br>
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone">
+
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email">
+
+        <label for="activate">Activate</label>
+        <select name="select" class="form-control" id="activate">
+            <option value="maths">activate</option>
+            <option value="english">deactivate</option>
+        </select>
+
+        <label for="fname">Partner</label>
+        <select name="select" class="form-control">
+            <option value="maths">part11</option>
+            <option value="english">partner2</option>
+            <option value="fmaths">partner3</option>
+        </select>
+
+    </div>
+
+
+    <button type="submit" class="btn btn-default btn-flat">Create</button>
+
+</form>
+
+<!-- end Update form -->
+
+</td>
+<td><button type="button" class="btn btn-link"><span aria-hidden="true">&times; </span></button></td>
+</tr>
+
+<tr>
+    <td>school2</td>
+    <td><button type="button"  href="#tab-cont1" data-toggle="collapse" class="btn btn-link">edit<span class="caret"></span></button>
+        <!-- update form -->
+        <div id="tab-cont1" class="collapse fade">
+            <!-- <h4>Update</h4>-->
+
+            <form class="form-pad" data-ng-submit="addSchool(school)">
+                <div class="form-group">
+                    <label for="fname">Question</label>
+
+                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <label for="fname">Topic Name</label>
+
+                    <input type="text" class="form-control" />
+
+                    <label>Subject</label>
+                    <select name="select" class="form-control">
+                        <option value="maths">Maths</option>
+                        <option value="english">English</option>
+                        <option value="fmaths">Further Maths</option>
+                        <option value="chemistry">Chemistry</option>
+                    </select>
+
+                    <label>Section</label>
+                    <select name="select" class="form-control">
+                        <option value="maths">Sec1</option>
+                        <option value="english">sec3</option>
+                        <option value="fmaths">ssec5</option>
+                        <option value="chemistry">sex6</option>
+                    </select>
+
+
+
+                </div>
+
+
+                <button type="submit" class="btn btn-default btn-flat">Update</button>
+
+            </form>
+        </div>

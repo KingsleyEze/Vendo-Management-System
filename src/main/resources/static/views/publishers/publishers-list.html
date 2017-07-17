@@ -1,0 +1,31 @@
+<div class="form-pad col-md-4">
+    <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."
+               required="required" ng-model="search" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+</div>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Publisher Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="publisher in publishers| filter: search">
+        <tr>
+            <td><a href="" 
+                   data-ng-click="findPublisherById(publisher.id)">{{publisher.name}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updatePublisherClicked(publisher)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deletePublisher(publisher.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+
+

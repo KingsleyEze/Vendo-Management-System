@@ -1,0 +1,110 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- main content area -->
+        <div class="col-md-12 valign-top">
+            <!-- start search questions here -->
+            <div class="row">
+                <div class="clearfix"></div>
+                <header id="nav-header" style="text-align: center;" class="clearfix">
+                    <div class="col-md-4">
+                        <input type="text" class="hidden-sm hidden-xs" id="header-search-field"
+                               placeholder="Search for something..."/>
+                    </div>
+                </header>
+            </div>
+            <!-- end search questions here -->
+            <div class="row content">
+
+                <div class="panel-group col-md-2 sidefx sidetext" id="accordion">
+
+                    <br/>
+
+                    <ul class="mainmenusec">
+                        <li>
+                          <a>SELECT</a>
+                            <ul class="submenusec grey">
+                                <li data-ng-repeat="subject in subjects"><a data-ng-click= "subjectSelected(subject.id)" href="">{{subject.name}}</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <ul data-ng-if="showSectionSection" class="mainmenusec">
+                        <h4><i class="fa fa-book"></i>Select Sections</h4>
+                        <li ng-repeat="section in sections">
+                            <a data-ng-click="sectionSelected(subject.id)">{{section.name}}</a>
+                            <ul class="submenusec grey">
+                                <li data-ng-repeat="topic in topics[section.id]"><a data-ng-click= "topicSelected(topic.id)" href="">{{topic.name}}</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul data-ng-if="showSkillLevelSection" class="mainmenusec">
+                        <h4><i class="fa fa-dot-circle-o"></i> Select Skills </h4>
+                        <li data-ng-repeat="skill in skills"><a data-ng-click="skillSelected(skill.id)" href="">{{skill.name}}</a>
+                        </li>
+                    </ul>
+
+                    <ul data-ng-if="showDifficultySection" class="mainmenusec">
+                        <h4><i class="fa fa-paper-plane"></i>  Difficulty Level</h4>
+                        <li><a data-ng-click="fetchQuestions(1)" href="">Level1</a></li>
+                        <li><a data-ng-click="fetchQuestions(2)" href="">Level2</a></li>
+                        <li><a data-ng-click="fetchQuestions(3)" href="">Level3</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-sm-10">
+                    <h3>Playlist</h3>
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-sm-3 col-md-3" data-ng-repeat="question in questions">
+                            <!-- question thumbnail -->
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h3><a ng-href="/playquestions/{{question.id}}"> Q. {{$index+1}}</a></h3>
+                                    <p style="max-height:40px;overflow: hidden;">
+                                        <div ng-bind-html="sanitizeQuestion(question.description)"/>
+                                    </p>
+
+                                    <!--
+
+                                    <p><i class="fa fa-anchor"></i>
+                                        <a>WAEC</a>|
+                                        <a>MX</a>|
+                                        <a>WP</a>|
+                                        <a>AN</a>|<span class="glyphicons glyphicons-pushpin"></span>
+                                        <br>
+                                        <span class="tiny">60k attempts (2% got it right)</span>
+                                    </p>
+                                    -->
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-4">
+                            <ul uib-pagination total-items="questions.length" items-per-page="pageSize" ng-model="currentPage" max-size="5" class="pagination-sm"></ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+

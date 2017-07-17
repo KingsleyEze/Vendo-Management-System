@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+    var vendors = [[${vendors}]];
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+
+<section>
+    <div class="mainwrapper" >
+        <span sec:authorize="hasAuthority('CONSULTANT')">
+            <div  th:replace="fragments/consultant-leftpanel :: leftpanel-admin"  ></div>
+
+        </span>
+        <div sec:authorize="not hasAuthority('CONSULTANT')">
+        <div   th:replace="fragments/admin-leftpanel :: leftpanel-admin"  >
+        </div>
+        </div>
+
+
+ <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Consultant Page</li>
+                        </ul>
+                        <h4>   Viewing consultant : <span th:text="${consultant.bioData.surName}"></span> <span th:text="${consultant.bioData.firstName}"></span></h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+                <div class="row">
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a th:href="@{/consultants/editBioData/} + ${consultant.id}"> Edit</a>
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">View Biodata</h4>
+                            <p>Bio data details </p>
+                        </div><!-- panel-heading -->
+
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>First Name</td><td><p th:text="${consultant.bioData.firstName}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Family Name</td><td><p th:text="${consultant.bioData.surName}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Middle Name</td><td><p th:text="${consultant.bioData.middleName}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Maiden Name</td><td><p th:text="${consultant.bioData.maidenName}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Date of Birth</td><td><p th:text="${consultant.bioData.dob}"></p></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>Place of Birth</td><td><p th:text="${consultant.bioData.placeOfBirth}"></p></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>Nationalities At Birth</td><td><span class="badge" th:each="natAtBirth : ${consultant.bioData.nationalitiesAtBirth}" th:text="${natAtBirth}"></span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Present Nationalities</td><td><span class="badge" th:each="nat : ${consultant.bioData.presentNationalities}" th:text="${natAtBirth}"></span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Gender</td><td><p th:text="${consultant.bioData.sex}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Height</td><td><p th:text="${consultant.bioData.height}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Weight</td><td><p th:text="${consultant.bioData.weight}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Marital Status</td><td><p th:text="${consultant.bioData.maritalStatus}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Has Spouse</td><td><p th:text="${consultant.bioData.hasSpouse}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Has foreign permanent status</td><td><p th:text="${consultant.bioData.hasForeignPermanentStatus}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Country Of foreign permanent status</td><td><p th:text="${consultant.bioData.countryOfForeignPermanentStatus}"></p></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>Are any of your relatives employed by a public international organization?</td><td><p th:text="${consultant.bioData.hasAnyRelationWorkingInternationally}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Preffered field of work</td><td><p th:text="${consultant.bioData.prefferedFieldOfWork}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Ever tried changing current nationality</td><td><p th:text="${consultant.bioData.everTriedChangingPresentNationality}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Reason for attempting to change current nationality</td><td><p th:text="${consultant.bioData.reasonForAttemptingToChangeNationality}"></p></td>
+                                        </tr>
+
+
+                                    </table>
+
+
+                                    <label>Address info</label>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td><b>Permanent Address</b></td><td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Address</td><td><p th:text="${consultant.bioData.permanentAddress.addressLine}"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tel. No</td><td><p th:text="${consultant.bioData.permanentAddress.telNo}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Fax. No</td><td><p th:text="${consultant.bioData.permanentAddress.faxNo}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><b>Current Address</b></td><td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Address</td><td><p th:text="${consultant.bioData.presentAddress.addressLine}"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tel. No</td><td><p th:text="${consultant.bioData.presentAddress.telNo}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Fax. No</td><td><p th:text="${consultant.bioData.presentAddress.faxNo}"></p></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td><b>Office Address</b></td><td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Address</td><td><p th:text="${consultant.bioData.officeAddress.addressLine}"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tel. No</td><td><p th:text="${consultant.bioData.officeAddress.telNo}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Fax. No</td><td><p th:text="${consultant.bioData.officeAddress.faxNo}"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Email</td><td><p th:text="${consultant.bioData.officeAddress.email}"></p></td>
+                                        </tr>
+
+                                    </table>
+
+
+                                    <label>Language info</label>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td><b>Mother Tongue</b></td><td><p th:text="${consultant.bioData.motherTongue}"></p></td>
+                                        </tr>
+
+                                        <tr th:each="lang : ${languageSkills}">
+                                            <td>Language: <span th:text="${lang.language}"></span></td>
+                                            <td>Read easily: <span th:text="${lang.readEasily}"></span></td>
+                                            <td>Write easily: <span th:text="${lang.writeEasily}"></span></td>
+                                            <td>Speak fluently: <span th:text="${lang.speakFluently}"></span></td>
+                                            <td>Understand easily: <span th:text="${lang.understandEasily}"></span></td>
+                                        </tr>
+
+                                    </table>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div id="edu-data">
+
+                        <div th:if="${null != consultant.educationalData}" class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a th:href="@{/consultants/editEduData/} + ${consultant.id}"> Edit</a>
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">View Educational data</h4>
+                            <p>Educational data details </p>
+                        </div><!-- panel-heading -->
+
+                        <div class="panel-body" >
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Professional activities and societies</td>
+                                            <td><span th:each="pActivity : ${consultant.educationalData.professionalActivitiesAndSocieties}" th:text="${pActivity}" class="badge"></span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Professional publications</td>
+                                            <td><span th:each="pPub : ${consultant.educationalData.professionalPublications}" th:text="${pPub}" class="badge"></span></td>
+                                        </tr>
+
+                                    </table>
+
+
+                                    <label><b>Institutions attended</b></label>
+                                    <table th:if="${null != institutionsAttended}" th:each="inst : ${institutionsAttended}" class="table table-bordered">
+                                        <tr>
+                                            <td>Name of institution</td><td> <span th:text="${inst.name}"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Place</td><td> <span th:text="${inst.place}"></span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Country</td><td> <span th:text="${inst.country}"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Start date</td>
+                                            <td>
+                                                <p th:text="${ #strings.isEmpty(inst.startDate) ? 'Null': #dates.format(inst.startDate, 'dd/MM/yyyy')}"></p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>End date</td>
+                                            <td>
+                                                <p th:text="${ #strings.isEmpty(inst.endDate) ? 'Null': #dates.format(inst.endDate, 'dd/MM/yyyy')}"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Certificate obtained</td><td> <span th:text="${inst.certificateObtained}"></span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Grade</td><td> <span th:text="${inst.grade}"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Course of study</td><td> <span th:text="${inst.courseOfStudy}"></span></td>
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                        <span sec:authorize="hasAuthority('CONSULTANT')">
+                        <div th:if="${null == consultant.educationalData}" class="alert alert-warning">
+                            <p>You have not supplied your educational data </p><a th:href="@{/consultants/addEduData/} + ${consultant.id}"> Click to supply</a>
+                        </div></span>
+
+                    </div>
+
+
+                    <div id="emp-data">
+
+                        <div th:if="${null != consultant.employmentData}" class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-btns" style="display: none;">
+                                    <a th:href="@{/consultants/editEmpData/} + ${consultant.id}"> Edit</a>
+                                    <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                    <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                                </div><!-- panel-btns -->
+
+
+                                <h4 class="panel-title">View Employment data</h4>
+                                <p>Employment data details </p>
+                            </div><!-- panel-heading -->
+
+                            <div class="panel-body" >
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>Can we contact your present employer?</td>
+                                                <td><span  th:text="${empData.canWeContactPresentEmployer}" class="badge" ></span></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Have you being a civil servant before?</td>
+                                                <td><span  th:text="${empData.haveYouBeingACivilServantBefore}" class="badge"></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Period of civil service</td>
+                                                <td><span  th:text="${empData.periodOfCivilService}"  ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Any relevant employment fact?</td>
+                                                <td><p  th:text="${empData.relevantEmploymentFact}" ></p></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Have you being convicted before?</td>
+                                                <td><span  th:text="${empData.haveYouBeingConvictedBefore}" class="badge"  ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Conviction details</td>
+                                                <td><p  th:text="${empData.convictionDetails}" ></p></td>
+                                            </tr>
+
+                                        </table>
+
+
+                                        <label><b>Employment History</b></label>
+                                        <table th:if="${null != employmentRecords}" th:each="empRecord : ${employmentRecords}" class="table table-bordered">
+                                            <tr>
+                                                <td>Job Title salary</td>
+                                                <td><span  th:text="${empRecord.jobTitle}" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Start date</td>
+                                                <td>
+                                                    <p th:text="${ #strings.isEmpty(empRecord.startDate) ? 'Null': #dates.format(empRecord.startDate, 'dd/MM/yyyy')}"></p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>End date</td>
+                                                <td>
+                                                    <p th:text="${ #strings.isEmpty(empRecord.endDate) ? 'Null': #dates.format(empRecord.endDate, 'dd/MM/yyyy')}"></p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Is this your current role?</td>
+                                                <td><span  th:text="${empRecord.present}" class="badge"></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Starting salary</td>
+                                                <td><span  th:text="${empRecord.startingSalary}" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Final salary</td>
+                                                <td><span  th:text="${empRecord.finalSalary}" ></span></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Job description</td>
+                                                <td><p  th:text="${empRecord.jobDescription}" ></p></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Type of Business</td>
+                                                <td><span  th:text="${empRecord.typeOfBusiness}" class="badge" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Supervisor's name</td>
+                                                <td><span  th:text="${empRecord.supervisorsName}" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>No. of staffs supervised</td>
+                                                <td><span  th:text="${empRecord.noOfEmployeesSupervised}" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Employer's name</td>
+                                                <td><span  th:text="${empRecord.nameOfEmployer}" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Employer's address</td>
+                                                <td><span  th:text="${empRecord.addressOfEmployer}" ></span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Reason for leaving</td>
+                                                <td><p  th:text="${empRecord.reasonForLeaving}" ></p></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <span sec:authorize="hasAuthority('CONSULTANT')">
+                        <div th:if="${null == consultant.employmentData}" class="alert alert-warning">
+                            <p>You have not supplied your employment data </p><a th:href="@{/consultants/addEmpData/} + ${consultant.id}"> Click to supply</a>
+                        </div>
+
+                        </span>
+                    </div>
+
+
+                </div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+
+    jQuery(document).ready(function(jQuery) {
+        jQuery('#addLanguageSkill').click(function () {
+            var answers = "";
+
+
+            answers += "<option value=''>--Select Answer--</option>";
+            answers += "<option value='true'>YES</option>";
+            answers += "<option value='false'>NO</option>";
+
+
+
+            var languageIndex = jQuery('table#languageSkillsTable tr').length - 1;
+            var text = "";
+            text += "<tr id='language" + languageIndex + "'><td> <label>Language " + (languageIndex + 1) + "</label> </td>";
+            //Enter new State Field
+                text += "<td>";
+                    text+= "<input type='text' name='languageSkills[" + languageIndex + "].language' class='form-control' /><br />";
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='false' /></label> Read Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='false' /></label> Write Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='false' /></label> Speak Fluently?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='true' /></label>" +
+                            "<label>NO <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='false' /></label> Understand Easily?";
+
+                    text += "<button type='button' class='btn btn-sm btn-danger removeLanguage pull-right' data-remove='#language" + languageIndex + "' >Remove Doc</button>";
+                text += "</td>";
+            text += "</tr>";
+
+            jQuery('#languageSkillsTable').append(text);
+
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

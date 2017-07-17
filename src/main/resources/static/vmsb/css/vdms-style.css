@@ -1,0 +1,56 @@
+/*!*#014fad, #5B92E5*! Primary color*/
+/*#0151ad */
+/*#003399*/
+/*#0f8ace*/
+@import "font-awesome.css";
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.nav-list > li > a {
+    padding-top: 13px!important;
+    padding-left: 15px!important;
+    vertical-align: middle!important;
+}
+
+.nav-list > li > a:hover {
+    color: #ffffff!important;
+    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);*/
+    background-color: #c2cfff !important;
+    height: 30px!important;
+    vertical-align: middle!important;
+    border-radius: 5px!important;
+}
+
+.nav-list > .active > a, .nav-list > .active > a:hover {
+    color: #ffffff!important;
+    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);*/
+    background-color: #0151ad!important;
+    height: 30px!important;
+    vertical-align: middle!important;
+    border-radius: 5px;
+}
+
+.padh > a {
+    color: #0151ad!important;
+    text-decoration: none;
+}
+
+.padh {
+    padding: 5px;
+    height: 30px;
+    border-radius: 5px;
+    vertical-align: middle!important;
+    font-size: 14px!important;
+}
+
+
+/*.padh:hover {*/
+    /*padding: 5px;*/
+    /*height: 35px;*/
+    /*border-radius: 5px;*/
+    /*color: #ffffff;*/
+    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);*/
+    /*background-color: #3d78ad !important;*/
+/*}*/

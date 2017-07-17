@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <!--<div th:replace="fragments/ngo-leftpanel :: leftpanel-admin"></div>-->
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a href=""> Ngo </a></li>
+                            <li>Add</li>
+                        </ul>
+                        <h5><strong>Step 4: EXPERIENCE</strong> </h5>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <h5 class="lg-title"></h5>
+                        <p class="mb20"></p>
+
+                        <!-- PROGRESS WIZARD -->
+                        <form action="/ngos/step-four" method="post" id="progressWizard" class="panel-wizard" th:object="${ngoExperienceDto}" enctype="multipart/form-data">
+
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <input type="hidden" th:field="*{ngoContractArray}"/>
+
+                            <ul class="nav nav-justified nav-wizard">
+                                <li><a href="/ngos/step-one"><strong>Step 1:</strong>COMPANY</a></li>
+                                <li><a href="/ngos/step-two"><strong>Step 2:</strong>FINANCIAL</a></li>
+                                <li><a href="/ngos/step-three"><strong>Step 3:</strong>TECHNICAL</a></li>
+                                <li><a href="/ngos/step-four"><strong>Step 4:</strong>EXPERIENCE</a></li>
+                                <li><a href="/ngos/step-five"><strong>Step 5:</strong>OTHER</a></li>
+                            </ul>
+
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"
+                                     aria-valuemin="25" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="tab-pane" id="tab1-2">
+
+                                    <div class="col-md-8">
+                                        <label>RECENT CONTRACTS WITH THE UNITED NATIONS and/or OTHER INTERNATIONAL AID ORGANIZATIONS</label>
+
+                                        <form id="contractForm">
+
+                                            <br class="clearfix"/>
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="organization" id="organization" placeholder="Enter Organization Name"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <br class="clearfix"/>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="value" id="value" placeholder="Enter Value in US$"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="year" id="year" placeholder="Enter Year"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <br class="clearfix"/>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="goodService" id="goodService" placeholder="Enter Goods/Services Supplied"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <input type="text" name="destination" id="destination" placeholder="Enter Destination"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+
+                                            <br class="clearfix"/>
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <button id="addContractButton"
+                                                            class="btn btn-sm btn-success pull-right"
+                                                            type="button">Add Contract
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <!--||Form Group -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <table class="table" id="contractTable">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Organization</th>
+                                                            <th>Value in US$</th>
+                                                            <th>Year</th>
+                                                            <th>Goods/Services Supplied</th>
+                                                            <th>Destination</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>TO WHICH COUNTRIES HAS YOUR COMPANY EXPORTED and/or MANAGED PROJECTS OVER THE LAST 3 YEARS?:</label>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" th:field="*{ngoProject1}"  placeholder="Enter Project Name 1"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" th:field="*{ngoCountry1}" placeholder="Enter Country 1"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                    <br class="clearfix"/>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" th:field="*{ngoProject2}" placeholder="Enter Project Name 2"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" th:field="*{ngoCountry2}" placeholder="Enter Country 2"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                    <br class="clearfix"/>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" th:field="*{ngoProject3}" placeholder="Enter Project Name 3"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" th:field="*{ngoCountry3}" placeholder="Enter Country 3"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                    <br class="clearfix"/>
+
+                                                </div>
+                                            </div><!-- form-group -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <label>DOES YOUR COMPANY HAVE A WRITTEN STATEMENT OF ITS ENVIRONMENTAL POLICY?
+                                                        (If YES, please attach a copy)
+                                                        :</label>
+                                                    <input type="file" name="ngoDocument" class="form-control" />
+                                                </div>
+                                            </div><!-- form-group -->
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+
+                                                    <button type="submit" class="btn btn-primary pull-right">Next</button>
+                                                </div>
+                                            </div><!-- form-group -->
+                                        </div>
+                                    </div><!-- // -->
+
+
+                                </div><!-- tab-pane -->
+
+                            </div><!-- tab-content -->
+
+                        </form><!-- panel-wizard -->
+
+                    </div><!-- col-md-6 -->
+
+                </div><!-- row -->
+
+            </div><!-- contentpanel -->
+        </div>
+    </div><!-- mainwrapper -->
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function(){
+
+        (function () {
+            var contactInput = $('#ngoContractArray').val();
+            var contactArray = contactInput !== "" ? JSON.parse(contactInput) : [];
+
+            createContractTable(contactArray);
+
+            function createContractTable (collection) {
+
+                var html = '';
+                for (var i = 0; i < collection.length; i++)
+                    html += '<tr><td>'
+                        + collection[i].organization + '</td>'
+                        + '<td>' + collection[i].value + '</td>'
+                        + '<td>' + collection[i].year + '</td>'
+                        + '<td>' + collection[i].goodService + '</td>'
+                        + '<td>' + collection[i].destination +
+                        '</td></tr>';
+
+                $('#contractTable tr').first().after(html);
+            };
+
+        })();
+
+        var contractCollection = [];
+
+        var createContractFactory = function (organization, value , year, goodService, destination) {
+
+            return {
+                organization: organization,
+                value: value,
+                year: year,
+                goodService: goodService,
+                destination: destination
+            };
+        };
+
+
+        jQuery('#addContractButton').click(function () {
+
+
+            var organization = jQuery('#organization').val();
+            var value = jQuery('#value').val();
+            var year = jQuery('#year').val();
+            var goodService = jQuery('#goodService').val();
+            var destination = jQuery('#destination').val();
+
+            var contractObject = createContractFactory(organization, value, year, goodService, destination);
+
+            contractCollection.push(contractObject);
+
+            buildContractTable(contractCollection);
+
+            buildNgoContractArrayInput(contractCollection);
+
+            resetAddContractForm();
+        });
+
+
+        var buildContractTable = function (collection) {
+
+            var html = '';
+            for (var i = 0; i < collection.length; i++)
+                html += '<tr><td>'
+                          + collection[i].organization + '</td>'
+                          + '<td>' + collection[i].value + '</td>'
+                          + '<td>' + collection[i].year + '</td>'
+                          + '<td>' + collection[i].goodService + '</td>'
+                          + '<td>' + collection[i].destination +
+                        '</td></tr>';
+
+            $('#contractTable tr').first().after(html);
+        };
+
+
+        var buildNgoContractArrayInput = function (collection) {
+            var ngoContractArray = JSON.stringify(collection);
+
+            $('#ngoContractArray').val(ngoContractArray);
+        };
+
+
+        var resetAddContractForm = function () {
+            jQuery('#organization ,#value, #year, #goodService, #destination').val('');
+        };
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function(event){
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function() {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "name" },
+                { "data": "position" },
+                { "data": "office" },
+                { "data": "salary" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // Progress Wizard
+        jQuery('#progressWizard').bootstrapWizard({
+            onTabShow: function(tab, navigation, index) {
+                tab.prevAll().addClass('done');
+                tab.nextAll().removeClass('done');
+                tab.removeClass('done');
+
+                var $total = navigation.find('li').length;
+                var $current = index + 4;
+
+                if($current >= $total) {
+                    $('#progressWizard').find('.wizard .next').addClass('hide');
+                    $('#progressWizard').find('.wizard .finish').removeClass('hide');
+                } else {
+                    $('#progressWizard').find('.wizard .next').removeClass('hide');
+                    $('#progressWizard').find('.wizard .finish').addClass('hide');
+                }
+
+                var $percent = ($current/$total) * 100;
+                $('#progressWizard').find('.progress-bar').css('width', $percent+'%');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format (d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">'+
+            '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.name+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.extn+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

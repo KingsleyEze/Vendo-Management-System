@@ -1,0 +1,23 @@
+package org.ng.undp.vdms.customannotations.constants;
+
+/**
+ * Created by abdulhakim on 11/19/16.
+ */
+public enum AuditingActionType
+{
+
+INTERNAL_USER_REGISTRATION,
+INTERNAL_USER_UPDATE,
+    INTERNAL_USER_DELETE,
+    INTERNAL_USER_SAVE,
+    USER_LOGIN,
+    SUPPLIER_USER_ADD,
+    SUPPLIER_USER_EDIT,
+    SUPPLIER_USER_DELETE,
+    SUPPLIER_USER_READ,
+ CONSULTANT_USER_ADD,
+    CONSULTANT_USER_EDIT,
+    CONSULTANT_USER_DELETE,
+   CONSULTANT_USER_READ,
+
+}

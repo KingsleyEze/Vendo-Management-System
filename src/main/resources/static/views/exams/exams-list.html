@@ -1,0 +1,29 @@
+<div class="form-pad col-md-4">
+    <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."
+               required="required" ng-model="search" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Exam Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="exam in exams | filter : search">
+        <tr>
+            <td><a href="" 
+                   data-ng-click="findExamById(exam.id)">{{exam.name}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updateExamClicked(exam)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteExam(exam.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+
+

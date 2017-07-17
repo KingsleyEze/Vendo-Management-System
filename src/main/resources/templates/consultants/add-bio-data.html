@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+    var vendors = [[${vendors}]];
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+<section>
+    <div class="mainwrapper">
+        <div th:replace="fragments/consultant-leftpanel :: leftpanel-admin">
+            <div class="media profile-left">
+
+                <div class="media-body" sec:authorize="isAuthenticated()">
+                    <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+
+
+                    <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+                </div>
+            </div><!-- media -->
+
+            <h5 class="leftpanel-title">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+
+
+
+
+            </ul>
+
+        </div><!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Consultant Signup</li>
+                        </ul>
+                        <h4>   Add Bio data</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+
+
+
+
+                <div class="row">
+
+                    <div class="progress progress-striped active">
+                        <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-warning">
+                            <span class="sr-only">20% Completed (success)</span>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">Add Bio Data</h4>
+                            <p><code>Quick tip: A Consultant is an independent individual vendor who does not operate as a business</code>  </p>
+                        </div><!-- panel-heading -->
+
+                        <form th:action="@{/consultants/addBioData}" method="POST" th:object="${bioData}" class="" >
+                            <div class="panel-body" >
+                                <div class="form-group col-sm-6">
+                                    <label class="label-control ">Family Name:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{surName}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class="label-control ">First Name:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{firstName}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Middle Name:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{middleName}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Maiden Name:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{maidenName}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Date of Birth:</label>
+                                    <div class="input-group">
+                                        <input id="datepicker" type="text" th:value="${#strings.isEmpty(bioData.dob) ? '' : #dates.format(bioData.dob, 'dd/MM/yyyy') }" name="dob" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Place of Birth:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{placeOfBirth}"  class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Nationalitie(s) at Birth:</label>
+                                    <select  data-placeholder="Choose One or More Nationalities" multiple="multiple" th:field="*{nationalitiesAtBirth}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                        <option value=""></option>
+                                        <option th:each="c: ${countries}" th:value="${c}"  th:text="${c}"></option>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Present Nationalitie(s):</label>
+                                    <select  data-placeholder="Choose One or More Nationalities" multiple="multiple" th:field="*{presentNationalities}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                        <option value=""></option>
+                                        <option th:each="c: ${countries}" th:value="${c}" th:text="${c}"></option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Sex:</label>
+                                    <div class="">
+
+                                        <select   th:field="*{sex}" data-placeholder="Choose One" class="width100p select-single-hide">
+                                            <option value="">---</option>
+                                            <option th:each="gender: ${genders}" th:selected="${bioData.sex == null } ? false : ${#strings.equalsIgnoreCase(gender, bioData.sex)} "  th:value="${gender}" th:text="${gender}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Marital Status:</label>
+                                    <div class="">
+
+                                        <select   th:field="*{maritalStatus}" data-placeholder="Choose One" class="width100p select-single-hide">
+                                            <option value="">---</option>
+                                            <option th:each="m: ${maritalStatus}" th:selected="${bioData.maritalStatus == null } ? false : ${#strings.equalsIgnoreCase(m, bioData.maritalStatus)} "  th:value="${m}" th:text="${m}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Height (in feet)</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{height}" placeholder="Height in feet" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Weight <span>( in kg)</span></label>
+                                    <div class="">
+                                        <input type="text" th:field="*{weight}" placeholder="Weigt in kg" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <table class="table table-bordered collapsibleTable" id="addressTable">
+
+                                        <tr  ><th > Contact Information</th><th></th></tr>
+                                        <tr >
+                                            <td> Permanent Address</td>
+                                            <td>
+
+                                                Address: <input type="text" th:field="*{permanentAddress.addressLine}" class="form-control" /><br />
+                                                Phone: <input type="text" th:field="*{permanentAddress.telNo}" class="form-control" /><br />
+                                                Fax No:<input type="text" th:field="*{permanentAddress.faxNo}" class="form-control" />
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td> Present Address</td>
+                                            <td>
+
+                                                Address: <input type="text" th:field="*{presentAddress.addressLine}" class="form-control" /><br />
+                                                Phone: <input type="text" th:field="*{presentAddress.telNo}" class="form-control" /><br />
+                                                Fax No:<input type="text" th:field="*{presentAddress.faxNo}" class="form-control" />
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                        <tr >
+                                            <td> Office Address</td>
+                                            <td>
+
+                                                Address: <input type="text" th:field="*{officeAddress.addressLine}" class="form-control" /><br />
+                                                Phone: <input type="text" th:field="*{officeAddress.telNo}" class="form-control" /><br />
+                                                Fax No: <input type="text" th:field="*{officeAddress.faxNo}" class="form-control" />
+                                                Email: <input type="text" th:field="*{officeAddress.email}" class="form-control" />
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="hasSpouseId" th:field="*{hasSpouse}"  />
+                                        <label for="hasSpouseId">Do you have a spouse and/or children? </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="hasForeignPermanentStatus" th:field="*{hasForeignPermanentStatus}"  />
+                                        <label for="hasForeignPermanentStatus">Have you taken up any legal permanent status in any country other than that of your nationality? </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Country Of Foreign Permanent Status</label>
+                                    <select  data-placeholder="Choose One "  th:field="*{countryOfForeignPermanentStatus}" class="select2-offscreen mselect select2Class width100p " tabindex="-1">
+                                        <option value=""></option>
+                                        <option th:each="c: ${countries}" th:value="${c}" th:text="${c}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="hasAnyRelationWorkingInternationally" th:field="*{hasAnyRelationWorkingInternationally}"  />
+                                        <label for="hasAnyRelationWorkingInternationally">Are any of your relatives employed by a public international organization? </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="everTriedChangingPresentNationality" th:field="*{everTriedChangingPresentNationality}"  />
+                                        <label for="everTriedChangingPresentNationality">Have you taken any legal steps towards changing your present nationality?</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Explain why you wanted to change?</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{reasonForAttemptingToChangeNationality}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Preffered Field of Work:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{prefferedFieldOfWork}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label class=" ">Mother Tongue:</label>
+                                    <div class="">
+                                        <input type="text" th:field="*{motherTongue}"  class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <table class="table table-bordered collapsibleTable" id="languageSkillsTable">
+
+                                        <tr  ><th >Select Language skills</th><th></th></tr>
+                                        <tr id="languageSkillss">
+                                            <td> <button type="button" id="addLanguageSkill" class="btn btn-sm btn-primary">Add New Skill</button><br />Language 1</td>
+                                            <td>
+                                                <input type="hidden" th:field="*{languageSkills[0].id}" />
+                                                Language: <input type="text" th:field="*{languageSkills[0].language}" class="form-control" /><br />
+
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[0].readEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[0].readEasily}" value="false"  /> </label> Read Easily<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[0].writeEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[0].writeEasily}" value="false"  /> </label>Write Easily<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[0].speakFluently}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[0].speakFluently}" value="false"  /> </label> Speak Fluently<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[0].understandEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[0].understandEasily}" value="false"  /> </label> Understand Easily<br />
+
+
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr><br />
+
+                                        <tr id="languageSkillss1">
+                                            <td> Language 2</td>
+                                            <td>
+                                                <input type="hidden" th:field="*{languageSkills[1].id}" />
+                                                Language: <input type="text" th:field="*{languageSkills[1].language}" class="form-control" /><br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[1].readEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[1].readEasily}" value="false"  /> </label> Read Easily<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[1].writeEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[1].writeEasily}" value="false"  /> </label>Write Easily<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[1].speakFluently}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[1].speakFluently}" value="false"  /> </label> Speak Fluently<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[1].understandEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[1].understandEasily}" value="false"  /> </label> Understand Easily<br />
+
+
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+                                        <tr id="languageSkillss2">
+                                            <td> Language 3</td>
+                                            <td>
+                                                <input type="hidden" th:field="*{languageSkills[2].id}" />
+                                                Language: <input type="text" th:field="*{languageSkills[2].language}" class="form-control" /><br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[2].readEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[2].readEasily}" value="false"  /> </label> Read Easily<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[2].writeEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[2].writeEasily}" value="false"  /> </label>Write Easily<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[2].speakFluently}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[2].speakFluently}" value="false"  /> </label> Speak Fluently<br />
+
+                                                <label>YES <input type="radio" th:field="*{languageSkills[2].understandEasily}" value="true"  /> </label>
+                                                <label>NO <input type="radio" th:field="*{languageSkills[2].understandEasily}" value="false"  /> </label> Understand Easily<br />
+
+
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr><br />
+
+                                    </table>
+                                </div>
+
+                            </div><!-- panel-body -->
+
+                            <div class="panel-footer">
+                                <input type="hidden" th:field="*{id}" />
+                                <input class="btn btn-primary mr5" type="submit" value="Submit" />
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <script>
+                        jQuery('body').on('click', '.removeLanguage', function() {
+
+                            var answer = confirm("Are you sure you want to Language Skill node?");
+                            if(answer === true){
+                                var removeControl = jQuery(this).attr("data-remove");
+                                jQuery(removeControl).remove();
+                            }
+
+                        });
+                    </script>
+
+
+
+
+                </div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+
+    jQuery(document).ready(function(jQuery) {
+        jQuery('#addLanguageSkill').click(function () {
+            var answers = "";
+
+
+            answers += "<option value=''>--Select Answer--</option>";
+            answers += "<option value='true'>YES</option>";
+            answers += "<option value='false'>NO</option>";
+
+
+
+            var languageIndex = jQuery('table#languageSkillsTable tr').length - 1;
+            var text = "";
+            text += "<tr id='language" + languageIndex + "'><td> <label>Language " + (languageIndex + 1) + "</label> </td>";
+            //Enter new State Field
+                text += "<td>";
+                    text+= "<input type='text' name='languageSkills[" + languageIndex + "].language' class='form-control' /><br />";
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='false' /></label> Read Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='false' /></label> Write Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='false' /></label> Speak Fluently?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='true' /></label>" +
+                            "<label>NO <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='false' /></label> Understand Easily?";
+
+                    text += "<button type='button' class='btn btn-sm btn-danger removeLanguage pull-right' data-remove='#language" + languageIndex + "' >Remove Doc</button>";
+                text += "</td>";
+            text += "</tr>";
+
+            jQuery('#languageSkillsTable').append(text);
+
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

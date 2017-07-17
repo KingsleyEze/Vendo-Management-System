@@ -1,0 +1,100 @@
+<form role="form" method="post" class="form-pad col-md-4" data-ng-submit="addQuestion(question)">
+
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Question Type </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.type">
+            <option  value="MCQ">MCQ</option>
+            <option  value="Non-MCQ">Non-MCQ</option>
+        </select>    
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>Question</label> 
+        <input type="text" class="form-control"
+               required="required" data-ng-model="question.description" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Topic: </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.topic.id">
+            <option ng-repeat="topic in topics" value="{{topic.id}}">{{topic.name}}</option>
+        </select>    
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Skill: </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.skill.id">
+            <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.name}}</option>
+        </select>    
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Publisher: </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.publisher.id">
+            <option ng-repeat="publisher in publishers" value="{{publisher.id}}">{{publisher.name}}</option>
+        </select>    
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>Publishing Date</label> <input type="text" class="form-control" placeholder="yyyy-mm-dd"
+                                              required="required" data-ng-model="question.publishing_date" /> <span
+                                              data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Difficulty Level: </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.difficulty">
+            <option  value="1">Level 1</option>
+            <option  value="2">Level 2</option>
+            <option  value="3">Level 3</option>
+        </select>    
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Paid: </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.paid">
+            <option  value="true">True</option>
+            <option  value="false">False</option>
+        </select>    
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="repeatSelect"> Anchor Question: </label>
+        <select name="repeatSelect" id="repeatSelect" data-ng-model="question.anchored">
+            <option  value="true">True</option>
+            <option  value="false">False</option>
+        </select>    
+    </fieldset>
+
+
+
+
+
+
+
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Question Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="question in questions">
+        <tr>
+            <td><a href=""
+                   data-ng-click="findQuestionById(question.id)">{{question.description}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updateQuestionClicked(question)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteQuestion(question.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+

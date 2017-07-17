@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+
+<body>
+
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+<section>
+    <div class="mainwrapper">
+        <div
+                th:replace="fragments/admin-leftpanel :: leftpanel-admin" ></div>
+        <!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a th:href="@{/accounts}"><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li><a th:href="@{/vendors?type=type}">Vendors</a></li>
+                            <li>Vendor Management </li>
+                        </ul>
+                        <h4>Suspended Vendors</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <a href="/vendors/create" class="btn btn-sm btn-primary btn-rounded pull-right">Add New</a>
+
+                        <br/><br/>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="table-responsive">
+                        <table class="table table-responsive table-striped table-hover">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+
+                                <th> Programme Area</th>
+                                <th  colspan="">Action</th>
+                                <th>Deleted</th>
+                            </tr>
+
+                            <tr th:each="vendor : ${vendors}">
+                                <td><label th:text="${vendor.name == null ? vendor.vendorName: vendor.name}" ></label>
+                                </td>
+                                <td th:text="${vendor.user.email}"></td>
+
+                                <td>
+                                    <small th:each="role : ${vendor.vpa}">
+                                        <small class="" th:text="${role.name + ' | '} "></small>
+                                    </small>
+                                </td>
+                                <td colspan="2">
+
+                                    <a th:if="${#authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN_ACCOUNT')}"
+                                       th:href="@{'/vendors/activate/' + ${vendor.uuid} }" title="Re-activate Vendor" class="btn btn-danger" > <i class="fa fa-lock"></i>
+                                        </a>
+                                </td>
+
+                                <td><span th:text="${ vendor.user.deleted_at != null}  ? ${#dates.format(vendor.user.deleted_at,'dd-MMM-yyyy')}: null"></span></td>
+                            </tr>
+
+                        </table>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div><!-- end of row content -->
+
+
+        <!--</div>--><!-- end of container fluid -->
+
+</section>
+
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+    jQuery(document).ready(function(){
+
+        jQuery('#basicTable').DataTable({
+            responsive: true
+        });
+
+        var shTable = jQuery('#shTable').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#shTable_paginate ul').addClass('pagination-active-dark');
+            },
+            responsive: true
+        });
+
+        // Show/Hide Columns Dropdown
+        jQuery('#shCol').click(function(event){
+            event.stopPropagation();
+        });
+
+        jQuery('#shCol input').on('click', function() {
+
+            // Get the column API object
+            var column = shTable.column($(this).val());
+
+            // Toggle the visibility
+            if ($(this).is(':checked'))
+                column.visible(true);
+            else
+                column.visible(false);
+        });
+
+        var exRowTable = jQuery('#exRowTable').DataTable({
+            responsive: true,
+            "fnDrawCallback": function(oSettings) {
+                jQuery('#exRowTable_paginate ul').addClass('pagination-active-success');
+            },
+            "ajax": "ajax/objects.txt",
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "name" },
+                { "data": "position" },
+                { "data": "office" },
+                { "data": "salary" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        jQuery('#exRowTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = exRowTable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+
+        // DataTables Length to Select2
+        jQuery('div.dataTables_length select').removeClass('form-control input-sm');
+        jQuery('div.dataTables_length select').css({width: '60px'});
+        jQuery('div.dataTables_length select').select2({
+            minimumResultsForSearch: -1
+        });
+
+    });
+
+    function format (d) {
+        // `d` is the original data object for the row
+        return '<table class="table table-bordered nomargin">'+
+            '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.name+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.extn+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+            '</table>';
+    }
+</script>
+
+</body>
+</html>

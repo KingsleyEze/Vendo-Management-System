@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css" leave="true">
+        #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+        .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+        body, td {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+        table, td {mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+        img {-ms-interpolation-mode:bicubic;} /* Help Microsoft platforms smoothly render resized images */
+        body, #bodyTable, #bodyCell {height:100% !important; width:100% !important; margin:0; padding:0;}
+        table {border-collapse:collapse;}
+        body, #bodyTable {
+            background-color: #F0F0F0;
+        }
+        #emailBody {
+            margin: 0 auto;
+            width: 600px;
+            background-color: #FFFFFF;
+        }
+        .backgroundColor {
+            background-color: #F0F0F0;
+        }
+        .previewText {
+            color:#F0F0F0 !important;
+        }
+        .logoImage {
+            border: 0;
+            border-style: none;
+            text-decoration: none;
+        }
+        .blog-padding {
+            padding: 30px 30px 30px 30px !important;
+        }
+        .footerImage {
+            border: 0;
+            border-style: none;
+            text-decoration: none;
+        }
+        .bodyContent {
+            color:#5F6C72;
+            font-family:"Open Sans", Helvetica, Arial, sans-serif;
+            font-size:16px;
+            font-weight:normal;
+            line-height:170%;
+            text-align:left;
+        }
+        .bodyContent p {
+            line-height:170%;
+            margin: 15px 0;
+            padding: 0;
+        }
+        .bodyContent p a {
+            color:#499DF3;
+        }
+        .bodyContent table td {
+            font-family:"Open Sans", Helvetica, Arial, sans-serif;
+        }
+        .img-max {
+            max-width: 100% !important;
+            height:auto !important;
+        }
+        #emailFooter {
+            padding: 20px 0;
+        }
+        .footerContent {
+            color:#999999;
+            font-family:"Open Sans", Helvetica, Arial, sans-serif;
+            font-size:13px;
+            font-weight:normal;
+            line-height:170%;
+            padding: 8px 0;
+        }
+        .footerContent span {
+            color:#999999;
+            font-family:"Open Sans", Helvetica, Arial, sans-serif;
+            font-size:13px;
+            font-weight:normal;
+            line-height:170%;
+        }
+        .footerContent a {
+            color:#499DF3;
+            font-family:"Open Sans", Helvetica, Arial, sans-serif;
+            font-size:13px;
+            font-weight:normal;
+            line-height:100%;
+            text-decoration: none;
+        }
+        .footerContent a.text {
+            color:#999999;
+        }
+        .logo {
+            padding: 20px 0 3px;
+        }
+        .tagline {
+            color:#999999;
+            font-family:"Open Sans", Helvetica, Arial, sans-serif;
+            font-size:13px;
+            letter-spacing: 1px;
+            font-weight:300;
+            line-height:125%;
+            padding-bottom: 40px;
+        }
+
+        .bodyContent {
+            padding: 30px 30px 30px 30px;
+        }
+
+        @media screen {
+            @font-face {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+            }
+            @font-face {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 300;
+                src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+            }
+            @font-face {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/MTP_ySUJH_bn48VBG8sNSr3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+            }
+            h1, h2, strong {font-weight: 600;}
+        }
+        @media only screen and (max-width: 600px){
+            #bodyCell {
+                padding: 0 10px 0 10px !important;
+            }
+            .max-width-full {
+                max-width: 100% !important;
+            }
+            #emailBody {
+                max-width:600px !important;
+                width:100% !important;
+            }
+            td[class="sz-rec-row-wrapper"] .sz-rec-col {
+                width: 100%;
+                display: block;
+            }
+            td[class="sz-rec-row-wrapper"] .sz-rec-col-left,
+            td[class="sz-rec-row-wrapper"] .sz-rec-col-mid {
+                margin: 0 0 20px 0;
+            }
+            .sz-rec-row-3 {
+                max-width: 200px;
+            }
+            td[class="icymi-wrapper"] .icymi-spacer { display: none; }
+            td[class="icymi-wrapper"] .icymi-col {
+                width: 100%;
+                display: block;
+            }
+            td[class="icymi-wrapper"] .icymi-col { margin-bottom: 30px; }
+            td[class="icymi-wrapper"] .icymi-image img { width: 100%; }
+            a[class="confirm-cta"] {padding:17px 40px 17px 40px !important;}
+
+            .bodyContent {
+                padding: 30px 10px 30px 10px !important;
+            }
+            .openerText {
+                font-size: 14px !important;
+                padding: 20px 10px 20px 10px !important;
+            }
+            .updateContainer {
+                padding: 0 10px 0 10px !important;
+            }
+            .itemArrow {
+                padding-left: 8px !important;
+            }
+            .appImage {
+                padding-right: 8px !important;
+            }
+            .spaceship {
+                padding: 20px 20px 20px 0 !important;
+            }
+            .wrench {
+                padding-right: 10px !important;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; background-color: #F0F0F0; height: 100%; width: 100%; margin: 0; padding: 0">
+<center>
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; background-color: #F0F0F0; height: 100%; width: 100%; margin: 0; padding: 0">
+        <tr>
+            <td align="center" valign="top" id="bodyCell" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; height: 100%; width: 100%; margin: 0; padding: 0">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                    <tr>
+                        <td align="center" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                <tr>
+                                    <td bgcolor="#f0f0f0" align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0">
+                                        <div style="display:none;font-size:1px;color:#f0f0f0;line-height:1px;font-family: Arial, san-serif;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+
+
+                                            Three new apps and 10 app updates including PostgreSQL, HubSpot CRM, Infusionsoft, Zapier, Paperform, MOCO, GetResponse, Zendesk, iAuditor by SafetyCulture, Shopify, HipChat, LinkedIn Lead Gen Forms and RSS by Zapier. See what we've been working on.
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" height="40" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; padding:20px 0 20px 0;">
+                                        <a href="https://zapier.com/goto/?payload=.eJwVyjEKgDAMBdCryJ_F7t09h4QatNjEYtLF4t3V9fE6VnJC7HCWWsh5URJGBKmeTRMLq1to9XtseEYIm9H2l1kolzikktOBESXr8enuXi2GcFPNfE3pFDwve7gkRA:1cyQGO:QW5P5kJEAsBU_79qcRsO1xRCVvU" target="_blank" title="Zapier"><img src="https://cdn.zapier.com/static/1CYo0m/images/email/email-logomark-orange.gif" alt="Zapier" height="40" width="40" border="0" class="logoImage img-max" style="-ms-interpolation-mode: bicubic; border: 0; border-style: none; text-decoration: none; max-width: 100%; height: auto"></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top" class="backgroundColor" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; background-color: #F0F0F0">
+                            <table border="0" cellpadding="0" cellspacing="0" id="emailBody" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; margin: 0 auto; width: 600px; background-color: #FFF">
+                                <tr>
+                                    <td align="center" valign="top" class="bodyContent" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; color: #5F6C72; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 170%; text-align: left; padding: 30px 30px 30px 30px">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                            <tr>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; color: #354147; font-size: 24px; font-weight: 600; padding-bottom: 10px; line-height: 170%;">
+                                                    Your VDMS   Updates
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 12px; color: #5F6C72; padding-bottom: 20px; text-transform: uppercase;">
+                                                    <!--snags the current date, and formats it correctly-->
+                                                    April 12, 2017
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; border: 1px solid #FFBFA5; border-radius: 5px; display: block;">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                                        <tr>
+                                                            <td align="left" class="openerText" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; color: #5F6C72; text-align: left; width: 80.5%; padding: 20px 20px 20px 20px;">
+                                                                Hey Abdulhakim Haliru! Here are some latest notices posted on the UNSiN Portal <strong><a href="https://zapier.com/goto/?payload=.eJxdjMEKwjAQRH9FFvRUjHgMFE9-gUiPZU2XGpLdhCY5aOm_myoieJph3mNmGDAj6BkycfSYqRdkAg0oEooYYpKcVInVowRLA0wp4bgqZ0br9cZ4axw04K24ut5zjkkr9cRoadqbwGu9heC-L-pUMvdMgy3cvk9265BCmQy114-0PR5-yCBHtKO0HZHzj8r-rJoXkgGWF-GESus:1cyQGO:ZGBeck5ShgfOxTI1tQPmnksSbuQ" style="color: #499DF3; color: #5F6C72; text-decoration: none;">3 new
+                                                                notices</a></strong>
+                                                            </td>
+                                                            <td align="right" class="spaceship" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; width: 19.5%; padding: 20px 20px 20px 20px;"><img src="https://cdn.zapier.com/storage/photos/cfb69f526616913877b8dc9e5d4f98ac.png" width="36" alt="Spaceship" style="-ms-interpolation-mode: bicubic"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!--start new apps section
+
+                        -->
+                                            <tr>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-top: 30px; padding-bottom: 15px; letter-spacing: 1.23; font-size: 16px; font-weight: 700; color: #354147; text-transform: uppercase;">
+                                                    NOTICES
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" class="updateContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; display: block; border: 1px solid #DADFE2; border-radius: 5px; padding: 0 30px 0 30px;">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                                        <tr>
+                                                            <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; border-bottom: 1px solid #DADFE2; padding: 20px 0 20px 0; line-height: 100%;">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                                                    <tr>
+                                                                        <td align="left" rowspan="2" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-right: 30px; width: 14.64%;"
+                                                                            class="appImage">
+                                                                            <a href="https://zapier.com/goto/?payload=.eJxdjcFqwzAQRH8lLCSnOHJ7q8H0lC8IIUezkbeusHYlrNUhMf73yikhkNMMM4-ZGXpUhGYGJY4elTpBJmgARUIWS0yiyeRYOEqw7IEpJRxW5MjofLOx3tkR9uCdjCX9VY2pMeaO0dF0sIFXew1hfK6Yj7r-MitOvZPKE_bVQFL9hIlT5URpmFBdkGS-s3LHBcvcPu52a5BCniy15_-57Wf9qixyRDdIeyEa_a10b1TRE0kPyx9owloj:1cyQGO:kQVJzUAADDg9GJR_xKT0po6HfUk"
+                                                                               style="color: #499DF3; text-decoration: none;"><img src="https://cdn.zapier.com/storage/developer/82e76b99c17c252653cee811b4e46123.64x64.png" width="40" alt="LinkedIn Lead Gen Forms logo" style="-ms-interpolation-mode: bicubic"></a>
+                                                                        </td>
+                                                                        <td align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-bottom: 4px; text-align: left; width: 77.19%"><a href="https://zapier.com/goto/?payload=.eJxdjcFqwzAQRH8lLCSnOHJ7q8H0lC8IIUezkbeusHYlrNUhMf73yikhkNMMM4-ZGXpUhGYGJY4elTpBJmgARUIWS0yiyeRYOEqw7IEpJRxW5MjofLOx3tkR9uCdjCX9VY2pMeaO0dF0sIFXew1hfK6Yj7r-MitOvZPKE_bVQFL9hIlT5URpmFBdkGS-s3LHBcvcPu52a5BCniy15_-57Wf9qixyRDdIeyEa_a10b1TRE0kPyx9owloj:1cyQGO:kQVJzUAADDg9GJR_xKT0po6HfUk"
+                                                                                                                                                                                                                                                                                                                                 style="color: #499DF3; color: #354147; font-weight: 600; font-size: 16px; text-decoration: none;">
+                                                                            LinkedIn Lead Gen Forms
+                                                                        </a></td>
+                                                                        <td align="right" class="itemArrow" rowspan="2" valign="middle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-left: 30px; width: 8.17%;">
+                                                                            <a href="https://zapier.com/goto/?payload=.eJxdjcFqwzAQRH8lLCSnOHJ7q8H0lC8IIUezkbeusHYlrNUhMf73yikhkNMMM4-ZGXpUhGYGJY4elTpBJmgARUIWS0yiyeRYOEqw7IEpJRxW5MjofLOx3tkR9uCdjCX9VY2pMeaO0dF0sIFXew1hfK6Yj7r-MitOvZPKE_bVQFL9hIlT5URpmFBdkGS-s3LHBcvcPu52a5BCniy15_-57Wf9qixyRDdIeyEa_a10b1TRE0kPyx9owloj:1cyQGO:kQVJzUAADDg9GJR_xKT0po6HfUk"
+                                                                               style="color: #499DF3; display: block; text-decoration: none;"><img src="https://cdn.zapier.com/storage/photos/c8558a1151bd6562f18d4789c18de4be.png" alt="read" height="13" style="-ms-interpolation-mode: bicubic"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; color: #969EA2; font-size: 12px; width: 77.19%"><a href="https://zapier.com/goto/?payload=.eJxdjcFqwzAQRH8lLCSnOHJ7q8H0lC8IIUezkbeusHYlrNUhMf73yikhkNMMM4-ZGXpUhGYGJY4elTpBJmgARUIWS0yiyeRYOEqw7IEpJRxW5MjofLOx3tkR9uCdjCX9VY2pMeaO0dF0sIFXew1hfK6Yj7r-MitOvZPKE_bVQFL9hIlT5URpmFBdkGS-s3LHBcvcPu52a5BCniy15_-57Wf9qixyRDdIeyEa_a10b1TRE0kPyx9owloj:1cyQGO:kQVJzUAADDg9GJR_xKT0po6HfUk"
+                                                                                                                                                                                                                                                                                                                           style="color: #499DF3; color: #969EA2; text-decoration: none;">New App: Convert More Prospects with LinkedIn Lead Gen Forms</a></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; border-bottom: 1px solid #DADFE2; padding: 20px 0 20px 0; line-height: 100%;">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                                                    <tr>
+                                                                        <td align="left" rowspan="2" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-right: 30px; width: 14.64%;"
+                                                                            class="appImage">
+                                                                            <a href="https://zapier.com/goto/?payload=.eJxdjMEKwjAQRH9FFvSkpoqnQvHkF4h4lDVdamh2E5rNQYv_bqqI4GmGmTczQouKUI-gxNGj0kWQCWpAkZDFEpNoMjkWjhI8l8CUEnYTcmB0vp5Z72wPS_BO-pLeVGOqjXlgdDSsbeDJXkPovy9mU212hoMNKydK3YDqgiSzz8oXptZlbt7fiylIIQ-WmtNnO99Wv8oiR3SdNGei3t9L90cVPZK08HwB4ttTAQ:1cyQGO:qpdivKvMEV76nkzqFlt0clAtmuk"
+                                                                               style="color: #499DF3; text-decoration: none;"><img src="https://cdn.zapier.com/storage/developer/186586919399c92817ac6965b02e50cf_2.64x64.png" width="40" alt="MOCO logo" style="-ms-interpolation-mode: bicubic"></a>
+                                                                        </td>
+                                                                        <td align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-bottom: 4px; text-align: left; width: 77.19%"><a href="https://zapier.com/goto/?payload=.eJxdjMEKwjAQRH9FFvSkpoqnQvHkF4h4lDVdamh2E5rNQYv_bqqI4GmGmTczQouKUI-gxNGj0kWQCWpAkZDFEpNoMjkWjhI8l8CUEnYTcmB0vp5Z72wPS_BO-pLeVGOqjXlgdDSsbeDJXkPovy9mU212hoMNKydK3YDqgiSzz8oXptZlbt7fiylIIQ-WmtNnO99Wv8oiR3SdNGei3t9L90cVPZK08HwB4ttTAQ:1cyQGO:qpdivKvMEV76nkzqFlt0clAtmuk"
+                                                                                                                                                                                                                                                                                                                                 style="color: #499DF3; color: #354147; font-weight: 600; font-size: 16px; text-decoration: none;">
+                                                                            MOCO
+                                                                        </a></td>
+                                                                        <td align="right" class="itemArrow" rowspan="2" valign="middle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-left: 30px; width: 8.17%;">
+                                                                            <a href="https://zapier.com/goto/?payload=.eJxdjMEKwjAQRH9FFvSkpoqnQvHkF4h4lDVdamh2E5rNQYv_bqqI4GmGmTczQouKUI-gxNGj0kWQCWpAkZDFEpNoMjkWjhI8l8CUEnYTcmB0vp5Z72wPS_BO-pLeVGOqjXlgdDSsbeDJXkPovy9mU212hoMNKydK3YDqgiSzz8oXptZlbt7fiylIIQ-WmtNnO99Wv8oiR3SdNGei3t9L90cVPZK08HwB4ttTAQ:1cyQGO:qpdivKvMEV76nkzqFlt0clAtmuk"
+                                                                               style="color: #499DF3; display: block; text-decoration: none;"><img src="https://cdn.zapier.com/storage/photos/c8558a1151bd6562f18d4789c18de4be.png" alt="read" height="13" style="-ms-interpolation-mode: bicubic"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; color: #969EA2; font-size: 12px; width: 77.19%"><a href="https://zapier.com/goto/?payload=.eJxdjMEKwjAQRH9FFvSkpoqnQvHkF4h4lDVdamh2E5rNQYv_bqqI4GmGmTczQouKUI-gxNGj0kWQCWpAkZDFEpNoMjkWjhI8l8CUEnYTcmB0vp5Z72wPS_BO-pLeVGOqjXlgdDSsbeDJXkPovy9mU212hoMNKydK3YDqgiSzz8oXptZlbt7fiylIIQ-WmtNnO99Wv8oiR3SdNGei3t9L90cVPZK08HwB4ttTAQ:1cyQGO:qpdivKvMEV76nkzqFlt0clAtmuk"
+                                                                                                                                                                                                                                                                                                                           style="color: #499DF3; color: #969EA2; text-decoration: none;">New App: Manage Your Business Projects with MOCO</a></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; border-bottom: 1px solid #DADFE2; padding: 20px 0 20px 0; line-height: 100%;">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                                                    <tr>
+                                                                        <td align="left" rowspan="2" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-right: 30px; width: 14.64%;"
+                                                                            class="appImage">
+                                                                            <a href="https://zapier.com/goto/?payload=.eJxdjcEKwjAQRH9FFvSkRj0Wiie_QMSjrOlaQ7ObkGwOWvrvtooInmaYecz00KAiVD0ocfSodBFkggpQJBSxxCSaTYkjRxmGJTDljO2EHBidr2bWO9vBEryTbkzvqjFXxjwxOkprG3iy1xC674rZbrY7EzFSuoXEKydKbUJ1QbLZF-ULU-MK1--DxRTkUJKl-vQZmO82v8oiR3St1Geizj_G7o8a9UjSwPACpl5VHQ:1cyQGO:KXS0bcXe5wKPBr4eG8p6CW8HvXc"
+                                                                               style="color: #499DF3; text-decoration: none;"><img src="https://cdn.zapier.com/storage/developer/a6793a574d45578aa6e16e0e950e4a8f.64x64.png" width="40" alt="Paperform logo" style="-ms-interpolation-mode: bicubic"></a>
+                                                                        </td>
+                                                                        <td align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-bottom: 4px; text-align: left; width: 77.19%"><a href="https://zapier.com/goto/?payload=.eJxdjcEKwjAQRH9FFvSkRj0Wiie_QMSjrOlaQ7ObkGwOWvrvtooInmaYecz00KAiVD0ocfSodBFkggpQJBSxxCSaTYkjRxmGJTDljO2EHBidr2bWO9vBEryTbkzvqjFXxjwxOkprG3iy1xC674rZbrY7EzFSuoXEKydKbUJ1QbLZF-ULU-MK1--DxRTkUJKl-vQZmO82v8oiR3St1Geizj_G7o8a9UjSwPACpl5VHQ:1cyQGO:KXS0bcXe5wKPBr4eG8p6CW8HvXc"
+                                                                                                                                                                                                                                                                                                                                 style="color: #499DF3; color: #354147; font-weight: 600; font-size: 16px; text-decoration: none;">
+                                                                            Paperform
+                                                                        </a></td>
+                                                                        <td align="right" class="itemArrow" rowspan="2" valign="middle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding-left: 30px; width: 8.17%;">
+                                                                            <a href="https://zapier.com/goto/?payload=.eJxdjcEKwjAQRH9FFvSkRj0Wiie_QMSjrOlaQ7ObkGwOWvrvtooInmaYecz00KAiVD0ocfSodBFkggpQJBSxxCSaTYkjRxmGJTDljO2EHBidr2bWO9vBEryTbkzvqjFXxjwxOkprG3iy1xC674rZbrY7EzFSuoXEKydKbUJ1QbLZF-ULU-MK1--DxRTkUJKl-vQZmO82v8oiR3St1Geizj_G7o8a9UjSwPACpl5VHQ:1cyQGO:KXS0bcXe5wKPBr4eG8p6CW8HvXc"
+                                                                               style="color: #499DF3; display: block; text-decoration: none;"><img src="https://cdn.zapier.com/storage/photos/c8558a1151bd6562f18d4789c18de4be.png" alt="read" height="13" style="-ms-interpolation-mode: bicubic"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; color: #969EA2; font-size: 12px; width: 77.19%"><a href="https://zapier.com/goto/?payload=.eJxdjcEKwjAQRH9FFvSkRj0Wiie_QMSjrOlaQ7ObkGwOWvrvtooInmaYecz00KAiVD0ocfSodBFkggpQJBSxxCSaTYkjRxmGJTDljO2EHBidr2bWO9vBEryTbkzvqjFXxjwxOkprG3iy1xC674rZbrY7EzFSuoXEKydKbUJ1QbLZF-ULU-MK1--DxRTkUJKl-vQZmO82v8oiR3St1Geizj_G7o8a9UjSwPACpl5VHQ:1cyQGO:KXS0bcXe5wKPBr4eG8p6CW8HvXc"
+                                                                                                                                                                                                                                                                                                                           style="color: #499DF3; color: #969EA2; text-decoration: none;">New App: Easily Create Beautiful Forms with Paperform</a></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; padding: 20px 10px 20px 10px;">
+                                                                <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                                                    <tr>
+                                                                        <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; box-shadow: 0 7px 5px -4px rgba(0, 0, 0, 0.2);"
+                                                                            bgcolor="#499DF3"><a class="confirm-cta" href="https://zapier.com/goto/?payload=.eJxdjMEKwjAQRH9FFvRUjHgMFE9-gUiPZU2XGpLdhCY5aOm_myoieJph3mNmGDAj6BkycfSYqRdkAg0oEooYYpKcVInVowRLA0wp4bgqZ0br9cZ4axw04K24ut5zjkkr9cRoadqbwGu9heC-L-pUMvdMgy3cvk9265BCmQy114-0PR5-yCBHtKO0HZHzj8r-rJoXkgGWF-GESus:1cyQGO:ZGBeck5ShgfOxTI1tQPmnksSbuQ"
+                                                                                                 target="_blank" style="color: #499DF3; font-size: 14px; color: #ffffff; text-decoration: none; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; padding: 13px 40px 13px 40px; display: inline-block; border-top:1px solid #499DF3;">View More Apps</a></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!--start updated apps section
+
+
+                        -->
+
+
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top" id="emailFooter" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; padding: 20px 0">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+
+                                <tr>
+                                    <td align="center" valign="top" class="footerContent" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; color: #999; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 170%; padding: 8px 0"><span style="color: #999; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 170%">© 2017 Zapier, Inc. All rights reserved.</span><br>
+                                        <a href="#" class="text" style="font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none; color: #999"><span style="color: #999; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 170%">548 Market St #62411, San Francisco, CA 94104-5401</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" class="footerContent" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; color: #999; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 170%; padding: 8px 0">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; max-width: 160px;margin:5px 0 15px 0;">
+                                            <tr>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; padding:0 10px 0 10px;">
+                                                    <a href="https://zapier.com/goto/?payload=.eJwVykEKwkAMBdCryF8XZz97zyFhDBo6SYfmF8HSu9tuH2_HSyioO6g-ulCfIa6okIhli6auwSzbOJ8mjgmumfK-ysPFer21bm3GhG4xn_ohR9ZS-DVS13tbvPxkmK44_q8HJ4Y:1cyQGP:8pO7T0oMvr4tb9KkGeiAj4VnkCg" style="color: #499DF3; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none"><img src="https://cdn.zapier.com/storage/photos/f3e93b161b599cbf55cc0eec74d331c7.png" width="30" class="img-max" style="-ms-interpolation-mode: bicubic; max-width: 100%; height: auto; border: none;"></a>
+                                                </td>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; padding:0 10px 0 10px;">
+                                                    <a href="https://zapier.com/goto/?payload=.eJwVyjEKwzAMQNGrFM0h2r33HEE4ohWxFFEpmDbk7nWGvzz-CSslQTkhWb1R8mKkDAXIbD-ssrJl4OHj44BrAuUIet3LU0laedQmdYMJmtg29J3pURB77_NNvIrNdVccOdkXf-TCH7j-0b4seg:1cyQGP:PWa0ImhKKbeW2W5U2c7wk_kW8BI"
+                                                       style="color: #499DF3; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none"><img src="https://cdn.zapier.com/storage/photos/6acb0da107808e99db159a40a797f4f3.png" width="30" class="img-max" style="-ms-interpolation-mode: bicubic; max-width: 100%; height: auto; border: none;"></a>
+                                                </td>
+                                                <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; padding:0 10px 0 10px;">
+                                                    <a href="https://zapier.com/goto/?payload=.eJwVyjEOgzAMBdCrVH9GeM_ecyA3tWiE7US1WYq4e2F9egfenIxyIMWGcsribIICdu-7VzHxDNrH9SRwTjCJ4PUuT-Om5VG11Q0TtPl26SdzRCH68WjynWs3emlfCecfXKcmRg:1cyQGP:6uE9-D0yP7KCfSVnzsOU1VI6W-A" style="color: #499DF3; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none"><img src="https://cdn.zapier.com/storage/photos/850afc65597483fc8b25bbcdefc732f0.png" width="30" class="img-max" style="-ms-interpolation-mode: bicubic; max-width: 100%; height: auto; border: none;"></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                            <tr>
+                                                <td valign="top" class="utilityLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0"><a href="#"
+                                                                                                                                                                                                     named="unsubscribe" style="color: #499DF3; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none">Unsubscribe</a> | <a href="https://zapier.com/goto/?payload=.eJwVzDEOAjEMBdGrINcL7tNzDvRlLIg2diziNKy4O9l29DQHPZGgclCqRUPqw2FKheDep4uaeg6esZwO-m1kOgZeJ7kbaisXaVV22qhV31d9Z8YozF9E1c9NujEiWLonJK9zTf7JDynk:1cyQGP:lOt52dc8_04awVePkXsDHI_pQyI"
+                                                                                                                                                                                                                                                                                                                                                                                                                       style="color: #499DF3; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none">Contact Us</a></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" class="footerContent" width="400" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; color: #999; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 170%; padding: 8px 0; width:100%;max-width:400px;padding:0 15px 0 15px;">
+                                        <div style="font-size:12px;">
+                                            <p>You received this email because you signed up for <a href="https://zapier.com/goto/?payload=.eJwVyjEKgDAMBdCryJ_F7t09h4QatNjEYtLF4t3V9fE6VnJC7HCWWsh5URJGBKmeTRMLq1to9XtseEYIm9H2l1kolzikktOBESXr8enuXi2GcFPNfE3pFDwve7gkRA:1cyQGO:QW5P5kJEAsBU_79qcRsO1xRCVvU"
+                                                                                                    style="color: #499DF3; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; line-height: 100%; text-decoration: none; text-decoration:underline;color:#999">VDMS</a>, a UNITED NATIONS SYSTEM IN NIGERIA PLATFORM
+                                                .</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0">
+                                        <table border="0" cellpadding="0" cellspacing="0" id="signature" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+                                            <tr>
+                                                <td align="center" class="logo" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; padding: 20px 0 3px">
+                                                    <a href="https://zapier.com/goto/?payload=.eJwVyjEKgDAMBdCryJ_F7t09h4QatNjEYtLF4t3V9fE6VnJC7HCWWsh5URJGBKmeTRMLq1to9XtseEYIm9H2l1kolzikktOBESXr8enuXi2GcFPNfE3pFDwve7gkRA:1cyQGO:QW5P5kJEAsBU_79qcRsO1xRCVvU" target="_blank" title="Zapier"><img src="https://cdn.zapier.com/static/1CYo0m/images/email/email-logo.gif" height="32" width="70" border="0" class="footerImage" style="-ms-interpolation-mode: bicubic; border: 0; border-style: none; text-decoration: none"></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" class="tagline" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0; mso-table-rspace: 0; color: #999; font-family: &quot;Open Sans&quot;, Helvetica, Arial, sans-serif; font-size: 13px; letter-spacing: 1px; font-weight: 300; line-height: 125%; padding-bottom: 40px"><span>makes you happier :)</span><img src="https://zapier.com/api/v3/events?payload=eyJtZXNzYWdlIjoiRW1haWw6IG9wZW4iLCJkYXRhIjp7InRlbXBsYXRlX25hbWUiOiJhbm5vdW5jZW1lbnRzL3VwZGF0ZXMifX0:1cyQGO:gNFAPjmEQ6CZDSRR5Q8IWvNMRqk" alt=""
+                                                                                                                                                                                                                                                                                                                                                                                                                      style="-ms-interpolation-mode: bicubic"></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</center>
+<!--litmus tracking code starts here-->
+<!--litmus tracking ends here-->
+</body>
+
+</html>

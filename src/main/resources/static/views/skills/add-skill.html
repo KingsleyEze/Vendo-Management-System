@@ -1,0 +1,93 @@
+<div class="row">
+    <header id="nav-header" class="clearfix">
+        <div class="col-md-5">
+            <nav class="navbar-default pull-left">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </nav>
+            <input type="text" class="hidden-sm hidden-xs" id="header-search-field" placeholder="Search for something..." ng-model="search">
+        </div>
+
+    </header>
+</div>
+
+<form role="form" method="post" class="form-horizontal" data-ng-submit="addSkill(skill)">
+
+    <h4> Add Skill</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Skill Name</label> 
+            <input type="text" class="form-control" required="required" data-ng-model="skill.name"/> 
+            <span data-ng-show="errorName">{{errorName}}</span>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label for="repeatSelect"> Topics: </label>
+            <select name="repeatSelect" id="repeatSelect" data-ng-model="skill.topic.id" class="form-control">
+                <option ng-repeat="topic in topics" value="{{topic.id}}">{{topic.name}}</option>
+            </select>    
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="submit" value="Submit" class="btn btn-success" />
+        </div>
+    </div>
+
+</form>
+
+<br/>
+
+<div id="dashboard-con">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="admin-content-con clearfix">
+
+                <header>
+                    <h4>  Skills List </h4>
+                </header>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Skill Name</th>
+                            <th>Topic</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-ng-repeat="skill in skills| filter: search">
+                        <tr>
+                            <td class="col-md-2">
+                                <a href="" data-ng-click="findSkillById(skill.id)">{{skill.name}}</a>
+                            </td>
+                            <td class="col-md-2">
+                                <a href="" data-ng-click="findSkillById(skill.id)">{{skill.topic.name}}</a>
+                            </td>
+                            <td class="col-md-2">
+                                <a href="" data-ng-click="updateSkillClicked(skill)" class="label label-success">Update</a>
+                            </td>
+                            <td class="col-md-3"><a href=""
+                                                    data-ng-click="deleteSkill(skill.id)" class="label label-danger">Delete</a></td>                
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

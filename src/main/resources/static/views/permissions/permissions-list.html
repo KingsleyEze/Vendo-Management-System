@@ -1,0 +1,33 @@
+<div class="form-pad col-md-4">
+    <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."
+               required="required" ng-model="search" /> <span
+               data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+</div>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Role Name</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="role in roles| filter: search">
+        <tr>
+            <td><a href="" 
+                   data-ng-click="findRoleById(role.id)">{{role.name}}</a></td>
+            <td ><a href=""
+                    data-ng-click="updateRoleClicked(role)" class="btn btn-success">Update</a></td>
+            <td ><a href=""
+                    data-ng-click="deleteRole(role.id)" class="btn btn-danger">Delete</a></td>
+            <td><label>Active: {{ role.active }}</label></td>
+        </tr>
+    </tbody>
+</table>
+
+

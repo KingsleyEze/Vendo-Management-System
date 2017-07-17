@@ -1,0 +1,424 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- main content area -->
+        <div class="col-md-12 valign-top">
+
+            <div class="row content">
+
+                <div class="col-sm-10">
+                    <h3> Rehearsal Mode   </h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <form>
+                                        <fieldset>
+
+                                            <legend>Exam Type</legend>
+                                            <div class="col-md-6">
+                                                <label>Type</label><br>
+                                                <select>
+                                                    <option>WAEC</option>
+                                                    <option>JAMB</option>
+                                                    <option>NECO</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Exam year</label><br>
+                                                <select>
+                                                    <option>2001</option>
+                                                    <option>J400</option>
+                                                    <option>9034</option>
+                                                </select>
+                                            </div>
+
+                                        </fieldset>
+                                        <div class="spacer"></div>
+
+                                        <fieldset>
+
+                                            <legend>Pick one, two, three or four subjects of your choice</legend>
+                                            <div class="col-md-4">
+                                                <input id="subject-select-1" type="checkbox">
+                                                <label for="subject-select-1">Geography</label>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <input id="subject-select-2" type="checkbox"> <label for="subject-select-2">Mathematics</label>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <input id="subject-select-3" type="checkbox"><label for="subject-select-3">Further maths</label>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <input id="subject-select-4" type="checkbox">
+                                                <label>Physics</label>
+                                            </div>
+
+                                            <div class="spacer"></div>
+                                        </fieldset>
+                                        <fieldset>
+
+                                            <legend>Set Time</legend>
+                                            <label>Timing</label><br>
+                                            <select>
+                                                <option>10mins</option>
+                                                <option>15mins</option>
+                                                <option>40mins</option>
+                                            </select>
+
+                                        </fieldset>
+                                        <div class="spacer"></div>
+
+                                        <a data-toggle="modal" data-target="#myModal" type="btn btn-default butt">Start</a>
+                                    </form>
+
+
+                                    <!-- Modal -->
+                                    <div id="myModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                                    <h5 class="modal-title">English (18/23) CountDown Timer: 34mins
+                                                        <button type="button" class="btn btn-primary">Finish</button></h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-1 btn-qv-ic ">
+                                                            <ul class="nav nav-tabs nav-stacked">
+                                                                <li>   <a class="btn btn-danger" data-toggle="tab" href="#question">
+                                                                    <i class="fa fa-question-circle" aria-hidden="true" title="Qestion View"></i>
+                                                                </a>
+                                                                </li>
+
+                                                                <li>  <a class="btn btn-danger" href="#feedback" data-toggle="tab">
+                                                                    <i class="fa fa-play-circle-o" aria-hidden="true" title="Play Ancho Video"></i>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+
+                                                                    <a class="btn btn-danger" href="#note" data-toggle="tab">
+                                                                        <i class="fa fa-pencil" aria-hidden="true" title="Qestion View"></i>
+
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div class="col-md-10">
+                                                            <div class="tab-content">
+                                                                <div id="question" class="tab-pane fade in active">
+                                                                    <h3> Q2123</h3>
+                                                                    <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+                                                                    <form class="col-sm-2">
+
+                                                                        <input name="RadioGroup1" value="radio" id="RadioGroup1_1" type="radio">
+                                                                        <label for="RadioGroup1_1">answer2</label>
+                                                                        <br>
+
+                                                                        <input name="RadioGroup1" value="radio" id="RadioGroup1_2" type="radio">
+                                                                        <label for="RadioGroup1_2">answer3</label>
+                                                                        <br>
+
+                                                                        <input name="RadioGroup1" value="radio" id="RadioGroup1_3" type="radio">
+                                                                        <label for="RadioGroup1_3">answer42</label>
+                                                                        <br><br><br>
+                                                                        <br><br><br>
+
+                                                                    </form>
+                                                                </div>
+                                                                <div id="feedback" class="tab-pane fade in">
+
+
+                                                                    <!-- 4:3 aspect ratio -->
+                                                                    <div class="embed-responsive embed-responsive-4by3">
+                                                                        <iframe src="https://www.youtube.com/embed/8mve0UoSxTo" allowfullscreen="" height="315" frameborder="0" width="560"></iframe>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div id="note" class="tab-pane fade in">
+                                                                    Write Notes
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <p class="pull-right">
+                                                                <a>WAEC</a>|
+                                                                <a>MX</a>|
+                                                                <a>WP</a>|
+                                                                <a>AN</a>|
+                                                                <br>
+
+                                                                <span class="tiny">60k attempts on this question 2% got it right</span>
+
+                                                            </p>
+                                                        </div>
+
+
+
+                                                        <div class="col-md-12">
+
+
+
+
+
+
+                                                            <hr>
+
+
+
+                                                            <div class="col-md-4">
+                                                                <!-- question thumbnail -->
+                                                                <div class="thumbnail">
+                                                                    <div class="caption">
+                                                                        <h3><a href="playquestions.html">Q2123</a></h3>
+                                                                        <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+
+                                                                        <p>
+                                                                            <span class="glyphicons glyphicons-pushpin"></span>
+                                                                            <a>JAMB</a>|
+                                                                            <a>MX</a>|
+                                                                            <a>WP</a>|
+                                                                            <a>AN</a>|
+                                                                            <br>
+                                                                            <span class="tiny">60k attempts (2% got it right)</span>
+
+
+                                                                        </p>
+
+                                                                        <!--  <p><a href="#" class="btn btn-default" role="button">Play</a></p>-->
+
+                                                                        <!-- question thumbnail -->
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
+                                                            <div class="col-md-4">
+                                                                <!-- question thumbnail -->
+                                                                <div class="thumbnail">
+                                                                    <div class="caption">
+                                                                        <h3><a href="playquestions.html">Q2123</a></h3>
+                                                                        <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+
+                                                                        <p>
+                                                                            <span class="glyphicons glyphicons-pushpin"></span>
+                                                                            <a>JAMB</a>|
+                                                                            <a>MX</a>|
+                                                                            <a>WP</a>|
+                                                                            <a>AN</a>|
+                                                                            <br>
+                                                                            <span class="tiny">60k attempts (2% got it right)</span>
+
+
+                                                                        </p>
+
+                                                                        <!--  <p><a href="#" class="btn btn-default" role="button">Play</a></p>-->
+
+                                                                        <!-- question thumbnail -->
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+                                                            <div class="col-md-4">
+                                                                <!-- question thumbnail -->
+                                                                <div class="thumbnail">
+                                                                    <div class="caption">
+                                                                        <h3><a href="playquestions.html">Q2123</a></h3>
+                                                                        <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+
+                                                                        <p>
+                                                                            <span class="glyphicons glyphicons-pushpin"></span>
+                                                                            <a>JAMB</a>|
+                                                                            <a>MX</a>|
+                                                                            <a>WP</a>|
+                                                                            <a>AN</a>|
+                                                                            <br>
+                                                                            <span class="tiny">60k attempts (2% got it right)</span>
+
+
+                                                                        </p>
+
+                                                                        <!--  <p><a href="#" class="btn btn-default" role="button">Play</a></p>-->
+
+                                                                        <!-- question thumbnail -->
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+                                                            <div class="col-md-4">
+                                                                <!-- question thumbnail -->
+                                                                <div class="thumbnail">
+                                                                    <div class="caption">
+                                                                        <h3><a href="playquestions.html">Q2123</a></h3>
+                                                                        <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+
+                                                                        <p>
+                                                                            <span class="glyphicons glyphicons-pushpin"></span>
+                                                                            <a>JAMB</a>|
+                                                                            <a>MX</a>|
+                                                                            <a>WP</a>|
+                                                                            <a>AN</a>|
+                                                                            <br>
+                                                                            <span class="tiny">60k attempts (2% got it right)</span>
+
+
+                                                                        </p>
+
+                                                                        <!--  <p><a href="#" class="btn btn-default" role="button">Play</a></p>-->
+
+                                                                        <!-- question thumbnail -->
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            <div class="col-md-4">
+                                                                <!-- question thumbnail -->
+                                                                <div class="thumbnail">
+                                                                    <div class="caption">
+                                                                        <h3><a href="playquestions.html">Q2123</a></h3>
+                                                                        <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+
+                                                                        <p>
+                                                                            <span class="glyphicons glyphicons-pushpin"></span>
+                                                                            <a>JAMB</a>|
+                                                                            <a>MX</a>|
+                                                                            <a>WP</a>|
+                                                                            <a>AN</a>|
+                                                                            <br>
+                                                                            <span class="tiny">60k attempts (2% got it right)</span>
+
+
+                                                                        </p>
+
+                                                                        <!--  <p><a href="#" class="btn btn-default" role="button">Play</a></p>-->
+
+                                                                        <!-- question thumbnail -->
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+                                                            <div class="col-md-4">
+                                                                <!-- question thumbnail -->
+                                                                <div class="thumbnail">
+                                                                    <div class="caption">
+                                                                        <h3><a href="playquestions.html">Q2123</a></h3>
+                                                                        <p>Each test has ten questions and should take 12 minutes. ... If you don't get a problem right on either our tests or a real SAT test, first try to solve the problem yourself.</p>
+
+                                                                        <p>
+                                                                            <span class="glyphicons glyphicons-pushpin"></span>
+                                                                            <a>JAMB</a>|
+                                                                            <a>MX</a>|
+                                                                            <a>WP</a>|
+                                                                            <a>AN</a>|
+                                                                            <br>
+                                                                            <span class="tiny">60k attempts (2% got it right)</span>
+
+
+                                                                        </p>
+
+                                                                        <!--  <p><a href="#" class="btn btn-default" role="button">Play</a></p>-->
+
+                                                                        <!-- question thumbnail -->
+
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+
+
+
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div> <!-- Modal Ends Here -->
+
+
+
+
+
+                                </div>
+                            </div><!-- end of panel -->
+                        </div> <!-- of the col-md-66 -->
+                        <div class="col-md-2"></div>
+                    </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+

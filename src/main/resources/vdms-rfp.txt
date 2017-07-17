@@ -1,0 +1,44 @@
+OBJECTIVES
+a) To speed up the hiring of consultants and NGOs.
+b) To create a platform to assist in streamlining the management of NGO, consultants and supplier database as well support vendor document management.
+c) To build the capacity to implement and support NGO, consultants and supplier records automation.
+d) To streamline the submission of NGO, consultants, supplier registration and performance evaluation.
+e) To provide a systematic approach in managing the documentation and in tracking/monitoring the progress of NGO, consultants, suppliers registration and performance evaluation.
+f) To generate timely and relevant information for use by UNDP.
+g) To facilitate timely and quality reporting to internal clients and auditors.
+h) To provide a corporate database for managing information related to Consultants, NGO and suppliers.
+i) To provide a transparent, robust approach to  management and monitoring of NGOs, suppliers and consultants.
+
+
+Deliverables:
+
+The VDMS must have among others modules for consultants, NGOs, suppliers of goods and services. It must be user friendly with the following features/capabilities but not limited to:
+
+1. Have full and basic search functionality for the following:
+
+a) Suppliers showing relevant information (e.g. type of organization, nature of business, contact details, product category, date of establishment, etc.).
+b) Category and sub category of commodities and services
+c) Suppliers for specific commodities and services
+d) Performance of suppliers for each category of performance indicator
+e) Regulatory documents with different timelines of expiry date (e.g. export & import certificate, VAT, TIN, trade license, etc.)
+f) Companies that have been suspended.
+g) Option to attach NGO, suppliers and consultants documents i.e CVs, incorporation documents etc.
+
+2. Set reminders on regulatory documents/licences (e.g. export & import certificate, VAT, TIN, trade license, etc.)
+
+3. Show the following tools in the architecture:
+
+a) Performance rating
+b) Suppliers, consultants and NGO information
+c) Category of products and services
+d) General information
+
+4. Separate performance monitoring tools for consultants, commodities and other services
+
+5. Must be web based system.
+
+6. Configure user management and access control tool.
+
+7. Maintenance and adding in new updates for 6 month period after the project completion
+
+Ownership:  The database and any future upgrade shall be the property of UNDP. The developer shall submit to UNDP, all the source codes of the system.

@@ -1,0 +1,103 @@
+<div class="row">
+    <header id="nav-header" class="clearfix">
+        <div class="col-md-5">
+            <nav class="navbar-default pull-left">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </nav>
+            <input type="text" class="hidden-sm hidden-xs" id="header-search-field" placeholder="Search for something..." ng-model="search">
+        </div>
+
+    </header>
+</div>
+
+<form role="form" method="post" class="form-horizontal" data-ng-submit="addSection(section)">
+
+    <h4> Add Section</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Section Name</label> 
+            <input type="text" class="form-control" required="required" data-ng-model="section.name" /> 
+            <span data-ng-show="errorName">{{errorName}}</span>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Section Code</label>
+            <input type="text" class="form-control" data-ng-model="section.code"/>
+            <span data-ng-show="errorName">{{errorName}}</span>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label for="repeatSelect"> Subjects: </label>
+
+            <select name="repeatSelect" id="repeatSelect" data-ng-model="section.subject.id" class="form-control">
+                <option ng-repeat="subject in subjects" value="{{subject.id}}">{{subject.name}}</option>
+            </select>    
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="submit" value="Submit" class="btn btn-success" />
+        </div>
+    </div>
+</form>
+
+<div id="dashboard-con">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="admin-content-con clearfix">
+
+                <header>
+                    <h5>  Sections List </h5>
+                </header>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th> Name</th>
+                            <th>Code</th>
+                            <th>Subject </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-ng-repeat="section in sections| filter: search">
+                        <tr>
+                            <td class="col-md-2"><a href="" 
+                                                    data-ng-click="findSectionById(section.id)">{{section.name}}</a></td>
+
+                            <td class="col-md-2"><a href=""
+                                                    data-ng-click="findSectionById(section.id)">{{section.code}}</a></td>
+
+                            <td class="col-md-2"><a href=""
+                                                    data-ng-click="findSectionById(section.id)">{{section.subject.name}}</a></td>
+                            <td class="col-md-2"><a href=""
+                                                    data-ng-click="updateSectionClicked(section)" class="label label-success">Update</a></td>
+                            <td class="col-md-2"><a href=""
+                                                    data-ng-click="deleteSection(section.id)" class="label label-danger">Delete</a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

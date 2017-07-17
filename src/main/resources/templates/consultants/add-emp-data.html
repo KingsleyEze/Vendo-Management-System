@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/admin-header :: head"></head>
+<body>
+<header th:replace="fragments/admin-header :: main-header" ></header>
+
+
+
+
+<script th:inline="javascript">
+    var config = {};
+    /*<![CDATA[*/
+    var vendors = [[${vendors}]];
+    /*]]>*/
+    config.vendors = vendors;
+
+    window.config= config;
+</script>
+
+<section>
+    <div class="mainwrapper">
+        <div th:replace="fragments/consultant-leftpanel :: leftpanel-admin">
+        <div class="media profile-left">
+
+                <div class="media-body" sec:authorize="isAuthenticated()">
+                    <h4 class="media-heading" th:text="${#authentication.principal.User.firstname + ' ' + #authentication.principal.User.lastname}"></h4>
+
+
+                    <small sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</small>
+
+                </div>
+            </div><!-- media -->
+
+            <h5 class="leftpanel-title">Navigation</h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/accounts"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+
+
+
+
+            </ul>
+
+        </div><!-- leftpanel -->
+
+        <div class="mainpanel">
+            <div class="pageheader">
+                <div class="media">
+                    <div class="pageicon pull-left">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="media-body">
+                        <ul class="breadcrumb">
+                            <li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li>Consultant Signup</li>
+                        </ul>
+                        <h4>   Add Employment data</h4>
+                    </div>
+                </div><!-- media -->
+            </div><!-- pageheader -->
+
+            <div class="contentpanel">
+
+
+                <div class="row">
+
+                    <div class="progress progress-striped active">
+                        <div style="width: 80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar progress-bar-success">
+                            <span class="sr-only">80% Completed (success)</span>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-btns" style="display: none;">
+                                <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="" data-original-title="Minimize Panel"><i class="fa fa-minus"></i></a>
+                                <a href="" class="panel-close tooltips" data-toggle="tooltip" title="" data-original-title="Close Panel"><i class="fa fa-times"></i></a>
+                            </div><!-- panel-btns -->
+
+
+                            <h4 class="panel-title">Add Employment Data</h4>
+
+                        </div><!-- panel-heading -->
+
+                        <form th:action="@{/consultants/addEmpData}" method="POST" th:object="${empData}" class="" >
+                            <div class="panel-body" >
+
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered collapsibleTable" id="employmentRecordTable">
+
+                                        <tr  ><th >Add Employment Record</th><th></th></tr>
+                                        <tr id="inst_attended">
+                                            <td> <button type="button" id="addEmpRecord" class="btn btn-sm btn-primary">Add more Empyment Record</button><br />Record 1</td>
+                                            <td>
+                                                <input type="hidden" th:field="*{employmentRecords[0].id}" />
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Is this your current job?</label>
+                                                    <label>YES <input type="radio" th:field="*{employmentRecords[0].present}" value="true"  /> </label>
+                                                    <label>NO <input type="radio" th:field="*{employmentRecords[0].present}" value="false"  /> </label><br />
+
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Job Title</label>
+                                                    <input type="text" th:field="*{employmentRecords[0].jobTitle}" class="form-control" /><br />
+                                                </div>
+
+
+
+
+
+                                                <div th:if="${#lists.isEmpty(empData.employmentRecords) or #lists.size(empData.employmentRecords) < 0}">
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">Start Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{employmentRecords[0].startDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">End Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{employmentRecords[0].endDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                    </div>
+
+
+                                                <div th:if="${!#lists.isEmpty(empData.employmentRecords) and #lists.size(empData.employmentRecords) > 0}">
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text" name="employmentRecords[0].startDate" th:value="${#strings.isEmpty(empData.employmentRecords[0].startDate) ? '' : #dates.format(empData.employmentRecords[0].startDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">End Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text"  name="employmentRecords[0].endDate" th:value="${#strings.isEmpty(empData.employmentRecords[0].endDate) ? '' : #dates.format(empData.employmentRecords[0].endDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Job Description</label>
+                                                    <textarea  th:field="*{employmentRecords[0].jobDescription}" class="form-control" ></textarea><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Type of Business</label>
+                                                    <select required='required'  th:field="*{employmentRecords[0].typeOfBusiness}" id="biz_type" class="form-control">
+                                                        <option value="">--Select Type of Business--</option>
+                                                        <option value="Trading">Trading</option>
+                                                        <!--<option th:each="instType : ${institutionTypes}" th:value="${instType}"  th:text="${instType}" ></option>-->
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label>Starting Salary</label>
+                                                    <input type="number" th:field="*{employmentRecords[0].startingSalary}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label>Final Salary</label>
+                                                    <input type="number" th:field="*{employmentRecords[0].finalSalary}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Name of Employer</label>
+                                                    <input type="text" th:field="*{employmentRecords[0].nameOfEmployer}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Address of Employer</label>
+                                                    <textarea  th:field="*{employmentRecords[0].addressOfEmployer}" class="form-control" ></textarea><br />
+                                                </div>
+
+
+
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Supervisor's Name</label>
+                                                    <input type="text" th:field="*{employmentRecords[0].supervisorsName}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>No. of Employees supervised</label>
+                                                    <input type="number" th:field="*{employmentRecords[0].noOfEmployeesSupervised}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Reason for leaving</label>
+                                                    <textarea th:field="*{employmentRecords[0].reasonForLeaving}" class="form-control" ></textarea><br />
+                                                </div>
+
+
+
+
+
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                        <tr id="inst_attended1">
+                                            <td> Record 2 ( Optional )</td>
+                                            <td>
+
+                                                <input type="hidden" th:field="*{employmentRecords[1].id}" />
+                                                <div class="form-group col-sm-12">
+                                                    <label>Is this your current job?</label>
+                                                    <label>YES <input type="radio" th:field="*{employmentRecords[1].present}" value="true"  /> </label>
+                                                    <label>NO <input type="radio" th:field="*{employmentRecords[1].present}" value="false"  /> </label><br />
+
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Job Title</label>
+                                                    <input type="text" th:field="*{employmentRecords[1].jobTitle}" class="form-control" /><br />
+                                                </div>
+
+
+                                                <div th:if="${!#lists.isEmpty(empData.employmentRecords) and #lists.size(empData.employmentRecords) > 1}">
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text" name="employmentRecords[1].startDate" th:value="${#strings.isEmpty(empData.employmentRecords[1].startDate) ? '' : #dates.format(empData.employmentRecords[1].startDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">End Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text"  name="employmentRecords[1].endDate" th:value="${#strings.isEmpty(empData.employmentRecords[1].endDate) ? '' : #dates.format(empData.employmentRecords[1].endDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker4">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div th:if="${#lists.isEmpty(empData.employmentRecords) or #lists.size(empData.employmentRecords) < 1}">
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">Start Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{employmentRecords[1].startDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">End Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{employmentRecords[1].endDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker4">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                    </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Job Description</label>
+                                                    <textarea  th:field="*{employmentRecords[1].jobDescription}" class="form-control" ></textarea><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Type of Business</label>
+                                                    <select required='required'  th:field="*{employmentRecords[1].typeOfBusiness}" id="biz_type" class="form-control">
+                                                        <option value="">--Select Type of Business--</option>
+                                                        <option value="Trading">Trading</option>
+                                                        <!--<option th:each="instType : ${institutionTypes}" th:value="${instType}"  th:text="${instType}" ></option>-->
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label>Starting Salary</label>
+                                                    <input type="number" th:field="*{employmentRecords[1].startingSalary}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label>Final Salary</label>
+                                                    <input type="number" th:field="*{employmentRecords[1].finalSalary}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Name of Employer</label>
+                                                    <input type="text" th:field="*{employmentRecords[1].nameOfEmployer}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Address of Employer</label>
+                                                    <textarea  th:field="*{employmentRecords[1].addressOfEmployer}" class="form-control" ></textarea><br />
+                                                </div>
+
+
+
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Supervisor's Name</label>
+                                                    <input type="text" th:field="*{employmentRecords[1].supervisorsName}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>No. of Employees supervised</label>
+                                                    <input type="number" th:field="*{employmentRecords[1].noOfEmployeesSupervised}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Reason for leaving</label>
+                                                    <textarea th:field="*{employmentRecords[1].reasonForLeaving}" class="form-control" ></textarea><br />
+                                                </div>
+
+
+
+
+
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                        <tr id="inst_attended">
+                                            <td> Record 3  (Optional)</td>
+                                            <td>
+
+                                                <input type="hidden" th:field="*{employmentRecords[2].id}" />
+                                                <div class="form-group col-sm-12">
+                                                    <label>Is this your current job?</label>
+                                                    <label>YES <input type="radio" th:field="*{employmentRecords[2].present}" value="true"  /> </label>
+                                                    <label>NO <input type="radio" th:field="*{employmentRecords[2].present}" value="false"  /> </label><br />
+
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Job Title</label>
+                                                    <input type="text" th:field="*{employmentRecords[2].jobTitle}" class="form-control" /><br />
+                                                </div>
+
+
+                                                <div th:if="${!#lists.isEmpty(empData.employmentRecords) and #lists.size(empData.employmentRecords) > 2}">
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">Start Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text" name="employmentRecords[2].startDate" th:value="${#strings.isEmpty(empData.employmentRecords[2].startDate) ? '' : #dates.format(empData.employmentRecords[2].startDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker5">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-3">
+                                                        <label class=" ">End Date:</label>
+                                                        <div class="input-group">
+                                                            <input class="datepicker" type="text"  name="employmentRecords[2].endDate" th:value="${#strings.isEmpty(empData.employmentRecords[2].endDate) ? '' : #dates.format(empData.employmentRecords[2].endDate, 'MM/dd/yyyy')}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker6">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div th:if="${#lists.isEmpty(empData.employmentRecords) or #lists.size(empData.employmentRecords) < 2}">
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">Start Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{employmentRecords[2].startDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker5">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label class=" ">End Date:</label>
+                                                    <div class="input-group">
+                                                        <input class="datepicker" type="text"  th:field="*{employmentRecords[2].endDate}" class="form-control" placeholder="mm/dd/yyyy" id="datepicker6">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                    </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Job Description</label>
+                                                    <textarea  th:field="*{employmentRecords[2].jobDescription}" class="form-control" ></textarea><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Type of Business</label>
+                                                    <select required='required'  th:field="*{employmentRecords[2].typeOfBusiness}" id="biz_type" class="form-control">
+                                                        <option value="">--Select Type of Business--</option>
+                                                        <option value="Trading">Trading</option>
+                                                        <!--<option th:each="instType : ${institutionTypes}" th:value="${instType}"  th:text="${instType}" ></option>-->
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label>Starting Salary</label>
+                                                    <input type="number" th:field="*{employmentRecords[2].startingSalary}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <label>Final Salary</label>
+                                                    <input type="number" th:field="*{employmentRecords[2].finalSalary}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Name of Employer</label>
+                                                    <input type="text" th:field="*{employmentRecords[2].nameOfEmployer}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Address of Employer</label>
+                                                    <textarea  th:field="*{employmentRecords[2].addressOfEmployer}" class="form-control" ></textarea><br />
+                                                </div>
+
+
+
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>Supervisor's Name</label>
+                                                    <input type="text" th:field="*{employmentRecords[2].supervisorsName}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label>No. of Employees supervised</label>
+                                                    <input type="number" th:field="*{employmentRecords[2].noOfEmployeesSupervised}" class="form-control" /><br />
+                                                </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <label>Reason for leaving</label>
+                                                    <textarea th:field="*{employmentRecords[2].reasonForLeaving}" class="form-control" ></textarea><br />
+                                                </div>
+
+
+
+
+
+                                                <!--<button type='button' class="btn btn-sm btn-danger removeLanguage pull-right" data-remove="#language0"  >Remove Skill</button>-->
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="contact_employer" th:field="*{canWeContactPresentEmployer}"  />
+                                        <label for="contact_employer">Can we contact your present employer? </label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="contact_employer" th:field="*{haveYouBeingACivilServantBefore}"  />
+                                        <label for="contact_employer">Have you being a civil Servant before? </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Any relevant employment fact?</label>
+                                    <textarea  th:fields="${relevantEmploymentFact}" class="form-control" ></textarea><br />
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="contact_employer" th:field="*{haveYouBeingConvictedBefore}"  />
+                                        <label for="contact_employer">Have you being convicted before ? </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Conviction details</label>
+                                    <textarea  th:fields="${convictionDetails}" class="form-control" ></textarea><br />
+                                </div>
+
+
+                                <div class="form-group col-sm-6">
+                                    <div class="ckboxx ckbox-success">
+                                        <input type="checkbox" id="certify_response" th:field="*{iCertifyThatMyResponsesAreTrue}"  />
+                                        <label for="certify_response">I certify that my responses are true </label>
+                                    </div>
+                                </div>
+
+
+                            </div><!-- panel-body -->
+
+                            <input type="hidden" name="consultantId" th:value="${consultant.id}" />
+
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="panel-footer">
+                                <input class="btn btn-primary mr5" type="submit" value="Submit" />
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <script>
+                        jQuery('body').on('click', '.removeLanguage', function() {
+
+                            var answer = confirm("Are you sure you want to Language Skill node?");
+                            if(answer === true){
+                                var removeControl = jQuery(this).attr("data-remove");
+                                jQuery(removeControl).remove();
+                            }
+
+                        });
+                    </script>
+
+
+
+
+                </div>
+            </div><!-- contentpanel -->
+
+        </div><!-- mainpanel -->
+    </div><!-- mainwrapper -->
+</section>
+<div th:replace="fragments/admin-footer::footer"></div>
+
+<script>
+
+    jQuery(document).ready(function(jQuery) {
+        jQuery('#addLanguageSkill').click(function () {
+            var answers = "";
+
+
+            answers += "<option value=''>--Select Answer--</option>";
+            answers += "<option value='true'>YES</option>";
+            answers += "<option value='false'>NO</option>";
+
+
+
+            var languageIndex = jQuery('table#languageSkillsTable tr').length - 1;
+            var text = "";
+            text += "<tr id='language" + languageIndex + "'><td> <label>Language " + (languageIndex + 1) + "</label> </td>";
+            //Enter new State Field
+                text += "<td>";
+                    text+= "<input type='text' name='languageSkills[" + languageIndex + "].language' class='form-control' /><br />";
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].readEasily' value='false' /></label> Read Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].writeEasily' value='false' /></label> Write Easily?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='true' /></label>" +
+                            "<label> NO <input type='radio' name='languageSkills[" + languageIndex + "].speakFluently' value='false' /></label> Speak Fluently?<br />";
+
+                    text+= "<label> YES <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='true' /></label>" +
+                            "<label>NO <input type='radio' name='languageSkills[" + languageIndex + "].understandEasily' value='false' /></label> Understand Easily?";
+
+                    text += "<button type='button' class='btn btn-sm btn-danger removeLanguage pull-right' data-remove='#language" + languageIndex + "' >Remove Doc</button>";
+                text += "</td>";
+            text += "</tr>";
+
+            jQuery('#languageSkillsTable').append(text);
+
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

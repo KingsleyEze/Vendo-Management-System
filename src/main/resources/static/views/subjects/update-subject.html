@@ -1,0 +1,15 @@
+<form role="form" method="post" class="form-pad col-md-4"
+      data-ng-submit="updateSubject(subjectData.currSubject)">
+    
+     <h2> Update Subject</h2>
+
+
+    <fieldset class="form-group">
+        <label>Subject Name</label> <input type="text" class="form-control"
+                                         required="required" data-ng-model="subjectData.currSubject.name" /> <span
+                                         data-ng-show="errorName">{{errorName}}</span>
+    </fieldset>
+    
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>
